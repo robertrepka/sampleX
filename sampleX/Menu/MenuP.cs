@@ -1,0 +1,912 @@
+﻿#region USING
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using System.Configuration;
+using System.Text.RegularExpressions;
+using System.IO;
+using System.Diagnostics;
+using NPOI.XSSF.UserModel;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.SS.Util;
+using NPOI.HSSF.Util;
+using NPOI.XSSF.Util;
+using NPOI.POIFS.FileSystem;
+using NPOI.HPSF;
+#endregion
+namespace sampleX
+{
+    public partial class MenuP : Form
+    {
+        #region DEKLARACIE
+        private readonly RRcode RRcode = new RRcode();
+        private readonly RRfun RRfun = new RRfun();
+        private readonly RRdata RRdata = new RRdata();
+        private readonly RRsql RRsql = new RRsql();
+
+        string sSql;
+
+        HSSFWorkbook xBook = new HSSFWorkbook();
+        //HSSFWorkbook xBook;
+        ICell xCell;
+        string sCell = "";
+        ISheet xSheet;
+        IRow r;
+        int iRow = 0;
+        int iCol = 0;
+        int iCount = 0;
+        int iSheetNameToCreate = 1;
+        #endregion
+        #region FORM
+        public MenuP()
+        {
+            InitializeComponent();
+        }
+
+        private void MenuP_Load(object sender, EventArgs e)
+        {
+
+            RRcode.Log(this.Text);
+            this.Text = RRvar.sHeader;
+            c1.SelectedIndex = 0;
+            lStatus.Text = "sampleX - " + RRvar.sFullName;
+            iCount = RRvar.Matrix4.Count;
+            LoadVariables();
+            RRcode.Front();
+            //xBook = new HSSFWorkbook();
+        }
+
+        private void MenuP_Shown(object sender, EventArgs e)
+        {
+            RRcode.FadeIn(this);
+            RRcode.Front();
+        }
+
+        private void pictureBox1_MouseHover(object sender, EventArgs e)
+        {
+            RRfun.ShowMyInfoToolTip(pictureBox1.Location.X + 50, pictureBox1.Location.Y + 50, this);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            xBook = new HSSFWorkbook();
+            if (c1.SelectedIndex == 0)
+            {
+                Typ1();
+            }
+            if (c1.SelectedIndex == 1)
+            {
+                Typ2();
+            }
+        }
+
+        private void nu1_ValueChanged(object sender, EventArgs e)
+        {
+            RRcode.RegWrite("Proto1", nu1.Value.ToString());
+        }
+
+        private void nu2_ValueChanged(object sender, EventArgs e)
+        {
+            RRcode.RegWrite("Proto2", nu2.Value.ToString());
+        }
+
+        private void nu3_ValueChanged(object sender, EventArgs e)
+        {
+            RRcode.RegWrite("Proto3", nu3.Value.ToString());
+        }
+
+        private void nu4_ValueChanged(object sender, EventArgs e)
+        {
+            RRcode.RegWrite("Proto4", nu4.Value.ToString());
+        }
+
+        private void nuR_ValueChanged(object sender, EventArgs e)
+        {
+            RRcode.RegWrite("ProtoR", nuR.Value.ToString());
+        }
+
+        private void nuC_ValueChanged(object sender, EventArgs e)
+        {
+            RRcode.RegWrite("ProtoC", nuC.Value.ToString());
+        }
+
+        private void nuF2_ValueChanged(object sender, EventArgs e)
+        {
+            RRcode.RegWrite("ProtoF2", nuF2.Value.ToString());
+        }
+
+        private void nuF1_ValueChanged(object sender, EventArgs e)
+        {
+            RRcode.RegWrite("ProtoF1", nuF1.Value.ToString());
+        }
+        #endregion
+        #region FUNKCIE
+        public void LoadVariables()
+        {
+            try
+            {
+                nu1.Value = Convert.ToInt32(RRcode.RegRead("Proto1"));
+            }
+            catch
+            {
+                RRcode.RegWrite("Proto1", nu1.Value.ToString());
+            }
+
+            try
+            {
+                nu2.Value = Convert.ToInt32(RRcode.RegRead("Proto2"));
+            }
+            catch
+            {
+                RRcode.RegWrite("Proto2", nu2.Value.ToString());
+            }
+
+            try
+            {
+                nu3.Value = Convert.ToInt32(RRcode.RegRead("Proto3"));
+            }
+            catch
+            {
+                RRcode.RegWrite("Proto3", nu3.Value.ToString());
+            }
+
+            try
+            {
+                nu4.Value = Convert.ToInt32(RRcode.RegRead("Proto4"));
+            }
+            catch
+            {
+                RRcode.RegWrite("Proto4", nu4.Value.ToString());
+            }
+
+            try
+            {
+                nuC.Value = Convert.ToInt32(RRcode.RegRead("ProtoC"));
+            }
+            catch
+            {
+                RRcode.RegWrite("ProtoC", nuC.Value.ToString());
+            }
+
+            try
+            {
+                nuR.Value = Convert.ToInt32(RRcode.RegRead("ProtoR"));
+            }
+            catch
+            {
+                RRcode.RegWrite("ProtoR", nuR.Value.ToString());
+            }
+
+            try
+            {
+                nuF1.Value = Convert.ToInt32(RRcode.RegRead("ProtoF1"));
+            }
+            catch
+            {
+                RRcode.RegWrite("ProtoF1", nuF1.Value.ToString());
+            }
+
+            try
+            {
+                nuF2.Value = Convert.ToInt32(RRcode.RegRead("ProtoF2"));
+            }
+            catch
+            {
+                RRcode.RegWrite("ProtoF2", nuF2.Value.ToString());
+            }
+        }
+
+        private void SaveProtokol()
+        {
+            var xDocInfo = NPOI.HPSF.PropertySetFactory.CreateDocumentSummaryInformation();
+            var xInfo = NPOI.HPSF.PropertySetFactory.CreateSummaryInformation();
+            xInfo.Author = "sampleX © 2022 Róbert Repka";
+            xInfo.Subject = "sampleX - výstupný protokol";
+            xInfo.Comments = "robert@repka.org\r\n+421917799260";
+            xInfo.Keywords = "Protokol";
+            xDocInfo.Company = "Štátny geologický ústav Dionýza Štúra, Odbor geoanalytických laboratórií, Spišská Nová Ves";
+
+            xBook.DocumentSummaryInformation = xDocInfo;
+            xBook.SummaryInformation = xInfo;
+
+            System.Windows.Forms.SaveFileDialog SD = new System.Windows.Forms.SaveFileDialog();
+            SD.Title = "Export XLS šablóny";
+            SD.RestoreDirectory = true;
+            SD.DefaultExt = "xls";
+            SD.Filter = "MS Excel (*.xls)|*.xls";
+            SD.CheckPathExists = true;
+            SD.FileName = "Protokol" + " - " + RRvar.iProtoNo1.ToString() + "-" + RRvar.iProtoNo2.ToString() + "___" + DateTime.Now.ToString("yyyy'-'MM'-'dd'_'HH'-'mm'-'ss") + ".xls";
+
+            if (SD.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    using (FileStream stream = new FileStream(SD.FileName, FileMode.Create, FileAccess.Write))
+                    {
+                        xBook.Write(stream);
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Nepodarilo za mi zapísať súbor.\r\n", "Varovanie", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            Process proc = new Process();
+            proc.StartInfo.FileName = SD.FileName;
+            proc.StartInfo.UseShellExecute = true;
+
+            try
+            {
+                proc.Start();
+            }
+            catch
+            {
+            }
+        }
+
+        private void InitPic(int iIndexOfPic, int iRow, int iCol)
+        {
+            if (iIndexOfPic == 1)
+            {
+                byte[] da1 = File.ReadAllBytes(Environment.CurrentDirectory + @"\" + "01.jpg");
+                int ip1 = xBook.AddPicture(da1, PictureType.JPEG);
+                ICreationHelper h1 = xBook.GetCreationHelper();
+                IDrawing d1 = xSheet.CreateDrawingPatriarch();
+                IClientAnchor a1 = h1.CreateClientAnchor();
+                a1.Col1 = iCol;
+                a1.Row1 = iRow;
+                IPicture p1 = d1.CreatePicture(a1, ip1);
+                p1.Resize(0.1 / 100 * Convert.ToDouble(nu1.Value));
+            }
+
+            if (iIndexOfPic == 2)
+            {
+                byte[] da2 = File.ReadAllBytes(Environment.CurrentDirectory + @"\" + "02.jpg");
+                int ip2 = xBook.AddPicture(da2, PictureType.JPEG);
+                ICreationHelper h2 = xBook.GetCreationHelper();
+                IDrawing d2 = xSheet.CreateDrawingPatriarch();
+                IClientAnchor a2 = h2.CreateClientAnchor();
+                a2.Col1 = iCol;
+                a2.Row1 = iRow;
+                IPicture p2 = d2.CreatePicture(a2, ip2);
+                p2.Resize(0.1 / 100 * Convert.ToDouble(nu2.Value));
+            }
+
+            if (iIndexOfPic == 3)
+            {
+                byte[] da3 = File.ReadAllBytes(Environment.CurrentDirectory + @"\" + "03.jpg");
+                int ip3 = xBook.AddPicture(da3, PictureType.JPEG);
+                ICreationHelper h3 = xBook.GetCreationHelper();
+                IDrawing d3 = xSheet.CreateDrawingPatriarch();
+                IClientAnchor a3 = h3.CreateClientAnchor();
+                a3.Col1 = iCol;
+                a3.Row1 = iRow;
+                IPicture p3 = d3.CreatePicture(a3, ip3);
+                p3.Resize(0.1 / 100 * Convert.ToDouble(nu3.Value));
+            }
+
+            if (iIndexOfPic == 4)
+            {
+                byte[] da4 = File.ReadAllBytes(Environment.CurrentDirectory + @"\" + "04.jpg");
+                int ip4 = xBook.AddPicture(da4, PictureType.JPEG);
+                ICreationHelper h4 = xBook.GetCreationHelper();
+                IDrawing d4 = xSheet.CreateDrawingPatriarch();
+                IClientAnchor a4 = h4.CreateClientAnchor();
+                a4.Col1 = iCol;
+                a4.Row1 = iRow;
+                IPicture p4 = d4.CreatePicture(a4, ip4);
+                p4.Resize(0.1 / 100 * Convert.ToDouble(nu4.Value));
+            }
+        }
+
+        private void InitXLS()
+        {
+            string sSheetNameToCreate = "";
+            if (iSheetNameToCreate < 10)
+            {
+                sSheetNameToCreate = "0" + iSheetNameToCreate.ToString();
+            }
+            else
+            {
+                sSheetNameToCreate = iSheetNameToCreate.ToString();
+            }
+            iSheetNameToCreate++;
+            xSheet = xBook.CreateSheet(sSheetNameToCreate);
+            xSheet.PrintSetup.PaperSize = (short)PaperSize.A4 + 1;
+            xSheet.SetMargin(MarginType.LeftMargin, (short)1 / 2.54);
+            xSheet.SetMargin(MarginType.RightMargin, (short)1 / 2.54 / 2);
+            xSheet.SetMargin(MarginType.TopMargin, (short)1 / 2.54);
+            xSheet.SetMargin(MarginType.BottomMargin, (short)1 / 2.54);
+            xSheet.SetMargin(MarginType.HeaderMargin, (short)1 / 2.54);
+            xSheet.SetMargin(MarginType.FooterMargin, (short)1 / 2.54);
+            xSheet.DefaultRowHeight = (short)(nuR.Value * 10);
+            xSheet.FitToPage = false;
+            HSSFFont myFont = (HSSFFont)xBook.CreateFont();
+            myFont.FontName = "Arial";
+            myFont.FontHeightInPoints = (short)(nuF1.Value); ;
+            HSSFCellStyle myStyle = (HSSFCellStyle)xBook.CreateCellStyle();
+            myStyle.WrapText = false;
+            myStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Left;
+            myStyle.VerticalAlignment = NPOI.SS.UserModel.VerticalAlignment.Center;
+            myStyle.SetFont(myFont);
+            for (int k = 0; k < 25; k++)
+            {
+                xSheet.SetDefaultColumnStyle(k, myStyle);
+            }
+
+            for (int i = 0; i < 100; i++)
+            {
+                r = xSheet.CreateRow(i);
+                for (int j = 0; j < 30; j++)
+                {
+                    xCell = r.CreateCell(j);
+                }
+            }
+
+            for (int i = 0; i < 50; i++)
+            {
+                xSheet.SetColumnWidth(i, (short)nuC.Value * 23);
+            }
+        }
+
+        private string sConfigValue(string sItem)
+        {
+            string sValue = "";
+            int iConfig = RRvar.Matrix2.Count;
+            for (int i = 0; i < iConfig; i++)
+            {
+                if (RRdata.MatrixRead(2, i, 0) == sItem)
+                {
+                    sValue = RRdata.MatrixRead(2, i, 1);
+                    break;
+                }
+
+            }
+            return sValue;
+        }
+
+        private int iColumnToNumber(string sChar)
+        {
+            int i = 0;
+
+            switch (sChar)
+            {
+                case "A":
+                    i = 0;
+                    break;
+                case "B":
+                    i = 1;
+                    break;
+                case "C":
+                    i = 2;
+                    break;
+                case "D":
+                    i = 3;
+                    break;
+                case "E":
+                    i = 4;
+                    break;
+                case "F":
+                    i = 5;
+                    break;
+                case "G":
+                    i = 6;
+                    break;
+                case "H":
+                    i = 7;
+                    break;
+                case "I":
+                    i = 8;
+                    break;
+                case "J":
+                    i = 9;
+                    break;
+                case "K":
+                    i = 10;
+                    break;
+                case "L":
+                    i = 11;
+                    break;
+                case "M":
+                    i = 12;
+                    break;
+                case "N":
+                    i = 13;
+                    break;
+                case "O":
+                    i = 14;
+                    break;
+                case "P":
+                    i = 15;
+                    break;
+                case "Q":
+                    i = 16;
+                    break;
+                case "R":
+                    i = 17;
+                    break;
+                case "S":
+                    i = 18;
+                    break;
+                case "T":
+                    i = 19;
+                    break;
+                case "U":
+                    i = 20;
+                    break;
+                case "V":
+                    i = 21;
+                    break;
+                case "W":
+                    i = 22;
+                    break;
+                case "X":
+                    i = 23;
+                    break;
+                case "Y":
+                    i = 24;
+                    break;
+                case "Z":
+                    i = 25;
+                    break;
+                default:
+                    i = 0;
+                    break;
+            }
+            return i;
+        }
+
+        private void rSize(int iRowInExcel, short iHeight)
+        {
+            r = xSheet.GetRow(iRowInExcel - 1);
+            r.Height = (short)(iHeight * 10);
+        }
+
+        private void w(string sCell, string sValue)
+        {
+            string sChar = sCell.Substring(0, 1);
+            int iRow = Convert.ToInt32(sCell.Substring(1, sCell.Length - 1)) - 1;
+            iCol = iColumnToNumber(sChar);
+            r = xSheet.GetRow(iRow);
+            xCell = r.GetCell(iCol);
+            xCell.SetCellValue(sValue);
+        }
+
+        private void w(string sCell, string sValue, short iSize, bool bBold, bool bItalic, string sAligment, bool bWrap, int iLeft, int iBottom, int iRight, int iTop)
+        {
+            string sChar = sCell.Substring(0, 1);
+            int iRow = Convert.ToInt32(sCell.Substring(1, sCell.Length - 1)) - 1;
+            iCol = iColumnToNumber(sChar);
+            r = xSheet.GetRow(iRow);
+            xCell = r.GetCell(iCol);
+            xCell.SetCellValue(sValue);
+
+            HSSFFont myFont = (HSSFFont)xBook.CreateFont();
+            myFont.FontHeightInPoints = (short)10;
+            myFont.FontName = "Arial";
+            myFont.FontHeightInPoints = iSize;
+            if (bBold)
+            {
+                myFont.Boldweight = (short)NPOI.SS.UserModel.FontBoldWeight.Bold;
+            }
+            else
+            {
+                myFont.Boldweight = (short)NPOI.SS.UserModel.FontBoldWeight.Normal;
+            }
+
+
+            if (bItalic)
+            {
+                myFont.IsItalic = true;
+            }
+            else
+            {
+                myFont.IsItalic = false;
+            }
+
+            HSSFCellStyle myStyle = (HSSFCellStyle)xBook.CreateCellStyle();
+            myStyle.WrapText = false;
+
+            if (sAligment.ToLower() == "left")
+            {
+                myStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Left;
+            }
+
+            if (sAligment.ToLower() == "center")
+            {
+                myStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
+            }
+
+            if (sAligment.ToLower() == "right")
+            {
+                myStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Right;
+            }
+            myStyle.WrapText = bWrap;
+            myStyle.VerticalAlignment = NPOI.SS.UserModel.VerticalAlignment.Center;
+            myStyle.SetFont(myFont);
+
+            switch (iLeft)
+            {
+                case 0:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+                case 1:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.Hair;
+                    break;
+                case 2:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.Medium;
+                    break;
+                case 3:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.Thick;
+                    break;
+                case 4:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.Double;
+                    break;
+                case 5:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.Dotted;
+                    break;
+                default:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+            }
+
+            switch (iRight)
+            {
+                case 0:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+                case 1:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Hair;
+                    break;
+                case 2:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Medium;
+                    break;
+                case 3:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Thick;
+                    break;
+                case 4:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Double;
+                    break;
+                case 5:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Dotted;
+                    break;
+                default:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+            }
+
+            switch (iTop)
+            {
+                case 0:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+                case 1:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Hair;
+                    break;
+                case 2:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Medium;
+                    break;
+                case 3:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Thick;
+                    break;
+                case 4:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Double;
+                    break;
+                case 5:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Dotted;
+                    break;
+                default:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+            }
+
+
+            switch (iBottom)
+            {
+                case 0:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+                case 1:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Hair;
+                    break;
+                case 2:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Medium;
+                    break;
+                case 3:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Thick;
+                    break;
+                case 4:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Double;
+                    break;
+                case 5:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Dotted;
+                    break;
+                default:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+            }
+
+            xCell.CellStyle = myStyle;
+        }
+
+        private string myDateFormatConvert(string sDate)
+        {
+            string s = "";
+            string sY = "";
+            string sM = "";
+            string sD = "";
+
+            if (sDate.Length == 10)
+            {
+                sY = sDate.Substring(0, 4);
+                sM = sDate.Substring(5, 2);
+                sD = sDate.Substring(8, 2);
+                s = sD + "." + sM + "." + sY;
+            }
+            return s;
+        }
+        #endregion
+        private void Typ2()
+        {
+
+        }
+
+        private void Typ1()
+        {
+            string s;
+            string ss;
+            InitXLS();
+            #region LOGO
+            for (int i = 0; i < 5; i++)
+            {
+                rSize(i + 1, (short)(nuR.Value - 4));
+            }
+
+            RRdata.MatrixFill(2, "SELECT item, value FROM config;", true);
+            w("D1", sConfigValue("adr01") + ", " + sConfigValue("adr10"), (short)(nuF1.Value - 1), true, false, "left", false, 0, 0, 0, 0);
+            w("D2", sConfigValue("adr03") + ", " + sConfigValue("adr04"), (short)(nuF1.Value - 1), false, false, "left", false, 0, 0, 0, 0);
+            w("D3", sConfigValue("adr06"), (short)(nuF1.Value - 1), false, false, "left", false, 0, 0, 0, 0);
+            w("D4", sConfigValue("adr11"), (short)(nuF1.Value - 1), false, false, "left", false, 0, 0, 0, 0);
+            w("D5", sConfigValue("adr07") + ", " + sConfigValue("adr08") + ", tel.: " + sConfigValue("adr09"), (short)(nuF1.Value - 1), false, false, "left", false, 0, 0, 0, 0);
+            rSize(8, 40);
+            #endregion
+            #region POKEC
+            s = "Protokol o skúške č. " + RRvar.iProtoNo1.ToString() + "/" + RRvar.iProtoNo2.ToString();
+            w("L8", s, (short)(nuF2.Value), true, false, "center", false, 0, 0, 0, 0);
+
+            w("N10", "Skúška:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            w("N11", "Subdodávka:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+
+            w("W10", "A - akreditovaná, N - neakreditovaná", (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);
+            w("W11", "SA - akreditovaná, SN - neakreditovaná", (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);
+
+            w("A13", "Počet výtlačkov:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            w("A14", "Výtlačok číslo:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            w("A16", "Objednávateľ:", (short)(nuF1.Value), true, true, "left", false, 0, 0, 0, 0);
+            w("A18", "Zodp. pracovník:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            w("A19", "Telefón:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            w("A20", "E-mail:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            w("A21", "Objednávka:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            w("A22", "Zákazka:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            w("A23", "Počet vzoriek:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+
+            w("N20", "Dátum prevzatia vzoriek:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            w("N21", "Dátum vykonania skúšok od:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            w("N22", "Dátum vykonania skúšok do:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            w("N23", "Dátum vydania protokolu:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+
+            w("A25", "Údaje o vzorkách:", (short)(nuF1.Value), true, true, "left", false, 0, 0, 0, 0);
+            w("A26", "Matrica:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            w("A27", "Identif. matrice:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+
+            w("N25", "Vzorky odobral:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            w("N26", "Miesto odberu:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            w("N27", "Dátum odberu:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+
+            w("W13", "Strana 1 z počtu 1", (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);
+            w("W14", "Počet príloh: 0", (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);
+            #endregion
+            #region HLAVICKY - HELP
+            //////////////////////////////////////////////////
+            // zakazka_obj_partner - MATRIX5
+            //obj_no 0
+            //obj_rok 1
+            //cobj 2
+            //czml 3
+            //obj_datum 4
+            //obj_expired 5
+            //obj_pozn 6
+            //meno 7
+            //id 8
+            //labc 9
+            //no 10
+            //rok 11
+            //ozn 12
+            //obj_id 13
+            //datum_dod 14
+            //datum_termin 15
+            //datum_start 16
+            //datum_end 17
+            //datum_protokol 18
+            //akr 19
+            //pozn 20
+            //stamp 21
+            //refe_id 22
+            //autor 23
+            //partner_id 24
+            //kontakt_id 25
+            //kontakt_meno 26
+            //kontakt_funkcia 27
+            //kontakt_tel 28
+            //kontakt_email 29
+            //adr1 30
+            //adr2 31
+            //adr3 32
+            //adr4 33
+            //v_matrica 34
+            //v_meno 35
+            //v_cas1 36
+            //v_cas2 37
+            //v_miesto 38
+            //////////////////////////////////////////////////
+            // zakazka - MATRIX6
+            //nazov 0
+            //ulica 1
+            //psc 2
+            //mesto 3
+            //////////////////////////////////////////////////
+            #endregion
+            #region ZAKAZKA HLAVICKA
+            w("E13", "3", (short)(nuF1.Value), false, false, "left", false, 0, 0, 0, 0);
+            w("E14", "1", (short)(nuF1.Value), false, false, "left", false, 0, 0, 0, 0);
+            w("E23", iCount.ToString(), (short)(nuF1.Value), false, false, "left", false, 0, 0, 0, 0);
+
+            s = RRdata.MatrixRead(4, 0, 4);
+            s = "SELECT * FROM zakazka_obj_partner WHERE id='" + s + "';";
+            RRdata.MatrixFill(5, s, true);
+            s = RRdata.MatrixRead(5, 0, 24);
+            s = "SELECT nazov, ulica, psc, mesto FROM partner WHERE id='" + s + "';";
+            RRdata.MatrixFill(6, s, true);
+            s = RRdata.MatrixRead(6, 0, 0);
+            w("E16", s, (short)(nuF1.Value), true, false, "left", false, 0, 0, 0, 0);//nazov
+            ss = RRdata.MatrixRead(6, 0, 2);
+            if (ss.Length == 5)
+            {
+                ss = ss.Substring(0, 3) + " " + ss.Substring(3, 2) + " ";
+            }
+            s = RRdata.MatrixRead(6, 0, 1) + ", " + ss + RRdata.MatrixRead(6, 0, 3);
+            w("E17", s, (short)(nuF1.Value), false, false, "left", false, 0, 0, 0, 0);//adresa
+            s = RRdata.MatrixRead(5, 0, 26);
+            w("E18", s, (short)(nuF1.Value), false, false, "left", false, 0, 0, 0, 0);//kontakt
+            s = RRdata.MatrixRead(5, 0, 28);
+            w("E19", s, (short)(nuF1.Value), false, false, "left", false, 0, 0, 0, 0);//email
+            s = RRdata.MatrixRead(5, 0, 29);
+            w("E20", s, (short)(nuF1.Value), false, false, "left", false, 0, 0, 0, 0);//tel
+            s = RRdata.MatrixRead(5, 0, 2);
+            if (s.Length == 0)
+            {
+                s = RRdata.MatrixRead(5, 0, 2);
+            }
+            w("E21", s, (short)(nuF1.Value), false, false, "left", false, 0, 0, 0, 0);//cobj/czml
+            s = RRdata.MatrixRead(5, 0, 10) + "/" + RRdata.MatrixRead(5, 0, 11);
+            w("E22", s, (short)(nuF1.Value), false, false, "left", false, 0, 0, 0, 0);//cislo zakazky
+            s = RRdata.MatrixRead(5, 0, 34);
+            w("E27", s, (short)(nuF1.Value), false, false, "left", false, 0, 0, 0, 0);//v_matrica
+
+            s = RRdata.MatrixRead(5, 0, 14);
+            s = myDateFormatConvert(s);
+            w("W20", s, (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);//dat dod
+
+            s = RRdata.MatrixRead(5, 0, 16);
+            s = myDateFormatConvert(s);
+            w("W21", s, (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);//dat start
+
+            s = RRdata.MatrixRead(5, 0, 17);
+            s = myDateFormatConvert(s);
+            w("W22", s, (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);//dat stop
+
+            s = RRdata.MatrixRead(5, 0, 18);
+            s = myDateFormatConvert(s);
+            w("W23", s, (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);//dat prot
+
+            s = RRdata.MatrixRead(5, 0, 35);
+            //s = myDateFormatConvert(s);
+            w("W25", s, (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);//v_odobral
+
+            s = RRdata.MatrixRead(5, 0, 38);
+            //s = myDateFormatConvert(s);
+            w("W27", s, (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);//v_miesto
+
+            s = myDateFormatConvert(RRdata.MatrixRead(5, 0, 36));
+            ss = myDateFormatConvert(RRdata.MatrixRead(5, 0, 37));
+            if (ss.Length == 10 || ss != s)
+            {
+                s = s + " - " + ss;
+            }
+            w("W27", s, (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);//v_cas
+            // MATRIX 4
+            // 4 - zakazka_id
+            // 3 - labc_id
+            RRdata.MatrixClear(5);
+            // matrice zo vetkych LC a parametrov do MATRIX5
+            for (int i = 0; i < iCount; i++)
+            {
+                ss = RRdata.MatrixRead(4, i, 3);// pre kazdé labc_id
+                int iParameterCount = Convert.ToInt16(RRsql.RunSqlReturn("SELECT count(*) FROM data WHERE labc=" + ss + ";"));
+                if (iParameterCount > 0)
+                {
+                    RRdata.MatrixFill(5, "SELECT xmatrica.value FROM xmatrica RIGHT JOIN data ON xmatrica.id = data.matrica WHERE labc=" + ss + ";", false);
+                }
+            }
+            // distinct matric z MATRIX5 do MATRIX6
+            RRdata.MatrixClear(6);
+            for (int i = 0; i < RRvar.Matrix5.Count; i++)
+            {
+                String[] sValue = new string[1];
+                ss = RRdata.MatrixRead(5, i, 0);// pre kazdy riadok MATRIX5
+                bool bNeedInsert = true;
+                if (RRvar.Matrix6.Count > 0)
+                {
+                    for (int k = 0; k < RRvar.Matrix6.Count; k++)
+                    {
+                        if (RRdata.MatrixRead(6, k, 0) == ss)
+                        {
+                            bNeedInsert = false;
+                        }
+                    }
+                }
+                if (bNeedInsert)
+                {
+                    sValue[0] = ss;
+                    RRdata.MatrixAdd(6, sValue, false);
+                }
+            }
+
+            s = RRdata.MatrixRead(6, 0, 0);
+            if (RRvar.Matrix6.Count > 1)
+            {
+                for (int i = 1; i < RRvar.Matrix6.Count; i++)
+                {
+                    s += ", " + RRdata.MatrixRead(6, i, 0);
+                }
+            }
+            w("E26", s, (short)(nuF1.Value), false, false, "left", false, 0, 0, 0, 0);//matrica
+            #endregion
+            #region DATA
+            rSize(30, 40);
+            w("L30", "Výsledky skúšok", (short)(nuF2.Value - 2), true, false, "center", false, 0, 0, 0, 0);
+            iRow = 32;
+            ss = "B" + (iRow).ToString();
+            w(ss, "Označenie:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+
+            ss = "B" + (iRow + 1).ToString();
+            w(ss, "Parameter", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+
+            ss = "E" + (iRow + 1).ToString();
+            w(ss, "Označenie", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+
+            ss = "J" + (iRow + 1).ToString();
+            w(ss, "Jednotka", (short)(nuF1.Value), false, true, "center", false, 0, 0, 0, 0);
+
+
+            #endregion
+            #region LOGÁ
+            InitPic(1, 0, 0);
+            InitPic(2, 0, 14);
+            InitPic(3, 0, 17);
+            #endregion
+            SaveProtokol();
+        }
+
+
+    }
+}
+
+
+

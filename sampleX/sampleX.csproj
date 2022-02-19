@@ -1,0 +1,792 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E3D2127A-0DA3-439C-9083-DDC8E21F57FC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>sampleX</RootNamespace>
+    <AssemblyName>sampleX</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetZone>LocalIntranet</TargetZone>
+    <GenerateManifests>true</GenerateManifests>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <ApplicationIcon>samplex.ico</ApplicationIcon>
+    <ManifestCertificateThumbprint>654D2A25933E82DE79229EB5F5722E9BED036563</ManifestCertificateThumbprint>
+    <ManifestKeyFile>sampleX_TemporaryKey.pfx</ManifestKeyFile>
+    <SignManifests>false</SignManifests>
+    <PublishUrl>d:\test\install\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://10.7.16.10/sampleX/</InstallUrl>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'test|AnyCPU' ">
+    <OutputPath>bin\test\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'test|x86' ">
+    <OutputPath>bin\x86\test\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>npoi\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.3.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.1.3.1, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>npoi\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.1.3.1, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>npoi\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.1.3.1, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>npoi\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.1.3.1, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>npoi\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\Config.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\Config.designer.cs">
+      <DependentUpon>Config.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\FilterAR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\FilterAR.designer.cs">
+      <DependentUpon>FilterAR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\FilterOR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\FilterOR.designer.cs">
+      <DependentUpon>FilterOR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Journal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\Journal.designer.cs">
+      <DependentUpon>Journal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Last.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\Last.designer.cs">
+      <DependentUpon>Last.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\RefeN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\RefeN.designer.cs">
+      <DependentUpon>RefeN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ciselniky\Ozn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ciselniky\Ozn.designer.cs">
+      <DependentUpon>Ozn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ciselniky\Super.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ciselniky\Super.designer.cs">
+      <DependentUpon>Super.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Data\DataA.designer.cs">
+      <DependentUpon>DataA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Data\DataB.designer.cs">
+      <DependentUpon>DataB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Data\DataC.designer.cs">
+      <DependentUpon>DataC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ImportE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Data\ImportE.designer.cs">
+      <DependentUpon>ImportE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Filter\FilterE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Filter\FilterE.designer.cs">
+      <DependentUpon>FilterE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\MenuP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu\MenuP.Designer.cs">
+      <DependentUpon>MenuP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Zakazky\Kontakt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Zakazky\Kontakt.Designer.cs">
+      <DependentUpon>Kontakt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Zakazky\Labc_zakazka.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Zakazky\Labc_zakazka.designer.cs">
+      <DependentUpon>Labc_zakazka.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Zakazky\Labc_zakazka2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Zakazky\Labc_zakazka2.designer.cs">
+      <DependentUpon>Labc_zakazka2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Zakazky\Labc_zakazka3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Zakazky\Labc_zakazka3.designer.cs">
+      <DependentUpon>Labc_zakazka3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Zakazky\Obj_partner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Zakazky\Obj_partner.designer.cs">
+      <DependentUpon>Obj_partner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Zakazky\Partners.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Zakazky\Partners.designer.cs">
+      <DependentUpon>Partners.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Zakazky\Prevadzka.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Zakazky\Prevadzka.Designer.cs">
+      <DependentUpon>Prevadzka.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Zakazky\Zakazka_obj_partner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Zakazky\Zakazka_obj_partner.designer.cs">
+      <DependentUpon>Zakazka_obj_partner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ciselniky\Cat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ciselniky\Cat.designer.cs">
+      <DependentUpon>Cat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ciselniky\Jednotka.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ciselniky\Jednotka.designer.cs">
+      <DependentUpon>Jednotka.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ciselniky\Matrica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ciselniky\Matrica.designer.cs">
+      <DependentUpon>Matrica.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ciselniky\Odd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ciselniky\Odd.designer.cs">
+      <DependentUpon>Odd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ciselniky\Parameter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ciselniky\Parameter.designer.cs">
+      <DependentUpon>Parameter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ciselniky\Princip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ciselniky\Princip.designer.cs">
+      <DependentUpon>Princip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ciselniky\xxxx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ciselniky\xxxx.designer.cs">
+      <DependentUpon>xxxx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dlls\CopyFiles\CopyFiles.cs" />
+    <Compile Include="Dlls\CopyFiles\DIA_CopyFiles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dlls\CopyFiles\DIA_CopyFiles.designer.cs">
+      <DependentUpon>DIA_CopyFiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Filter\Filter1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Filter\Filter1.designer.cs">
+      <DependentUpon>Filter1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Filter\FilterA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Filter\FilterA.designer.cs">
+      <DependentUpon>FilterA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Filter\FilterM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Filter\FilterM.designer.cs">
+      <DependentUpon>FilterM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Filter\FilterN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Filter\FilterN.designer.cs">
+      <DependentUpon>FilterN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Library\Library.cs" />
+    <Compile Include="Library\Library_sql.cs" />
+    <Compile Include="Library\Library_fun.cs" />
+    <Compile Include="Library\Library_net.cs" />
+    <Compile Include="Library\Library_zip.cs" />
+    <Compile Include="Login\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\Login.designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\PassChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\PassChange.designer.cs">
+      <DependentUpon>PassChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\PassChangeAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\PassChangeAdmin.designer.cs">
+      <DependentUpon>PassChangeAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu\Menu.Designer.cs">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\MenuA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu\MenuA.designer.cs">
+      <DependentUpon>MenuA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\MenuC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu\MenuC.designer.cs">
+      <DependentUpon>MenuC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\MenuV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu\MenuV.designer.cs">
+      <DependentUpon>MenuV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\MenuZ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu\MenuZ.designer.cs">
+      <DependentUpon>MenuZ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Admin\Config.resx">
+      <DependentUpon>Config.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\FilterAR.resx">
+      <DependentUpon>FilterAR.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\FilterOR.resx">
+      <DependentUpon>FilterOR.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\Journal.resx">
+      <DependentUpon>Journal.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\Last.resx">
+      <DependentUpon>Last.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\RefeN.resx">
+      <DependentUpon>RefeN.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ciselniky\Ozn.resx">
+      <DependentUpon>Ozn.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ciselniky\Super.resx">
+      <DependentUpon>Super.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\DataA.resx">
+      <DependentUpon>DataA.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\DataB.resx">
+      <DependentUpon>DataB.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\DataC.resx">
+      <DependentUpon>DataC.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\ImportE.resx">
+      <DependentUpon>ImportE.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Filter\FilterE.resx">
+      <DependentUpon>FilterE.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu\MenuP.resx">
+      <DependentUpon>MenuP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Zakazky\Kontakt.resx">
+      <DependentUpon>Kontakt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Zakazky\Labc_zakazka.resx">
+      <DependentUpon>Labc_zakazka.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Zakazky\Labc_zakazka2.resx">
+      <DependentUpon>Labc_zakazka2.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Zakazky\Labc_zakazka3.resx">
+      <DependentUpon>Labc_zakazka3.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Zakazky\Obj_partner.resx">
+      <DependentUpon>Obj_partner.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Zakazky\Partners.resx">
+      <DependentUpon>Partners.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Zakazky\Prevadzka.resx">
+      <DependentUpon>Prevadzka.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Zakazky\Zakazka_obj_partner.resx">
+      <DependentUpon>Zakazka_obj_partner.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ciselniky\Cat.resx">
+      <DependentUpon>Cat.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ciselniky\Jednotka.resx">
+      <DependentUpon>Jednotka.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ciselniky\Matrica.resx">
+      <DependentUpon>Matrica.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ciselniky\Odd.resx">
+      <DependentUpon>Odd.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ciselniky\Parameter.resx">
+      <DependentUpon>Parameter.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ciselniky\Princip.resx">
+      <DependentUpon>Princip.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ciselniky\xxxx.resx">
+      <DependentUpon>xxxx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dlls\CopyFiles\DIA_CopyFiles.resx">
+      <DependentUpon>DIA_CopyFiles.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Filter\Filter1.resx">
+      <DependentUpon>Filter1.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Filter\FilterA.resx">
+      <DependentUpon>FilterA.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Filter\FilterM.resx">
+      <DependentUpon>FilterM.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Filter\FilterN.resx">
+      <DependentUpon>FilterN.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\PassChange.resx">
+      <DependentUpon>PassChange.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\PassChangeAdmin.resx">
+      <DependentUpon>PassChangeAdmin.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu\Menu.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu\MenuA.resx">
+      <DependentUpon>MenuA.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu\MenuC.resx">
+      <DependentUpon>MenuC.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu\MenuV.resx">
+      <DependentUpon>MenuV.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu\MenuZ.resx">
+      <DependentUpon>MenuZ.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reg\Reg.resx">
+      <DependentUpon>Reg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\Start.resx">
+      <DependentUpon>Start.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\Start2.resx">
+      <DependentUpon>Start2.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Reg\Reg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reg\Reg.designer.cs">
+      <DependentUpon>Reg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Start.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\Start.Designer.cs">
+      <DependentUpon>Start.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Start2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\Start2.designer.cs">
+      <DependentUpon>Start2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dlls\Zip\BZip2\BZip2.cs" />
+    <Compile Include="Dlls\Zip\BZip2\BZip2Constants.cs" />
+    <Compile Include="Dlls\Zip\BZip2\BZip2Exception.cs" />
+    <Compile Include="Dlls\Zip\BZip2\BZip2InputStream.cs" />
+    <Compile Include="Dlls\Zip\BZip2\BZip2OutputStream.cs" />
+    <Compile Include="Dlls\Zip\Checksums\Adler32.cs" />
+    <Compile Include="Dlls\Zip\Checksums\CRC32.cs" />
+    <Compile Include="Dlls\Zip\Checksums\IChecksum.cs" />
+    <Compile Include="Dlls\Zip\Checksums\StrangeCRC.cs" />
+    <Compile Include="Dlls\Zip\Core\FileSystemScanner.cs" />
+    <Compile Include="Dlls\Zip\Core\INameTransform.cs" />
+    <Compile Include="Dlls\Zip\Core\IScanFilter.cs" />
+    <Compile Include="Dlls\Zip\Core\NameFilter.cs" />
+    <Compile Include="Dlls\Zip\Core\PathFilter.cs" />
+    <Compile Include="Dlls\Zip\Core\StreamUtils.cs" />
+    <Compile Include="Dlls\Zip\Core\WindowsPathUtils.cs" />
+    <Compile Include="Dlls\Zip\Encryption\PkzipClassic.cs" />
+    <Compile Include="Dlls\Zip\GZip\GZIPConstants.cs" />
+    <Compile Include="Dlls\Zip\GZip\GZipException.cs" />
+    <Compile Include="Dlls\Zip\GZip\GzipInputStream.cs" />
+    <Compile Include="Dlls\Zip\GZip\GzipOutputStream.cs" />
+    <Compile Include="Dlls\Zip\Main.cs" />
+    <Compile Include="Dlls\Zip\SharpZipBaseException.cs" />
+    <Compile Include="Dlls\Zip\Tar\InvalidHeaderException.cs" />
+    <Compile Include="Dlls\Zip\Tar\TarArchive.cs" />
+    <Compile Include="Dlls\Zip\Tar\TarBuffer.cs" />
+    <Compile Include="Dlls\Zip\Tar\TarEntry.cs" />
+    <Compile Include="Dlls\Zip\Tar\TarException.cs" />
+    <Compile Include="Dlls\Zip\Tar\TarHeader.cs" />
+    <Compile Include="Dlls\Zip\Tar\TarInputStream.cs" />
+    <Compile Include="Dlls\Zip\Tar\TarOutputStream.cs" />
+    <Compile Include="Dlls\Zip\Zip\Compression\Deflater.cs" />
+    <Compile Include="Dlls\Zip\Zip\Compression\DeflaterConstants.cs" />
+    <Compile Include="Dlls\Zip\Zip\Compression\DeflaterEngine.cs" />
+    <Compile Include="Dlls\Zip\Zip\Compression\DeflaterHuffman.cs" />
+    <Compile Include="Dlls\Zip\Zip\Compression\DeflaterPending.cs" />
+    <Compile Include="Dlls\Zip\Zip\Compression\Inflater.cs" />
+    <Compile Include="Dlls\Zip\Zip\Compression\InflaterDynHeader.cs" />
+    <Compile Include="Dlls\Zip\Zip\Compression\InflaterHuffmanTree.cs" />
+    <Compile Include="Dlls\Zip\Zip\Compression\PendingBuffer.cs" />
+    <Compile Include="Dlls\Zip\Zip\Compression\Streams\DeflaterOutputStream.cs" />
+    <Compile Include="Dlls\Zip\Zip\Compression\Streams\InflaterInputStream.cs" />
+    <Compile Include="Dlls\Zip\Zip\Compression\Streams\OutputWindow.cs" />
+    <Compile Include="Dlls\Zip\Zip\Compression\Streams\StreamManipulator.cs" />
+    <Compile Include="Dlls\Zip\Zip\FastZip.cs" />
+    <Compile Include="Dlls\Zip\Zip\IEntryFactory.cs" />
+    <Compile Include="Dlls\Zip\Zip\WindowsNameTransform.cs" />
+    <Compile Include="Dlls\Zip\Zip\ZipConstants.cs" />
+    <Compile Include="Dlls\Zip\Zip\ZipEntry.cs" />
+    <Compile Include="Dlls\Zip\Zip\ZipEntryFactory.cs" />
+    <Compile Include="Dlls\Zip\Zip\ZipException.cs" />
+    <Compile Include="Dlls\Zip\Zip\ZipExtraData.cs" />
+    <Compile Include="Dlls\Zip\Zip\ZipFile.cs" />
+    <Compile Include="Dlls\Zip\Zip\ZipHelperStream.cs" />
+    <Compile Include="Dlls\Zip\Zip\ZipInputStream.cs" />
+    <Compile Include="Dlls\Zip\Zip\ZipNameTransform.cs" />
+    <Compile Include="Dlls\Zip\Zip\ZipOutputStream.cs" />
+    <Compile Include="Settings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\02925.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\b7.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\b0.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\b2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\b3.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\b1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\b4.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\b5.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\b6.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\b8.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="icons\bv.gif" />
+    <None Include="icons\bw.gif" />
+    <None Include="Resources\Lab science_ToneMapping.jpg" />
+    <None Include="icons\Button-Play-icon.png" />
+    <None Include="icons\Button-Play-icon %281%29.png" />
+    <None Include="icons\Button-Forward-icon %281%29.png" />
+    <None Include="icons\Button-Check-icon.png" />
+    <None Include="icons\Button-Close-icon.png" />
+    <None Include="icons\Button-Upload-icon.png" />
+    <None Include="icons\Download-icon.png" />
+    <None Include="icons\Button-Download-icon.png" />
+    <None Include="icons\Very-Basic-Ok-icon.png" />
+    <None Include="icons\accept-icon.png" />
+    <None Include="icons\_down.png" />
+    <None Include="icons\_up.png" />
+    <None Include="icons\document_9_icon-icons.com_54619.png" />
+    <None Include="icons\Document-Copy-icon.png" />
+    <None Include="icons\Arrows-icon.png" />
+    <None Include="icons\edit-copy-icon.png" />
+    <None Include="icons\0.png" />
+    <None Include="icons\Clear-icon.png" />
+    <Content Include="01.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="02.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="03.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="samplex.ico" />
+    <None Include="icons\Icojam-Blue-Bits-Arrow-left.ico" />
+    <Content Include="licencia.txt" />
+    <Content Include="note.txt" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\edit-icon.png" />
+    <None Include="Resources\Settings-icon %282%29.png" />
+    <None Include="Resources\settings-icon.png" />
+    <None Include="Resources\key-icon.png" />
+    <None Include="Resources\Close-2-icon.png" />
+    <None Include="Resources\Household-Waste-icon.png" />
+    <None Include="Resources\Household-Waste-icon1.png" />
+    <None Include="Resources\Email-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>"$(ProjectDir)RRinc.exe"</PreBuildEvent>
+  </PropertyGroup>
+</Project>

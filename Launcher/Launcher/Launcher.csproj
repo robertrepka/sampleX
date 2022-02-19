@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E3D2127A-0DA3-439C-9083-DDC8E21F57FC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Launcher</RootNamespace>
+    <AssemblyName>Launcher</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetZone>LocalIntranet</TargetZone>
+    <GenerateManifests>false</GenerateManifests>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <ApplicationIcon>0_dkV_icon.ico</ApplicationIcon>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CopyFiles\CopyFiles.cs" />
+    <Compile Include="CopyFiles\DIA_CopyFiles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CopyFiles\DIA_CopyFiles.designer.cs">
+      <DependentUpon>DIA_CopyFiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Library\Library.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu.Designer.cs">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CopyFiles\DIA_CopyFiles.resx">
+      <DependentUpon>DIA_CopyFiles.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Start.resx">
+      <DependentUpon>Start.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Start.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Start.Designer.cs">
+      <DependentUpon>Start.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Zip\BZip2\BZip2.cs" />
+    <Compile Include="Zip\BZip2\BZip2Constants.cs" />
+    <Compile Include="Zip\BZip2\BZip2Exception.cs" />
+    <Compile Include="Zip\BZip2\BZip2InputStream.cs" />
+    <Compile Include="Zip\BZip2\BZip2OutputStream.cs" />
+    <Compile Include="Zip\Checksums\Adler32.cs" />
+    <Compile Include="Zip\Checksums\CRC32.cs" />
+    <Compile Include="Zip\Checksums\IChecksum.cs" />
+    <Compile Include="Zip\Checksums\StrangeCRC.cs" />
+    <Compile Include="Zip\Core\FileSystemScanner.cs" />
+    <Compile Include="Zip\Core\INameTransform.cs" />
+    <Compile Include="Zip\Core\IScanFilter.cs" />
+    <Compile Include="Zip\Core\NameFilter.cs" />
+    <Compile Include="Zip\Core\PathFilter.cs" />
+    <Compile Include="Zip\Core\StreamUtils.cs" />
+    <Compile Include="Zip\Core\WindowsPathUtils.cs" />
+    <Compile Include="Zip\Encryption\PkzipClassic.cs" />
+    <Compile Include="Zip\GZip\GZIPConstants.cs" />
+    <Compile Include="Zip\GZip\GZipException.cs" />
+    <Compile Include="Zip\GZip\GzipInputStream.cs" />
+    <Compile Include="Zip\GZip\GzipOutputStream.cs" />
+    <Compile Include="Zip\Main.cs" />
+    <Compile Include="Zip\SharpZipBaseException.cs" />
+    <Compile Include="Zip\Tar\InvalidHeaderException.cs" />
+    <Compile Include="Zip\Tar\TarArchive.cs" />
+    <Compile Include="Zip\Tar\TarBuffer.cs" />
+    <Compile Include="Zip\Tar\TarEntry.cs" />
+    <Compile Include="Zip\Tar\TarException.cs" />
+    <Compile Include="Zip\Tar\TarHeader.cs" />
+    <Compile Include="Zip\Tar\TarInputStream.cs" />
+    <Compile Include="Zip\Tar\TarOutputStream.cs" />
+    <Compile Include="Zip\Zip\Compression\Deflater.cs" />
+    <Compile Include="Zip\Zip\Compression\DeflaterConstants.cs" />
+    <Compile Include="Zip\Zip\Compression\DeflaterEngine.cs" />
+    <Compile Include="Zip\Zip\Compression\DeflaterHuffman.cs" />
+    <Compile Include="Zip\Zip\Compression\DeflaterPending.cs" />
+    <Compile Include="Zip\Zip\Compression\Inflater.cs" />
+    <Compile Include="Zip\Zip\Compression\InflaterDynHeader.cs" />
+    <Compile Include="Zip\Zip\Compression\InflaterHuffmanTree.cs" />
+    <Compile Include="Zip\Zip\Compression\PendingBuffer.cs" />
+    <Compile Include="Zip\Zip\Compression\Streams\DeflaterOutputStream.cs" />
+    <Compile Include="Zip\Zip\Compression\Streams\InflaterInputStream.cs" />
+    <Compile Include="Zip\Zip\Compression\Streams\OutputWindow.cs" />
+    <Compile Include="Zip\Zip\Compression\Streams\StreamManipulator.cs" />
+    <Compile Include="Zip\Zip\FastZip.cs" />
+    <Compile Include="Zip\Zip\IEntryFactory.cs" />
+    <Compile Include="Zip\Zip\WindowsNameTransform.cs" />
+    <Compile Include="Zip\Zip\ZipConstants.cs" />
+    <Compile Include="Zip\Zip\ZipEntry.cs" />
+    <Compile Include="Zip\Zip\ZipEntryFactory.cs" />
+    <Compile Include="Zip\Zip\ZipException.cs" />
+    <Compile Include="Zip\Zip\ZipExtraData.cs" />
+    <Compile Include="Zip\Zip\ZipFile.cs" />
+    <Compile Include="Zip\Zip\ZipHelperStream.cs" />
+    <Compile Include="Zip\Zip\ZipInputStream.cs" />
+    <Compile Include="Zip\Zip\ZipNameTransform.cs" />
+    <Compile Include="Zip\Zip\ZipOutputStream.cs" />
+    <Compile Include="zzzzzzz.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Launcher.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="0_dkV_icon.ico" />
+    <Content Include="link.ico" />
+    <Content Include="ToolBox.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="icons\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>"$(ProjectDir)RRinc.exe"</PreBuildEvent>
+  </PropertyGroup>
+</Project>

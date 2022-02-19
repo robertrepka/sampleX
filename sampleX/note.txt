@@ -1,0 +1,17 @@
+Pozn�mky:
+
+SKRATKY
+Ctrl-M, O will collapse all of the code to its definitions.
+Ctrl-M, L will expand all of the code (actually, this one toggles it).
+Ctrl-M, M will expand or collapse a single region
+
+GLOBAL: RRvar.     - Library.cs
+sConStr            - TRVAL� connection string
+sCurrPath          - TRVAL� len cesta ku exe na konci \
+sCounty            - TRVAL� �PZ okresu akt. user (ak je zle tak XX) .ToUpper
+sUser              - TRVAL� aktu�lny pou��vate� bez n�zvu dom�ny .ToUpper
+iID                - DO�ASN� len na prenos id medzi forms
+sTemp              - DO�ASN� len na prenos nejak�ho stringu medzi forms
+i, j               - DO�ASN� i sa v�dy z�de
+
+ 
