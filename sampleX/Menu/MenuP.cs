@@ -29,18 +29,17 @@ namespace sampleX
         private readonly RRdata RRdata = new RRdata();
         private readonly RRsql RRsql = new RRsql();
 
-        string sSql;
 
         HSSFWorkbook xBook = new HSSFWorkbook();
         //HSSFWorkbook xBook;
         ICell xCell;
-        string sCell = "";
         ISheet xSheet;
         IRow r;
         int iRow = 0;
         int iCol = 0;
         int iCount = 0;
         int iSheetNameToCreate = 1;
+        int iRowToInitializeOnStart = 1000;
         #endregion
         #region FORM
         public MenuP()
@@ -74,6 +73,7 @@ namespace sampleX
 
         private void button1_Click(object sender, EventArgs e)
         {
+            RRcode.Log(this.Text);
             xBook = new HSSFWorkbook();
             if (c1.SelectedIndex == 0)
             {
@@ -340,9 +340,10 @@ namespace sampleX
                 xSheet.SetDefaultColumnStyle(k, myStyle);
             }
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < iRowToInitializeOnStart; i++)
             {
                 r = xSheet.CreateRow(i);
+                r.Height = (short)(nuR.Value * 10);
                 for (int j = 0; j < 30; j++)
                 {
                     xCell = r.CreateCell(j);
@@ -468,6 +469,39 @@ namespace sampleX
             r.Height = (short)(iHeight * 10);
         }
 
+        private void j(string sCell)
+        {
+            string sChar = sCell.Substring(0, 1);
+            int iRow = Convert.ToInt32(sCell.Substring(1, sCell.Length - 1)) - 1;
+            iCol = iColumnToNumber(sChar);
+            r = xSheet.GetRow(iRow);
+            xCell = r.GetCell(iCol);
+            NPOI.SS.Util.CellRangeAddress cra = new NPOI.SS.Util.CellRangeAddress(iRow, iRow, iCol, iCol + 1);
+            xSheet.AddMergedRegion(cra);
+        }
+
+        private void j(string sCell, int iNumberOfColumnsToAdd)
+        {
+            string sChar = sCell.Substring(0, 1);
+            int iRow = Convert.ToInt32(sCell.Substring(1, sCell.Length - 1)) - 1;
+            iCol = iColumnToNumber(sChar);
+            r = xSheet.GetRow(iRow);
+            xCell = r.GetCell(iCol);
+            NPOI.SS.Util.CellRangeAddress cra = new NPOI.SS.Util.CellRangeAddress(iRow, iRow, iCol, iCol + iNumberOfColumnsToAdd);
+            xSheet.AddMergedRegion(cra);
+        }
+
+        private void j(string sCell, int iNumberOfColumnsToAdd, int iNumberOfRowsToAdd)
+        {
+            string sChar = sCell.Substring(0, 1);
+            int iRow = Convert.ToInt32(sCell.Substring(1, sCell.Length - 1)) - 1;
+            iCol = iColumnToNumber(sChar);
+            r = xSheet.GetRow(iRow);
+            xCell = r.GetCell(iCol);
+            NPOI.SS.Util.CellRangeAddress cra = new NPOI.SS.Util.CellRangeAddress(iRow, iRow + iNumberOfRowsToAdd, iCol, iCol + iNumberOfColumnsToAdd);
+            xSheet.AddMergedRegion(cra);
+        }
+
         private void w(string sCell, string sValue)
         {
             string sChar = sCell.Substring(0, 1);
@@ -475,7 +509,10 @@ namespace sampleX
             iCol = iColumnToNumber(sChar);
             r = xSheet.GetRow(iRow);
             xCell = r.GetCell(iCol);
-            xCell.SetCellValue(sValue);
+            if (sValue.Length > 0)
+            {
+                xCell.SetCellValue(sValue);
+            }
         }
 
         private void w(string sCell, string sValue, short iSize, bool bBold, bool bItalic, string sAligment, bool bWrap, int iLeft, int iBottom, int iRight, int iTop)
@@ -485,7 +522,10 @@ namespace sampleX
             iCol = iColumnToNumber(sChar);
             r = xSheet.GetRow(iRow);
             xCell = r.GetCell(iCol);
-            xCell.SetCellValue(sValue);
+            if (sValue.Length > 0)
+            {
+                xCell.SetCellValue(sValue);
+            }
 
             HSSFFont myFont = (HSSFFont)xBook.CreateFont();
             myFont.FontHeightInPoints = (short)10;
@@ -635,6 +675,279 @@ namespace sampleX
             xCell.CellStyle = myStyle;
         }
 
+        private void wNum(int iC, int iR, string sValue, short iSize, bool bBold, bool bItalic, string sAligment, bool bWrap, int iLeft, int iBottom, int iRight, int iTop)
+        {
+            //string sChar = sCell.Substring(0, 1);
+            int iRow = iR - 1;
+            iCol = iC - 1;
+            r = xSheet.GetRow(iRow);
+            xCell = r.GetCell(iCol);
+            if (sValue.Length > 0)
+            {
+                xCell.SetCellValue(sValue);
+            }
+
+            HSSFFont myFont = (HSSFFont)xBook.CreateFont();
+            myFont.FontHeightInPoints = (short)10;
+            myFont.FontName = "Arial";
+            myFont.FontHeightInPoints = iSize;
+            if (bBold)
+            {
+                myFont.Boldweight = (short)NPOI.SS.UserModel.FontBoldWeight.Bold;
+            }
+            else
+            {
+                myFont.Boldweight = (short)NPOI.SS.UserModel.FontBoldWeight.Normal;
+            }
+
+
+            if (bItalic)
+            {
+                myFont.IsItalic = true;
+            }
+            else
+            {
+                myFont.IsItalic = false;
+            }
+
+            HSSFCellStyle myStyle = (HSSFCellStyle)xBook.CreateCellStyle();
+            myStyle.WrapText = false;
+
+            if (sAligment.ToLower() == "left")
+            {
+                myStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Left;
+            }
+
+            if (sAligment.ToLower() == "center")
+            {
+                myStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
+            }
+
+            if (sAligment.ToLower() == "right")
+            {
+                myStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Right;
+            }
+            myStyle.WrapText = bWrap;
+            myStyle.VerticalAlignment = NPOI.SS.UserModel.VerticalAlignment.Center;
+            myStyle.SetFont(myFont);
+
+            switch (iLeft)
+            {
+                case 0:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+                case 1:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.Hair;
+                    break;
+                case 2:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.Medium;
+                    break;
+                case 3:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.Thick;
+                    break;
+                case 4:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.Double;
+                    break;
+                case 5:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.Dotted;
+                    break;
+                default:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+            }
+
+            switch (iRight)
+            {
+                case 0:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+                case 1:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Hair;
+                    break;
+                case 2:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Medium;
+                    break;
+                case 3:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Thick;
+                    break;
+                case 4:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Double;
+                    break;
+                case 5:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Dotted;
+                    break;
+                default:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+            }
+
+            switch (iTop)
+            {
+                case 0:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+                case 1:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Hair;
+                    break;
+                case 2:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Medium;
+                    break;
+                case 3:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Thick;
+                    break;
+                case 4:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Double;
+                    break;
+                case 5:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Dotted;
+                    break;
+                default:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+            }
+
+
+            switch (iBottom)
+            {
+                case 0:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+                case 1:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Hair;
+                    break;
+                case 2:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Medium;
+                    break;
+                case 3:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Thick;
+                    break;
+                case 4:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Double;
+                    break;
+                case 5:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Dotted;
+                    break;
+                default:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+            }
+
+            xCell.CellStyle = myStyle;
+        }
+
+        private void wNum(int iC, int iR, int iLeft, int iBottom, int iRight, int iTop)
+        {
+            int iRow = iR - 1;
+            iCol = iC - 1;
+            r = xSheet.GetRow(iRow);
+            xCell = r.GetCell(iCol);
+
+            HSSFCellStyle myStyle = (HSSFCellStyle)xBook.CreateCellStyle();
+            myStyle.WrapText = false;
+
+            switch (iLeft)
+            {
+                case 0:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+                case 1:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.Hair;
+                    break;
+                case 2:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.Medium;
+                    break;
+                case 3:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.Thick;
+                    break;
+                case 4:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.Double;
+                    break;
+                case 5:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.Dotted;
+                    break;
+                default:
+                    myStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+            }
+
+            switch (iRight)
+            {
+                case 0:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+                case 1:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Hair;
+                    break;
+                case 2:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Medium;
+                    break;
+                case 3:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Thick;
+                    break;
+                case 4:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Double;
+                    break;
+                case 5:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Dotted;
+                    break;
+                default:
+                    myStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+            }
+
+            switch (iTop)
+            {
+                case 0:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+                case 1:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Hair;
+                    break;
+                case 2:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Medium;
+                    break;
+                case 3:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Thick;
+                    break;
+                case 4:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Double;
+                    break;
+                case 5:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Dotted;
+                    break;
+                default:
+                    myStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+            }
+
+            switch (iBottom)
+            {
+                case 0:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+                case 1:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Hair;
+                    break;
+                case 2:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Medium;
+                    break;
+                case 3:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Thick;
+                    break;
+                case 4:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Double;
+                    break;
+                case 5:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Dotted;
+                    break;
+                default:
+                    myStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.None;
+                    break;
+            }
+
+            xCell.CellStyle = myStyle;
+        }
+
         private string myDateFormatConvert(string sDate)
         {
             string s = "";
@@ -712,7 +1025,28 @@ namespace sampleX
             w("W13", "Strana 1 z počtu 1", (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);
             w("W14", "Počet príloh: 0", (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);
             #endregion
-            #region HLAVICKY - HELP
+            #region DATA - HELP
+            //////////////////////////////////////////////////
+            // MATRIX4
+            //labc 0
+            //rok 1
+            //ozn 2
+            //labc_id 3
+            //zakazka_id 4
+            //////////////////////////////////////////////////
+            // data - MATRIX5
+            //id 0
+            //labc 1
+            //polozka 2
+            //parameter 3
+            //matrica 4
+            //princip 5
+            //ozn 6
+            //odd 7
+            //jednotka 8
+            //akr 9
+            //result 10
+            //neistota 11
             //////////////////////////////////////////////////
             // zakazka_obj_partner - MATRIX5
             //obj_no 0
@@ -881,18 +1215,187 @@ namespace sampleX
             #region DATA
             rSize(30, 40);
             w("L30", "Výsledky skúšok", (short)(nuF2.Value - 2), true, false, "center", false, 0, 0, 0, 0);
+
             iRow = 32;
-            ss = "B" + (iRow).ToString();
-            w(ss, "Označenie:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
 
-            ss = "B" + (iRow + 1).ToString();
-            w(ss, "Parameter", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
 
-            ss = "E" + (iRow + 1).ToString();
-            w(ss, "Označenie", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            for (int i = 0; i < iCount; i++)
+            {
+                //data pre jedno labc do MATRIX5
+                string sLabcId = RRdata.MatrixRead(4, i, 3);
+                RRdata.MatrixFill(5, "select * from data where labc='" + sLabcId + "';", true);
+                if (RRvar.Matrix5.Count > 0)
+                {
+                    //Hlavicka tabulky
+                    for (int l = 1; l < 23; l++)
+                    {
+                        wNum(l + 1, iRow, 0, 1, 0, 1);
+                    }
 
-            ss = "J" + (iRow + 1).ToString();
-            w(ss, "Jednotka", (short)(nuF1.Value), false, true, "center", false, 0, 0, 0, 0);
+
+                    s = "  Laboratórne číslo " + RRdata.MatrixRead(4, i, 0) + " / " + RRdata.MatrixRead(4, i, 1);
+                    ss = "A" + (iRow).ToString();
+                    w(ss, s, (short)(nuF1.Value + 1), true, false, "left", false, 1, 1, 0, 1);
+
+                    if (RRdata.MatrixRead(4, i, 2).Length > 0)
+                    {
+                        s = "Označenie: " + RRdata.MatrixRead(4, i, 2);
+                    }
+                    else
+                    {
+                        s = " " + RRdata.MatrixRead(4, i, 2);
+                    }
+                    ss = "W" + (iRow).ToString();
+                    w(ss, s, (short)(nuF1.Value), false, false, "right", false, 0, 1, 1, 1);
+
+                    iRow++;
+
+                    wNum(1, iRow, 1, 0, 0, 0);
+                    wNum(1, iRow + 1, 1, 0, 0, 0);
+                    wNum(23, iRow, 0, 0, 1, 0);
+                    wNum(23, iRow + 1, 0, 0, 1, 0);
+
+                    ss = "A" + (iRow).ToString();
+                    j(ss, 3, 1);
+                    w(ss, "  Parameter", (short)(nuF1.Value - 1), false, true, "left", true, 1, 0, 0, 0);
+
+                    ss = "E" + (iRow).ToString();
+                    j(ss, 2, 1);
+                    w(ss, "Jednotka", (short)(nuF1.Value - 1), false, true, "center", true, 0, 0, 0, 0);
+
+                    ss = "K" + (iRow).ToString();
+                    j(ss, 1, 1);
+                    w(ss, "Rozšírená neistota[%]", (short)(nuF1.Value - 1), false, true, "center", true, 0, 0, 0, 0);
+
+                    ss = "H" + (iRow).ToString();
+                    j(ss, 2, 1);
+                    w(ss, "Hodnota", (short)(nuF1.Value - 1), false, true, "center", true, 0, 0, 0, 0);
+
+                    ss = "M" + (iRow).ToString();
+                    j(ss, 1, 1);
+                    w(ss, "Medza stanovenia", (short)(nuF1.Value - 1), false, true, "center", true, 0, 0, 0, 0);
+
+                    ss = "O" + (iRow).ToString();
+                    j(ss, 2, 1);
+                    w(ss, "Metóda", (short)(nuF1.Value - 1), false, true, "center", true, 0, 0, 0, 0);
+
+                    ss = "R" + (iRow).ToString();
+                    j(ss, 3, 1);
+                    w(ss, "Metodický predpis", (short)(nuF1.Value - 1), false, true, "center", true, 0, 0, 0, 0);
+
+                    ss = "V" + (iRow).ToString();
+                    j(ss, 1, 1);
+                    w(ss, "Typ skúšky", (short)(nuF1.Value - 1), false, true, "center", true, 0, 0, 2, 0);
+                    iRow++;
+
+                    //pridavanie riadkov z data
+                    for (int m = 0; m < RRvar.Matrix5.Count; m++)
+                    {
+                        iRow++;
+                        for (int n = 0; n < 23; n++)
+                        {
+                            wNum(n + 1, iRow, 0, 1, 0, 1);
+                        }
+                        ss = RRdata.MatrixRead(5, m, 3); //id parameter
+                        s = RRsql.RunSqlReturn("SELECT pozn FROM xparameter where id='" + ss + "'");
+                        if (s.Length == 0)
+                        {
+                            s = RRsql.RunSqlReturn("SELECT value FROM xparameter where id='" + ss + "'");
+                        }
+                        ss = "A" + (iRow).ToString();
+                        j(ss, 3);
+                        w(ss, "  " + s, (short)(nuF1.Value), true, false, "left", false, 1, 1, 0, 1);
+
+                        ss = RRdata.MatrixRead(5, m, 8); //id jedn
+                        s = RRsql.RunSqlReturn("SELECT value FROM xjednotka where id='" + ss + "'");
+                        ss = "E" + (iRow).ToString();
+                        j(ss, 2);
+                        w(ss, s, (short)(nuF1.Value), false, false, "center", false, 1, 1, 0, 1);
+
+                        ss = RRdata.MatrixRead(5, m, 12); //medza
+                        s = ss;
+                        ss = "M" + (iRow).ToString();
+                        j(ss, 1);
+                        w(ss, s, (short)(nuF1.Value), false, false, "center", false, 1, 1, 0, 1);
+
+                        string sStopa = "< " + s;
+
+                        ss = RRdata.MatrixRead(5, m, 9); //akr
+                        string sAkreditovane = ss.ToLower();
+                        if (ss.ToLower() == "true")
+                        {
+                            s = "A";
+                        }
+                        else
+                        {
+                            s = "N";
+                        }
+                        ss = "V" + (iRow).ToString();
+                        j(ss, 1);
+                        w(ss, s, (short)(nuF1.Value), false, false, "center", false, 1, 1, 0, 1);
+
+                        ss = RRdata.MatrixRead(5, m, 10); //hodn
+                        s = ss;
+
+                        if (s == "0")
+                        {
+                            if (sAkreditovane == "true")
+                            {
+                                s = sStopa;
+                            }
+                            else
+                            {
+                                s = "< ";
+                            }
+                        }
+
+                        ss = "H" + (iRow).ToString();
+                        j(ss, 2);
+                        w(ss, s, (short)(nuF1.Value), false, false, "center", false, 1, 1, 0, 1);
+
+                        ss = RRdata.MatrixRead(5, m, 11); //neistota
+                        s = ss;
+                        ss = "K" + (iRow).ToString();
+                        j(ss, 1);
+                        w(ss, s, (short)(nuF1.Value), false, false, "center", false, 1, 1, 0, 1);
+
+                        ss = RRdata.MatrixRead(5, m, 5); //princip
+                        s = RRsql.RunSqlReturn("SELECT value FROM xprincip where id='" + ss + "'");
+                        ss = "O" + (iRow).ToString();
+                        j(ss, 2);
+                        w(ss, s, (short)(nuF1.Value), false, false, "center", false, 1, 1, 0, 1);
+
+                        ss = RRdata.MatrixRead(5, m, 5); //ozn - norma
+                        s = RRsql.RunSqlReturn("SELECT value FROM xozn where id='" + ss + "'");
+                        ss = "R" + (iRow).ToString();
+                        j(ss, 3);
+                        w(ss, s, (short)(nuF1.Value - 1), false, false, "center", false, 1, 1, 0, 1);
+                        wNum(23, iRow, 0, 1, 1, 1);
+
+                    }
+
+                    iRow++; iRow++;
+                    iRow++;
+                }
+
+            }
+
+
+
+
+            //ss = "B" + (iRow + 1).ToString();
+            //w(ss, "Parameter", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+
+
+            //ss = "B" + (iRow).ToString();
+            //w(ss, "Označenie:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+
+
+            //ss = "E" + (iRow + 1).ToString();
+            //w(ss, "Označenie", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+
+            //ss = "J" + (iRow + 1).ToString();
+            //w(ss, "Jednotka", (short)(nuF1.Value), false, true, "center", false, 0, 0, 0, 0);
 
 
             #endregion

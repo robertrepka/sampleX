@@ -40,11 +40,11 @@
             this.bPassCh = new System.Windows.Forms.Button();
             this.rokUD = new System.Windows.Forms.NumericUpDown();
             this.bSelect = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rokUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -178,7 +178,20 @@
             this.bSelect.TabIndex = 122;
             this.toolTip1.SetToolTip(this.bSelect, "Vygenerované laboratórne čísla");
             this.bSelect.UseVisualStyleBackColor = true;
+            this.bSelect.Visible = false;
             this.bSelect.Click += new System.EventHandler(this.bSelect_Click);
+            // 
+            // button1
+            // 
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(387, 149);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(45, 45);
+            this.button1.TabIndex = 123;
+            this.toolTip1.SetToolTip(this.button1, "Vygenerované laboratórne čísla");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // pictureBox2
             // 
@@ -221,17 +234,6 @@
             this.groupBox2.Size = new System.Drawing.Size(148, 100);
             this.groupBox2.TabIndex = 104;
             this.groupBox2.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(387, 149);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(45, 45);
-            this.button1.TabIndex = 123;
-            this.toolTip1.SetToolTip(this.button1, "Vygenerované laboratórne čísla");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // Menu
             // 
