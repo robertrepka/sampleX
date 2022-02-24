@@ -58,8 +58,6 @@
             this.bNew = new System.Windows.Forms.Button();
             this.bDelete = new System.Windows.Forms.Button();
             this.bRename = new System.Windows.Forms.Button();
-            this.bDown = new System.Windows.Forms.Button();
-            this.bUp = new System.Windows.Forms.Button();
             this.cMain = new System.Windows.Forms.ComboBox();
             this.dg1 = new System.Windows.Forms.DataGridView();
             this.dg2 = new System.Windows.Forms.DataGridView();
@@ -82,6 +80,8 @@
             this.bAkr = new System.Windows.Forms.Button();
             this.dg4 = new System.Windows.Forms.DataGridView();
             this.ldg4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg2)).BeginInit();
@@ -95,7 +95,7 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 513);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 571);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 8, 0);
             this.statusStrip1.Size = new System.Drawing.Size(955, 22);
@@ -273,7 +273,7 @@
             // 
             this.bAll.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bAll.BackgroundImage")));
             this.bAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.bAll.Location = new System.Drawing.Point(923, 396);
+            this.bAll.Location = new System.Drawing.Point(923, 454);
             this.bAll.Name = "bAll";
             this.bAll.Size = new System.Drawing.Size(25, 25);
             this.bAll.TabIndex = 77;
@@ -324,28 +324,6 @@
             this.bRename.UseVisualStyleBackColor = true;
             this.bRename.Click += new System.EventHandler(this.bRename_Click);
             // 
-            // bDown
-            // 
-            this.bDown.Image = global::sampleX.Properties.Resources._down;
-            this.bDown.Location = new System.Drawing.Point(268, 167);
-            this.bDown.Name = "bDown";
-            this.bDown.Size = new System.Drawing.Size(45, 45);
-            this.bDown.TabIndex = 139;
-            this.toolTip1.SetToolTip(this.bDown, "Presuň záznam nižšie");
-            this.bDown.UseVisualStyleBackColor = true;
-            this.bDown.Click += new System.EventHandler(this.bDown_Click);
-            // 
-            // bUp
-            // 
-            this.bUp.Image = global::sampleX.Properties.Resources._up;
-            this.bUp.Location = new System.Drawing.Point(268, 121);
-            this.bUp.Name = "bUp";
-            this.bUp.Size = new System.Drawing.Size(45, 45);
-            this.bUp.TabIndex = 138;
-            this.toolTip1.SetToolTip(this.bUp, "Presuň záznam vyššie");
-            this.bUp.UseVisualStyleBackColor = true;
-            this.bUp.Click += new System.EventHandler(this.bUp_Click);
-            // 
             // cMain
             // 
             this.cMain.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -380,7 +358,7 @@
             this.dg1.ReadOnly = true;
             this.dg1.RowHeadersVisible = false;
             this.dg1.RowTemplate.Height = 24;
-            this.dg1.Size = new System.Drawing.Size(240, 428);
+            this.dg1.Size = new System.Drawing.Size(240, 486);
             this.dg1.TabIndex = 51;
             this.dg1.Paint += new System.Windows.Forms.PaintEventHandler(this.dg1_Paint);
             this.dg1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dg1_KeyPress);
@@ -408,8 +386,7 @@
             this.dg2.ReadOnly = true;
             this.dg2.RowHeadersVisible = false;
             this.dg2.RowTemplate.Height = 24;
-            this.dg2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dg2.Size = new System.Drawing.Size(240, 312);
+            this.dg2.Size = new System.Drawing.Size(240, 364);
             this.dg2.TabIndex = 56;
             this.dg2.SelectionChanged += new System.EventHandler(this.dg2_SelectionChanged);
             this.dg2.Paint += new System.Windows.Forms.PaintEventHandler(this.dg2_Paint);
@@ -429,7 +406,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Segoe UI", 8.139131F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button2.Location = new System.Drawing.Point(268, 274);
+            this.button2.Location = new System.Drawing.Point(268, 276);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(45, 35);
             this.button2.TabIndex = 54;
@@ -459,6 +436,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.cOdd);
             this.groupBox1.Controls.Add(this.label8);
@@ -473,7 +452,7 @@
             this.groupBox1.Controls.Add(this.cPolozka);
             this.groupBox1.Location = new System.Drawing.Point(581, 56);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(332, 330);
+            this.groupBox1.Size = new System.Drawing.Size(332, 380);
             this.groupBox1.TabIndex = 109;
             this.groupBox1.TabStop = false;
             // 
@@ -541,7 +520,7 @@
             // 
             this.ldg2.AutoSize = true;
             this.ldg2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.ldg2.Location = new System.Drawing.Point(325, 378);
+            this.ldg2.Location = new System.Drawing.Point(325, 431);
             this.ldg2.Name = "ldg2";
             this.ldg2.Size = new System.Drawing.Size(27, 13);
             this.ldg2.TabIndex = 127;
@@ -551,7 +530,7 @@
             // 
             this.ldg1.AutoSize = true;
             this.ldg1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.ldg1.Location = new System.Drawing.Point(10, 494);
+            this.ldg1.Location = new System.Drawing.Point(9, 552);
             this.ldg1.Name = "ldg1";
             this.ldg1.Size = new System.Drawing.Size(27, 13);
             this.ldg1.TabIndex = 128;
@@ -587,7 +566,7 @@
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dg3.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dg3.Location = new System.Drawing.Point(328, 396);
+            this.dg3.Location = new System.Drawing.Point(328, 454);
             this.dg3.MultiSelect = false;
             this.dg3.Name = "dg3";
             this.dg3.ReadOnly = true;
@@ -603,7 +582,7 @@
             // 
             this.ldg3.AutoSize = true;
             this.ldg3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.ldg3.Location = new System.Drawing.Point(325, 494);
+            this.ldg3.Location = new System.Drawing.Point(325, 552);
             this.ldg3.Name = "ldg3";
             this.ldg3.Size = new System.Drawing.Size(27, 13);
             this.ldg3.TabIndex = 130;
@@ -613,7 +592,7 @@
             // bAkr
             // 
             this.bAkr.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.bAkr.Location = new System.Drawing.Point(328, 456);
+            this.bAkr.Location = new System.Drawing.Point(328, 514);
             this.bAkr.Name = "bAkr";
             this.bAkr.Size = new System.Drawing.Size(585, 35);
             this.bAkr.TabIndex = 67;
@@ -639,7 +618,7 @@
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dg4.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dg4.Location = new System.Drawing.Point(750, 396);
+            this.dg4.Location = new System.Drawing.Point(750, 454);
             this.dg4.MultiSelect = false;
             this.dg4.Name = "dg4";
             this.dg4.ReadOnly = true;
@@ -654,20 +633,39 @@
             // 
             this.ldg4.AutoSize = true;
             this.ldg4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.ldg4.Location = new System.Drawing.Point(747, 494);
+            this.ldg4.Location = new System.Drawing.Point(747, 552);
             this.ldg4.Name = "ldg4";
             this.ldg4.Size = new System.Drawing.Size(27, 13);
             this.ldg4.TabIndex = 134;
             this.ldg4.Text = "dg4";
             this.ldg4.Visible = false;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label3.Location = new System.Drawing.Point(4, 325);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(224, 17);
+            this.label3.TabIndex = 120;
+            this.label3.Text = "Medza pre stopu v neakreditovanom";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(7, 346);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(314, 25);
+            this.comboBox1.TabIndex = 119;
+            this.toolTip1.SetToolTip(this.comboBox1, "Oddelenie");
+            // 
             // Filter1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(955, 535);
-            this.Controls.Add(this.bDown);
-            this.Controls.Add(this.bUp);
+            this.ClientSize = new System.Drawing.Size(955, 593);
             this.Controls.Add(this.bRename);
             this.Controls.Add(this.bDelete);
             this.Controls.Add(this.bNew);
@@ -767,7 +765,7 @@
         private System.Windows.Forms.Button bNew;
         private System.Windows.Forms.Button bDelete;
         private System.Windows.Forms.Button bRename;
-        private System.Windows.Forms.Button bDown;
-        private System.Windows.Forms.Button bUp;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

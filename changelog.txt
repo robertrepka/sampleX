@@ -1,3 +1,4 @@
+22/02/2022-19:23:35 -> Pred pridanim Medze neakr. merania
 19/02/2022-21:01:57 -> Protokol - hlavicky vsetky
 19/02/2022-02:46:52 -> button na data zo zakaziek a protokol pokraèuje
 08/02/2022-17:05:55 -> pred kontrolou importu výsledkov z excelu

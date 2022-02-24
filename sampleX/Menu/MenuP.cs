@@ -73,6 +73,9 @@ namespace sampleX
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //MessageBox.Show(System.Reflection.Assembly.GetEntryAssembly().Location);
+            //MessageBox.Show(Application.StartupPath);
+
             RRcode.Log(this.Text);
             xBook = new HSSFWorkbook();
             if (c1.SelectedIndex == 0)
@@ -254,7 +257,7 @@ namespace sampleX
         {
             if (iIndexOfPic == 1)
             {
-                byte[] da1 = File.ReadAllBytes(Environment.CurrentDirectory + @"\" + "01.jpg");
+                byte[] da1 = File.ReadAllBytes(Application.StartupPath + @"\" + "01.jpg");
                 int ip1 = xBook.AddPicture(da1, PictureType.JPEG);
                 ICreationHelper h1 = xBook.GetCreationHelper();
                 IDrawing d1 = xSheet.CreateDrawingPatriarch();
@@ -267,7 +270,7 @@ namespace sampleX
 
             if (iIndexOfPic == 2)
             {
-                byte[] da2 = File.ReadAllBytes(Environment.CurrentDirectory + @"\" + "02.jpg");
+                byte[] da2 = File.ReadAllBytes(Application.StartupPath + @"\" + "02.jpg");
                 int ip2 = xBook.AddPicture(da2, PictureType.JPEG);
                 ICreationHelper h2 = xBook.GetCreationHelper();
                 IDrawing d2 = xSheet.CreateDrawingPatriarch();
@@ -280,7 +283,7 @@ namespace sampleX
 
             if (iIndexOfPic == 3)
             {
-                byte[] da3 = File.ReadAllBytes(Environment.CurrentDirectory + @"\" + "03.jpg");
+                byte[] da3 = File.ReadAllBytes(Application.StartupPath + @"\" + "03.jpg");
                 int ip3 = xBook.AddPicture(da3, PictureType.JPEG);
                 ICreationHelper h3 = xBook.GetCreationHelper();
                 IDrawing d3 = xSheet.CreateDrawingPatriarch();
@@ -293,7 +296,7 @@ namespace sampleX
 
             if (iIndexOfPic == 4)
             {
-                byte[] da4 = File.ReadAllBytes(Environment.CurrentDirectory + @"\" + "04.jpg");
+                byte[] da4 = File.ReadAllBytes(Application.StartupPath + @"\" + "04.jpg");
                 int ip4 = xBook.AddPicture(da4, PictureType.JPEG);
                 ICreationHelper h4 = xBook.GetCreationHelper();
                 IDrawing d4 = xSheet.CreateDrawingPatriarch();
@@ -1260,19 +1263,19 @@ namespace sampleX
                     w(ss, "  Parameter", (short)(nuF1.Value - 1), false, true, "left", true, 1, 0, 0, 0);
 
                     ss = "E" + (iRow).ToString();
-                    j(ss, 2, 1);
+                    j(ss, 1, 1);
                     w(ss, "Jednotka", (short)(nuF1.Value - 1), false, true, "center", true, 0, 0, 0, 0);
 
-                    ss = "K" + (iRow).ToString();
+                    ss = "J" + (iRow).ToString();
                     j(ss, 1, 1);
                     w(ss, "Rozšírená neistota[%]", (short)(nuF1.Value - 1), false, true, "center", true, 0, 0, 0, 0);
 
-                    ss = "H" + (iRow).ToString();
+                    ss = "G" + (iRow).ToString();
                     j(ss, 2, 1);
                     w(ss, "Hodnota", (short)(nuF1.Value - 1), false, true, "center", true, 0, 0, 0, 0);
 
-                    ss = "M" + (iRow).ToString();
-                    j(ss, 1, 1);
+                    ss = "L" + (iRow).ToString();
+                    j(ss, 2, 1);
                     w(ss, "Medza stanovenia", (short)(nuF1.Value - 1), false, true, "center", true, 0, 0, 0, 0);
 
                     ss = "O" + (iRow).ToString();
@@ -1309,14 +1312,23 @@ namespace sampleX
                         ss = RRdata.MatrixRead(5, m, 8); //id jedn
                         s = RRsql.RunSqlReturn("SELECT value FROM xjednotka where id='" + ss + "'");
                         ss = "E" + (iRow).ToString();
-                        j(ss, 2);
-                        w(ss, s, (short)(nuF1.Value), false, false, "center", false, 1, 1, 0, 1);
+                        j(ss, 1);
+                        w(ss, s, (short)(nuF1.Value - 1), false, false, "center", false, 1, 1, 0, 1);
+                        string sJednotka = s;
 
                         ss = RRdata.MatrixRead(5, m, 12); //medza
                         s = ss;
-                        ss = "M" + (iRow).ToString();
-                        j(ss, 1);
-                        w(ss, s, (short)(nuF1.Value), false, false, "center", false, 1, 1, 0, 1);
+                        ss = "L" + (iRow).ToString();
+                        j(ss, 2);
+                        if (s.Length > 0)
+                        {
+                            w(ss, s + " " + sJednotka, (short)(nuF1.Value - 1), false, false, "center", false, 1, 1, 0, 1);
+                        }
+                        else
+                        {
+                            w(ss, "", (short)(nuF1.Value - 1), false, false, "center", false, 1, 1, 0, 1);
+                        }
+
 
                         string sStopa = "< " + s;
 
@@ -1349,13 +1361,13 @@ namespace sampleX
                             }
                         }
 
-                        ss = "H" + (iRow).ToString();
+                        ss = "G" + (iRow).ToString();
                         j(ss, 2);
                         w(ss, s, (short)(nuF1.Value), false, false, "center", false, 1, 1, 0, 1);
 
                         ss = RRdata.MatrixRead(5, m, 11); //neistota
                         s = ss;
-                        ss = "K" + (iRow).ToString();
+                        ss = "J" + (iRow).ToString();
                         j(ss, 1);
                         w(ss, s, (short)(nuF1.Value), false, false, "center", false, 1, 1, 0, 1);
 
@@ -1365,8 +1377,15 @@ namespace sampleX
                         j(ss, 2);
                         w(ss, s, (short)(nuF1.Value), false, false, "center", false, 1, 1, 0, 1);
 
-                        ss = RRdata.MatrixRead(5, m, 5); //ozn - norma
-                        s = RRsql.RunSqlReturn("SELECT value FROM xozn where id='" + ss + "'");
+                        ss = RRdata.MatrixRead(5, m, 6); //ozn - norma
+                        if (ss.Length > 0)
+                        {
+                            s = RRsql.RunSqlReturn("SELECT value FROM xozn where id='" + ss + "'");
+                        }
+                        else
+                        {
+                            s = "";
+                        }
                         ss = "R" + (iRow).ToString();
                         j(ss, 3);
                         w(ss, s, (short)(nuF1.Value - 1), false, false, "center", false, 1, 1, 0, 1);

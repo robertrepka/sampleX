@@ -22,7 +22,7 @@ namespace sampleX
         static extern void keybd_event(byte bVk, byte bScan, uint dwFlags,
         UIntPtr dwExtraInfo);
 
-	    int iSort = 0;
+        int iSort = 0;
         string sFilter = "";
         BindingSource bs = new BindingSource();
         MySqlDataAdapter da = new MySqlDataAdapter();
@@ -31,20 +31,20 @@ namespace sampleX
 
         #region UVOD
         string sSqlCount = "select count(id) as total from Journal where pc = '";
-             
+
         string SqlSelectCommand = "SELECT id, pc, description, autor, stamp FROM journal1 order by id DESC ";
         string SqlUpdateCommand = "";
         string SqlInsertCommand = "";
         string SqlDeleteCommand = "";
         string SqlLogCommand = "SELECT CONCAT('id:', id, ' - ', pc) from Journal ORDER BY id DESC LIMIT 1;";
-        
-	    string sLog1 = "Journal: ";
-        
+
+        string sLog1 = "Journal: ";
+
         MySqlCommand mySqlSelectCommand;
         MySqlCommand mySqlUpdateCommand;
         MySqlCommand mySqlInsertCommand;
         MySqlCommand mySqlDeleteCommand;
-        
+
         MySqlConnection con = new MySqlConnection(RRvar.sConStr);
         MySqlConnection MyDataConnect = new MySqlConnection(RRvar.sConStr);
 
@@ -151,7 +151,6 @@ namespace sampleX
             this.da.Fill(dt);
             MyDataConnect.Close();
             myDataSource();
-
             dg.DefaultCellStyle.Font = new Font("Segoe UI", 10);
             dg.AlternatingRowsDefaultCellStyle.Font = new Font("Segoe UI", 10);
 
@@ -201,7 +200,7 @@ namespace sampleX
             }
         }
         #endregion
-        
+
         #region UPDATE
         private void myTaUpdate()
         {
@@ -213,12 +212,12 @@ namespace sampleX
 
             //mySqlUpdateCommand.Parameters["@autor"].Value = RRvar.sUser;
             //mySqlUpdateCommand.Parameters["@stamp"].Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            
+
             try
             {
                 da.Update(dt);
             }
-            catch 
+            catch
             {
                 //MessageBox.Show(ex.ToString());
             }
@@ -237,7 +236,7 @@ namespace sampleX
                 MessageBox.Show("Uvedená položka sa už v databáze nachádza!", "Varovanie", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return;
             }
-            
+
             bInsertIsRunning = true;
             int iNewId = 0;
 
@@ -326,7 +325,7 @@ namespace sampleX
         {
             string s, d;
             Control[] c;
-            
+
             try
             {
                 d = sElement;
@@ -372,30 +371,30 @@ namespace sampleX
         {
             MySqlConnection con = new MySqlConnection(RRvar.sConStr);
             MySqlCommand cmd = new MySqlCommand(SqlDeleteCommand, con);
-            
+
             cmd.Parameters.AddWithValue("@id", id_.Text);
 
 
             try
             {
-                    con.Open();
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.ToString());
-                    }
+                con.Open();
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
 
-                    con.Close();
-                    try
-                    {
-                        bs.EndEdit();
-                        bs.RemoveCurrent();
-                        //   myTaUpdate();
-                    }
-                    catch { }    
+                con.Close();
+                try
+                {
+                    bs.EndEdit();
+                    bs.RemoveCurrent();
+                    //   myTaUpdate();
+                }
+                catch { }
             }
             catch { }
         }
@@ -416,7 +415,7 @@ namespace sampleX
                 MessageBox.Show(ex.ToString());
             }
         }
-        
+
         private void pictureBox1_MouseHover(object sender, EventArgs e)
         {
             RRfun.ShowMyInfoToolTip(pictureBox1.Location.X + 50, pictureBox1.Location.Y + 50, this);
@@ -513,7 +512,7 @@ namespace sampleX
             this.Enabled = true;
             RRcode.Front();
         }
-        
+
         private void tSearch_TextChanged(object sender, EventArgs e)
         {
             myFilter();
@@ -577,17 +576,17 @@ namespace sampleX
             }
             catch { }
         }
-        
+
         private void bExcel_Click(object sender, EventArgs e)
         {
             myClip();
         }
-        
+
         private void dg_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             myEndEdit(true);
         }
-    
+
         private void Journal_Resize(object sender, EventArgs e)
         {
             myResize();
@@ -608,7 +607,7 @@ namespace sampleX
             //object o = MySqlHelper.ExecuteScalar(RRvar.sConStr, "delete from refe where (login='' or login is null) and (fullname='' or fullname is null);");
             RRcode.FadeOut(this);
         }
-        
+
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
         {
             bInsertIsRunning = true;
@@ -619,8 +618,8 @@ namespace sampleX
             oldCombo = cFilter.SelectedIndex;
             cFilter.SelectedIndex = 0;
             bExcel.Visible = false;
-            
-            
+
+
             dr.Focus();
             bs.Position = dg.RowCount;
 
@@ -636,15 +635,15 @@ namespace sampleX
             bindingNavigatorMoveNextItem.Enabled = false;
             bindingNavigatorMovePreviousItem.Enabled = false;
             bindingNavigatorPositionItem.Enabled = false;
-            
-            
+
+
             id_.Text = "NOVÝ";
             foreach (Control ctr in dr.Controls)
             {
                 if (ctr is TextBox)
-                    {
-                        ctr.Text = "";
-                    }
+                {
+                    ctr.Text = "";
+                }
             }
         }
 
@@ -703,14 +702,14 @@ namespace sampleX
         {
             MessageBox.Show("Chyba zápisu", "Varovanie", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        
+
         private void bSelect_Click(object sender, EventArgs e)
         {
             RRvar.iID = Convert.ToInt32(id_.Text);
             RRvar.sTemp = pc_.Text;
             this.Close();
         }
-        
+
         public Journal()
         {
             InitializeComponent();
@@ -733,14 +732,14 @@ namespace sampleX
             }
             catch { }
         }
-        
+
         private void dg_Click(object sender, EventArgs e)
         {
             try
             {
                 iSort = Convert.ToInt32(dg.Rows[dg.CurrentRow.Index].Cells[0].Value);
             }
-            catch {}
+            catch { }
         }
 
         private void dg_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -759,8 +758,9 @@ namespace sampleX
                 dg.CurrentCell = dg.Rows[iRow].Cells[0];
                 dg.Rows[iRow].Selected = true;
                 dg.FirstDisplayedScrollingRowIndex = dg.SelectedRows[0].Index;
-                
-            } catch { }          
+
+            }
+            catch { }
         }
         #endregion
     }

@@ -260,7 +260,7 @@ namespace sampleX
             return selectedPair.Key;
         }
 
-        private void ComboFind(string s, string sControl)
+        private void ComboFindOld(string s, string sControl)
         {
             string sItem;
             Control[] c;
@@ -280,6 +280,40 @@ namespace sampleX
                 }
             }
         }
+
+        private string ComboIdById(string sControl, int iIndex)
+        {
+            Control[] c;
+            c = this.Controls.Find(sControl, true);
+            KeyValuePair<string, string> selectedPair = (KeyValuePair<string, string>)(c[0] as ComboBox).Items[iIndex];
+            return selectedPair.Key;
+        }
+
+        private void ComboFind(string s, string sControl)
+        {
+            string sItem;
+            Control[] c;
+            c = this.Controls.Find(sControl, true);
+            (c[0] as ComboBox).SelectedIndex = 0;
+
+            if (s.Length != 0)
+            {
+
+                for (int j = 0; j < (c[0] as ComboBox).Items.Count; j++)
+                {
+                    //(c[0] as ComboBox).SelectedIndex = j;
+
+                    sItem = ComboIdById(sControl, j);
+                    if (sItem == s)
+                    {
+                        (c[0] as ComboBox).SelectedIndex = j;
+                        break;
+                    }
+                }
+            }
+        }
+
+
 
         private void DoIt1()
         {
@@ -302,7 +336,7 @@ namespace sampleX
         private void DoIt2()
         {
             string s;
-            s = "select parid as id, parvalue as value from f_cat_par1 where catid='" + RRvar.sTemp + "' order by parvalue";
+            s = "select parid as id, parvalue as value from f_cat_par1 where catid='" + RRvar.sTemp + "' order by ind";
             Filldt(s);
             dg2.DataSource = dt;
             dg2.DefaultCellStyle.Font = new Font("Segoe UI", 10);
@@ -493,7 +527,7 @@ namespace sampleX
         private void bAddAll_Click(object sender, EventArgs e)
         {
             string s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14;
-            string s = "select f_cat_par.id AS id from f_cat_par, xparameter where catid='" + cMain.SelectedValue + "' and f_cat_par.parid=xparameter.id order by xparameter.value";
+            string s = "select f_cat_par.id AS id from f_cat_par, xparameter where catid='" + cMain.SelectedValue + "' and f_cat_par.parid=xparameter.id order by ind";
             // ID vlastnej skupiny
             Filldt(s);
 

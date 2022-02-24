@@ -276,14 +276,6 @@ namespace sampleX
             return selectedPair.Key;
         }
 
-        private string ComboIdById(string sControl, int iIndex)
-        {
-            Control[] c;
-            c = this.Controls.Find(sControl, true);
-            KeyValuePair<string, string> selectedPair = (KeyValuePair<string, string>)(c[0] as ComboBox).Items[iIndex];
-            return selectedPair.Key;
-        }
-
         private void ComboFind(string s, string sControl)
         {
             string sItem;
@@ -296,14 +288,11 @@ namespace sampleX
 
                 for (int j = 0; j < (c[0] as ComboBox).Items.Count; j++)
                 {
-                    //(c[0] as ComboBox).SelectedIndex = j;
-
-                    sItem = ComboIdById(sControl, j);
+                    (c[0] as ComboBox).SelectedIndex = j;
+                    sItem = ComboId(sControl);
+                    KeyValuePair<string, string> selectedPair = (KeyValuePair<string, string>)(c[0] as ComboBox).SelectedItem;
                     if (sItem == s)
-                    {
-                        (c[0] as ComboBox).SelectedIndex = j;
-                        break;
-                    }
+                    { break; }
                 }
             }
         }
@@ -341,6 +330,7 @@ namespace sampleX
                 i = dg1.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = dg1.Rows[i];
                 t = selectedRow.Cells[0].Value.ToString();
+
                 j = 0;
                 string sSql =
                 "select count(id) as total from f_cat_par where " +
@@ -350,11 +340,7 @@ namespace sampleX
 
                 if (j == 0)
                 {
-                    sSql = "select count(id) as total from f_cat_par where " +
-                    "catid = '" + cMain.SelectedValue + "';";
-                    j = Convert.ToInt16(RRsql.RunSqlReturn(sSql));
-
-                    s = "insert into f_cat_par (catid, parid, refe_id, ind) values ('" + cMain.SelectedValue + "', '" + t + "', '" + RRvar.idUser + "', '" + (j + 1).ToString() + "')";
+                    s = "insert into f_cat_par (catid, parid, refe_id) values ('" + cMain.SelectedValue + "', '" + t + "', '" + RRvar.idUser + "')";
                     int FirstDisplayedScrollingRowIndex = dg1.FirstDisplayedScrollingRowIndex;
                     RRsql.RunSql(s);
 
@@ -383,22 +369,51 @@ namespace sampleX
                             break;
                         }
                     }
-                    DoIt2();
-
-                    foreach (DataGridViewRow row in dg2.Rows)
-                    {
-                        if (row.Cells[0].Value.ToString().Equals(t))
-                        {
-                            dg2.CurrentCell = dg2.Rows[row.Index].Cells[1];
-                            dg2.Rows[row.Index].Selected = true;
-                            break;
-                        }
-                    }
                 }
             }
             catch { }
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string s, t;
+            int i;
+            try
+            {
+                i = dg2.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = dg2.Rows[i];
+                t = selectedRow.Cells[0].Value.ToString();
+                s = "delete from f_cat_par where parid='" + t + "' and catid= '" + cMain.SelectedValue + "'";
+                int FirstDisplayedScrollingRowIndex = dg2.FirstDisplayedScrollingRowIndex;
+                RRsql.RunSql(s);
+                DoIt();
+                try
+                {
+                    dg2.CurrentCell = dg2.Rows[i].Cells[1];
+                    dg2.FirstDisplayedScrollingRowIndex = FirstDisplayedScrollingRowIndex;
+                }
+                catch
+                {
+                    try
+                    {
+                        dg2.CurrentCell = dg2.Rows[i - 1].Cells[1];
+                        dg2.FirstDisplayedScrollingRowIndex = FirstDisplayedScrollingRowIndex;
+                    }
+                    catch { }
+                }
+
+                foreach (DataGridViewRow row in dg1.Rows)
+                {
+                    if (row.Cells[0].Value.ToString().Equals(t))
+                    {
+                        dg1.CurrentCell = dg1.Rows[row.Index].Cells[1];
+                        dg1.Rows[row.Index].Selected = true;
+                        break;
+                    }
+                }
+            }
+            catch { }
+        }
 
         private void DoIt()
         {
@@ -418,7 +433,7 @@ namespace sampleX
             }
             catch { }
 
-            s = "select parid, parvalue from f_cat_par1 where catid='" + cMain.SelectedValue + "' order by ind";
+            s = "select parid, parvalue from f_cat_par1 where catid='" + cMain.SelectedValue + "' order by parvalue";
 
             Filldt(s);
             dg2.DataSource = dt;
@@ -436,9 +451,8 @@ namespace sampleX
         private void DoIt2()
         {
             string s;
-            s = "select ind, id, parid, parvalue from f_cat_par1 where catid='" + cMain.SelectedValue + "' order by ind";
-            RRdata.MatrixFill(2, s, true);
-            s = "select parid, parvalue from f_cat_par1 where catid='" + cMain.SelectedValue + "' order by ind";
+            s = "select parid, parvalue from f_cat_par1 where catid='" + cMain.SelectedValue + "' order by parvalue";
+
             Filldt(s);
             dg2.DataSource = dt;
             dg2.DefaultCellStyle.Font = new Font("Segoe UI", 10);
@@ -641,14 +655,14 @@ namespace sampleX
                     s = " SELECT id FROM xcat where value='" + sNewName + "';";
                     RRdata.MatrixFill(s, true);
                     iNewId = Convert.ToInt32(RRdata.MatrixRead(0, 0));
-                    s = " SELECT catid, parid, polozkaid, matricaid, principid, oznid, jednotkaid, oddid, ind" +
+                    s = " SELECT catid, parid, polozkaid, matricaid, principid, oznid, jednotkaid, oddid" +
                         " FROM f_cat_par WHERE " +
                         " catid = '" + cMain.SelectedValue + "'";
                     RRdata.MatrixFill(2, s, true);
 
                     for (int i = 0; i < RRvar.Matrix2.Count; i++)
                     {
-                        string s0, s1, s2, s3, s4, s5, s6, s7, s8;
+                        string s0, s1, s2, s3, s4, s5, s6, s7;
                         //s0 = RRdata.MatrixRead(2, i, 0);
                         s0 = iNewId.ToString();
                         s1 = RRdata.MatrixRead(2, i, 1);
@@ -720,21 +734,11 @@ namespace sampleX
                             s7 = "'" + s7 + "'";
                         }
 
-                        s8 = RRdata.MatrixRead(2, i, 8);
-                        if (s8.Length == 0)
-                        {
-                            s8 = "NULL";
-                        }
-                        else
-                        {
-                            s8 = "'" + s8 + "'";
-                        }
-
                         s = " INSERT INTO " +
                             "f_cat_par (catid, parid, polozkaid, matricaid, " +
-                            "  principid, oznid, jednotkaid, oddid, ind, refe_id) " +
+                            "  principid, oznid, jednotkaid, oddid,  refe_id) " +
                             " VALUES " +
-                            "('" + s0 + "', " + s1 + ", " + s2 + ", " + s3 + ", " + s4 + ", " + s5 + ", " + s6 + ", " + s7 + ", " + s8 + ", '" + RRvar.idUser + "')";
+                            "('" + s0 + "', " + s1 + ", " + s2 + ", " + s3 + ", " + s4 + ", " + s5 + ", " + s6 + ", " + s7 + ", '" + RRvar.idUser + "')";
                         RRdata.RunSql(s);
                     }
 
@@ -1067,160 +1071,6 @@ namespace sampleX
                     MessageBox.Show("Skupina parametov musí mať nejaký názov!", "Kontrola", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
             }
-        }
-
-        private void bUp_Click(object sender, EventArgs e)
-        {
-            //MATRIX2
-            //select ind, id, parid, parvalue from f_cat_par1 where
-            //catid='" + cMain.SelectedValue + "' order by ind";
-            string s;
-            string sCurrentParId = dg2.SelectedRows[0].Cells[0].Value.ToString();
-            string sCurrentId = RRsql.RunSqlReturn("SELECT id from f_cat_par WHERE catid='" + cMain.SelectedValue + "' and parid='" + sCurrentParId + "'");
-            int iCurrentIndex = 0;
-            string sToChangeId = "";
-
-            for (int i = 0; i < RRvar.Matrix2.Count; i++)
-            {
-                s = RRdata.MatrixRead(2, i, 2);// pre kazde parid
-                if (s == sCurrentParId)
-                {
-                    iCurrentIndex = Convert.ToInt16(RRdata.MatrixRead(2, i, 0));
-                }
-            }
-
-            if (iCurrentIndex > 1)
-            {
-                for (int i = 0; i < RRvar.Matrix2.Count; i++)
-                {
-                    s = RRdata.MatrixRead(2, i, 0);// pre kazde parid
-                    if (s == (iCurrentIndex - 1).ToString())
-                    {
-                        sToChangeId = RRdata.MatrixRead(2, i, 1);
-                    }
-                }
-                s = "UPDATE f_cat_par set ind='" + iCurrentIndex.ToString() + "' WHERE id='" + sToChangeId + "'";
-                RRsql.RunSql(s);
-                s = "UPDATE f_cat_par set ind='" + (iCurrentIndex - 1).ToString() + "' WHERE id='" + sCurrentId.ToString() + "'";
-                RRsql.RunSql(s);
-                DoIt2();
-            }
-            foreach (DataGridViewRow row in dg2.Rows)
-            {
-                if (row.Cells[0].Value.ToString().Equals(sCurrentParId))
-                {
-                    dg2.CurrentCell = dg2.Rows[row.Index].Cells[1];
-                    dg2.Rows[row.Index].Selected = true;
-                    break;
-                }
-            }
-        }
-
-        private void bDown_Click(object sender, EventArgs e)
-        {
-
-            string s;
-            string sCurrentParId = dg2.SelectedRows[0].Cells[0].Value.ToString();
-            string sCurrentId = RRsql.RunSqlReturn("SELECT id from f_cat_par WHERE catid='" + cMain.SelectedValue + "' and parid='" + sCurrentParId + "'");
-            int iCurrentIndex = 0;
-            string sToChangeId = "";
-
-            for (int i = 0; i < RRvar.Matrix2.Count; i++)
-            {
-                s = RRdata.MatrixRead(2, i, 2);// pre kazde parid
-                if (s == sCurrentParId)
-                {
-                    iCurrentIndex = Convert.ToInt16(RRdata.MatrixRead(2, i, 0));
-                }
-            }
-
-            if (iCurrentIndex < dg2.RowCount)
-            {
-                for (int i = 0; i < RRvar.Matrix2.Count; i++)
-                {
-                    s = RRdata.MatrixRead(2, i, 0);// pre kazde parid
-                    if (s == (iCurrentIndex + 1).ToString())
-                    {
-                        sToChangeId = RRdata.MatrixRead(2, i, 1);
-                    }
-                }
-                s = "UPDATE f_cat_par set ind='" + iCurrentIndex.ToString() + "' WHERE id='" + sToChangeId + "'";
-                RRsql.RunSql(s);
-                s = "UPDATE f_cat_par set ind='" + (iCurrentIndex + 1).ToString() + "' WHERE id='" + sCurrentId.ToString() + "'";
-                RRsql.RunSql(s);
-                DoIt2();
-            }
-            foreach (DataGridViewRow row in dg2.Rows)
-            {
-                if (row.Cells[0].Value.ToString().Equals(sCurrentParId))
-                {
-                    dg2.CurrentCell = dg2.Rows[row.Index].Cells[1];
-                    dg2.Rows[row.Index].Selected = true;
-                    break;
-                }
-            }
-        }
-
-        //delete zo skupiny
-        private void button2_Click(object sender, EventArgs e)
-        {
-            string s, t;
-            int i;
-            try
-            {
-                i = dg2.SelectedCells[0].RowIndex;
-                DataGridViewRow selectedRow = dg2.Rows[i];
-                t = selectedRow.Cells[0].Value.ToString();
-                s = "delete from f_cat_par where parid='" + t + "' and catid= '" + cMain.SelectedValue + "'";
-                int FirstDisplayedScrollingRowIndex = dg2.FirstDisplayedScrollingRowIndex;
-                RRsql.RunSql(s);
-                DoIt();
-                try
-                {
-                    dg2.CurrentCell = dg2.Rows[i].Cells[1];
-                    dg2.FirstDisplayedScrollingRowIndex = FirstDisplayedScrollingRowIndex;
-                }
-                catch
-                {
-                    try
-                    {
-                        dg2.CurrentCell = dg2.Rows[i - 1].Cells[1];
-                        dg2.FirstDisplayedScrollingRowIndex = FirstDisplayedScrollingRowIndex;
-                    }
-                    catch { }
-                }
-
-                s = "select ind, id, parid, parvalue from f_cat_par1 where catid='" + cMain.SelectedValue + "' order by ind";
-                RRdata.MatrixFill(2, s, true);
-
-                foreach (DataGridViewRow row in dg1.Rows)
-                {
-                    if (row.Cells[0].Value.ToString().Equals(t))
-                    {
-                        dg1.CurrentCell = dg1.Rows[row.Index].Cells[1];
-                        dg1.Rows[row.Index].Selected = true;
-                        break;
-                    }
-                }
-
-                //MATRIX2
-                //select ind, id, parid, parvalue from f_cat_par1 where
-                //catid='" + cMain.SelectedValue + "' order by ind";
-                int iIndex = 1;
-                for (int j = 0; j < RRvar.Matrix2.Count; j++)
-                {
-                    string ss = RRdata.MatrixRead(2, j, 1);// pre kazde id
-                    s = "UPDATE f_cat_par set ind='" + iIndex.ToString() + "' WHERE id='" + ss + "'";
-                    iIndex++;
-                    RRsql.RunSql(s);
-                }
-                DoIt2();
-
-            }
-            catch { }
-
-
-
         }
     }
 }

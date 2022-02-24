@@ -20,7 +20,7 @@ namespace sampleX
         private readonly RRfun RRfun = new RRfun();
         private readonly RRdata RRdata = new RRdata();
         private readonly RRsql RRsql = new RRsql();
-                
+
         BindingSource bs = new BindingSource();
         MySqlDataAdapter da = new MySqlDataAdapter();
         DataTable dt;
@@ -105,7 +105,8 @@ namespace sampleX
                 try
                 {
                     dg.Sort(dg.Columns["dataid"], ListSortDirection.Ascending);
-                } catch { }
+                }
+                catch { }
             }
 
             if (RRvar.iFilterMeranie > 1)
@@ -116,7 +117,8 @@ namespace sampleX
                 try
                 {
                     dg.Sort(dg.Columns["dataid"], ListSortDirection.Ascending);
-                } catch { }
+                }
+                catch { }
             }
 
             if (RRvar.iFilterMeranie == 1)
@@ -126,7 +128,8 @@ namespace sampleX
                 try
                 {
                     dg.Sort(dg.Columns["dataid"], ListSortDirection.Ascending);
-                } catch { }
+                }
+                catch { }
             }
 
             for (int i = 0; i <= 16; i++)
@@ -195,10 +198,12 @@ namespace sampleX
             int i = 0;
             foreach (DataRow r in dt.Rows)
             {
-                try {
+                try
+                {
                     data.Add(new KeyValuePair<string, string>(r["id"].ToString(), r["value"].ToString()));
                 }
-                catch {
+                catch
+                {
                     i++;
                     data.Add(new KeyValuePair<string, string>(i.ToString(), r["value"].ToString()));
                 }
@@ -214,7 +219,7 @@ namespace sampleX
         private void FillCombosStart()
         {
             bUpdatingCombo = true;
-//            FillOneComboStart("select c_all.id, CONCAT(polozka, ' - ', xparameter.value) as value from c_all, xparameter where xparameter.id = c_all.parameter order by value", "cPolozka");
+            //            FillOneComboStart("select c_all.id, CONCAT(polozka, ' - ', xparameter.value) as value from c_all, xparameter where xparameter.id = c_all.parameter order by value", "cPolozka");
             FillOneComboStart("select DISTINCT polozka as value from c_all order by value", "cPolozka");
             FillOneComboStart("select id, value from xmatrica order by value", "cMatrica");
             FillOneComboStart("select id, value from xprincip order by value", "cPrincip");
@@ -250,7 +255,7 @@ namespace sampleX
         {
             string t;
             string s1 = "", s2 = "", s3 = "", s4 = "", s5 = "", s6 = "";
-            
+
             bUpdatingCombo = true;
             try
             {
@@ -267,7 +272,8 @@ namespace sampleX
             s5 = dg.SelectedRows[0].Cells["jednotka"].Value.ToString();
             s6 = dg.SelectedRows[0].Cells["odd"].Value.ToString();
 
-            try {
+            try
+            {
                 cPolozka.Text = s1;
                 ComboFind(s2, "cMatrica");
                 ComboFind(s3, "cPrincip");
@@ -276,17 +282,17 @@ namespace sampleX
                 ComboFind(s6, "cOdd");
             }
             catch { }
-            
+
             tMedza.Text = "";
             cAkr.Checked = false;
 
             if (tResult.Text.Length == 0)
             {
-                ResultPrepare();        
+                ResultPrepare();
             }
             bUpdatingCombo = false;
         }
-        
+
         private void ResultCheck()
         {
             lMin.Text = "";
@@ -309,7 +315,7 @@ namespace sampleX
             {
                 bOK.Visible = false;
             }
-            
+
             try
             {
                 double d = Convert.ToDouble(tResult.Text.Replace('.', ','));
@@ -318,7 +324,7 @@ namespace sampleX
                 double dMax = 0;
                 double dNeistota = 0;
                 double dMedza = Convert.ToDouble(RRdata.MatrixRead(3, 0, 0));
-                
+
                 tMedza.Text = RRdata.MatrixRead(3, 0, 0);
                 bFound = false;
 
@@ -356,7 +362,7 @@ namespace sampleX
                     }
                 }
             }
-            catch {}
+            catch { }
 
             if (bFound)
             {
@@ -447,7 +453,7 @@ namespace sampleX
             return selectedPair.Key;
         }
 
-        private void ComboFind(string s, string sControl)
+        private void ComboFindOld(string s, string sControl)
         {
             string sItem;
             Control[] c;
@@ -467,6 +473,39 @@ namespace sampleX
                 }
             }
         }
+
+        private string ComboIdById(string sControl, int iIndex)
+        {
+            Control[] c;
+            c = this.Controls.Find(sControl, true);
+            KeyValuePair<string, string> selectedPair = (KeyValuePair<string, string>)(c[0] as ComboBox).Items[iIndex];
+            return selectedPair.Key;
+        }
+
+        private void ComboFind(string s, string sControl)
+        {
+            string sItem;
+            Control[] c;
+            c = this.Controls.Find(sControl, true);
+            (c[0] as ComboBox).SelectedIndex = 0;
+
+            if (s.Length != 0)
+            {
+
+                for (int j = 0; j < (c[0] as ComboBox).Items.Count; j++)
+                {
+                    //(c[0] as ComboBox).SelectedIndex = j;
+
+                    sItem = ComboIdById(sControl, j);
+                    if (sItem == s)
+                    {
+                        (c[0] as ComboBox).SelectedIndex = j;
+                        break;
+                    }
+                }
+            }
+        }
+
 
         private void Filldt(string sSql)
         {
@@ -489,7 +528,7 @@ namespace sampleX
             con.Close();
             MyAdapterTemp.Dispose();
         }
-        
+
         private void Filldt3(string sSql)
         {
             MySqlCommand myCommandTemp = new MySqlCommand(sSql, con);
@@ -602,12 +641,12 @@ namespace sampleX
 
         private void bOK_Click(object sender, EventArgs e)
         {
-            
+
             string sId;
             string s = "UPDATE data set result = '" + tResult.Text.Replace(',', '.') + "' "; ;
             DataGridViewRow selectedRow = dg.SelectedRows[0];
             sId = selectedRow.Cells[0].Value.ToString();
-            
+
             if (tNeistota.Text.Length > 0)
             {
                 s += ", neistota = '" + tNeistota.Text.Replace(',', '.') + "' ";
@@ -679,7 +718,7 @@ namespace sampleX
                 Meral();
                 bClear.Visible = true;
             }
-            catch 
+            catch
             {
                 MessageBox.Show("Chyba pri zápise!");
             }
@@ -704,7 +743,7 @@ namespace sampleX
                 tNeistota.Text = string.Empty;
                 tMedza.Text = string.Empty;
                 tPozn.Text = string.Empty;
-                EnableCombos(false);            
+                EnableCombos(false);
             }
             else
             {
@@ -723,10 +762,10 @@ namespace sampleX
                 tNeistota.Text = string.Empty;
                 tMedza.Text = string.Empty;
                 tPozn.Text = string.Empty;
-                EnableCombos(true);            
+                EnableCombos(true);
             }
         }
-        
+
         private void Meral()
         {
             bool bFound = false;
@@ -753,7 +792,7 @@ namespace sampleX
                     label14.Visible = false;
                 }
             }
-            catch {}
+            catch { }
         }
 
         private void dg_SelectionChanged_1(object sender, EventArgs e)
@@ -781,7 +820,7 @@ namespace sampleX
                     bClear.Visible = false;
                 }
             }
-            catch{}
+            catch { }
         }
 
         private void UpdateDataInt(string sColName, string sControl)
@@ -790,7 +829,7 @@ namespace sampleX
             string sSql;
             string i;
             string s;
-            
+
             if (!bStart && !bUpdatingCombo)
             {
                 sIdData = dg.SelectedRows[0].Cells[0].Value.ToString();
@@ -835,12 +874,12 @@ namespace sampleX
 
         private void cJednotka_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateDataInt("jednotka", "cJednotka");       
+            UpdateDataInt("jednotka", "cJednotka");
         }
 
         private void cOzn_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateDataInt("ozn", "cOzn");    
+            UpdateDataInt("ozn", "cOzn");
         }
 
         private void cPrincip_SelectedIndexChanged(object sender, EventArgs e)
@@ -894,7 +933,7 @@ namespace sampleX
             int totalRows = dg.Rows.Count;
             string sSql;
             string s = dg.SelectedCells[0].Value.ToString();
-            
+
             if (MessageBox.Show("Určite chceš vymazať merací záznam pre " + s + " ?", "Mazanie dát", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
                 try
@@ -926,7 +965,7 @@ namespace sampleX
                 e.Handled = true;
             }
         }
-        
+
         private void tNeistota_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ',') && (e.KeyChar != '.'))
@@ -974,9 +1013,9 @@ namespace sampleX
         {
 
             string sId = dg.SelectedRows[0].Cells[0].Value.ToString();
-            string s = "UPDATE data set result = NULL, neistota = NULL, medza = NULL, akr = NULL, pozn = NULL , des = NULL " + 
+            string s = "UPDATE data set result = NULL, neistota = NULL, medza = NULL, akr = NULL, pozn = NULL , des = NULL " +
                         " WHERE id = '" + sId + "';";
-            
+
             if (MessageBox.Show("Určite chceš vymazať nameranú hodnotu pre " + dg.SelectedRows[0].Cells["parameter"].Value.ToString() + " ?", "Mazanie dát", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
                 try
