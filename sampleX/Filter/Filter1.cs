@@ -121,7 +121,7 @@ namespace sampleX
                 s0 = selectedRow.Cells[1].Value.ToString();
                 s = " SELECT " +
                     "c_all.polozka as s0, c_all.princip as s1, c_all.ozn as s2, c_all.jednotka as s3, c_all.odd as s4, " +
-                    "c_all.id as id, c_all.polozka, " +
+                    "c_all.id as id, c_all.akr AS akr, c_all.polozka, " +
                     " xparameter.value as parameter, " +
                     " xjednotka.value as jednotka, " +
                     " CONCAT(xozn.value, ' ', xozn.popis) as ozn, " +
@@ -144,8 +144,20 @@ namespace sampleX
                 dg3.Columns[2].Visible = false;
                 dg3.Columns[3].Visible = false;
                 dg3.Columns[4].Visible = false;
+                dg3.Columns[5].Visible = false;
                 dg3.AlternatingRowsDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10);
                 dg3.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10);
+                foreach (DataGridViewRow r in dg3.Rows)
+                {
+                    if (r.Cells["akr"].Value.ToString().ToLower() == "true")
+                    {
+                        r.Cells["akr"].Value = "A";
+                    }
+                    else
+                    {
+                        r.Cells["akr"].Value = "N";
+                    }
+                }
 
                 //try
                 //{
@@ -910,7 +922,7 @@ namespace sampleX
 
         private void dg3_Paint(object sender, PaintEventArgs e)
         {
-            ldg3.Text = "Počet možných akreditovaných kombinácií pre tento parameter: " + dg3.Rows.Count.ToString();
+            ldg3.Text = "Počet dostupných skúšok pre parameter: " + dg3.Rows.Count.ToString();
         }
 
         private void bAkr_Click(object sender, EventArgs e)

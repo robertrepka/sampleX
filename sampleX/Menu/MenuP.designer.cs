@@ -36,6 +36,19 @@
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.l1 = new System.Windows.Forms.Label();
             this.nuF2 = new System.Windows.Forms.NumericUpDown();
             this.nuF1 = new System.Windows.Forms.NumericUpDown();
             this.nuC = new System.Windows.Forms.NumericUpDown();
@@ -45,19 +58,8 @@
             this.nu2 = new System.Windows.Forms.NumericUpDown();
             this.nu1 = new System.Windows.Forms.NumericUpDown();
             this.c1 = new System.Windows.Forms.ComboBox();
-            this.l1 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.nuPriloha = new System.Windows.Forms.NumericUpDown();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -69,13 +71,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.nu3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nu2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nu1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nuPriloha)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 202);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 251);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 8, 0);
             this.statusStrip1.Size = new System.Drawing.Size(558, 22);
@@ -95,7 +98,7 @@
             // 
             this.button1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(506, 136);
+            this.button1.Location = new System.Drawing.Point(506, 196);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(45, 45);
@@ -118,6 +121,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.nuPriloha);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label10);
@@ -142,9 +147,135 @@
             this.groupBox1.Controls.Add(this.c1);
             this.groupBox1.Location = new System.Drawing.Point(7, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(489, 193);
+            this.groupBox1.Size = new System.Drawing.Size(489, 241);
             this.groupBox1.TabIndex = 121;
             this.groupBox1.TabStop = false;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label12.Location = new System.Drawing.Point(292, 161);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(43, 17);
+            this.label12.TabIndex = 26;
+            this.label12.Text = "Verzia";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(226, 28);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(16, 13);
+            this.label11.TabIndex = 25;
+            this.label11.Text = "%";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(226, 61);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(16, 13);
+            this.label10.TabIndex = 24;
+            this.label10.Text = "%";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(226, 94);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(16, 13);
+            this.label9.TabIndex = 23;
+            this.label9.Text = "%";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(226, 127);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(16, 13);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "%";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label7.Location = new System.Drawing.Point(292, 127);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(102, 17);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "Veľkosť nadpisu";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label6.Location = new System.Drawing.Point(292, 94);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(91, 17);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "Veľkosť písma";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label5.Location = new System.Drawing.Point(292, 61);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(74, 17);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "Šírka stĺpca";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label4.Location = new System.Drawing.Point(292, 28);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(81, 17);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "Výška riadka";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label3.Location = new System.Drawing.Point(5, 127);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(125, 17);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "Veľkosť loga SNAS2";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(5, 94);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(125, 17);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "Veľkosť loga SNAS1";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(6, 61);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(114, 17);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Veľkosť loga MRA";
+            // 
+            // l1
+            // 
+            this.l1.AutoSize = true;
+            this.l1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.l1.Location = new System.Drawing.Point(6, 28);
+            this.l1.Name = "l1";
+            this.l1.Size = new System.Drawing.Size(127, 17);
+            this.l1.TabIndex = 14;
+            this.l1.Text = "Veľkosť loga ŠGÚDŠ";
             // 
             // nuF2
             // 
@@ -239,7 +370,7 @@
             // nu4
             // 
             this.nu4.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.nu4.Location = new System.Drawing.Point(131, 120);
+            this.nu4.Location = new System.Drawing.Point(147, 120);
             this.nu4.Maximum = new decimal(new int[] {
             300,
             0,
@@ -264,7 +395,7 @@
             // nu3
             // 
             this.nu3.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.nu3.Location = new System.Drawing.Point(131, 87);
+            this.nu3.Location = new System.Drawing.Point(147, 87);
             this.nu3.Maximum = new decimal(new int[] {
             300,
             0,
@@ -289,7 +420,7 @@
             // nu2
             // 
             this.nu2.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.nu2.Location = new System.Drawing.Point(131, 54);
+            this.nu2.Location = new System.Drawing.Point(147, 54);
             this.nu2.Maximum = new decimal(new int[] {
             300,
             0,
@@ -314,7 +445,7 @@
             // nu1
             // 
             this.nu1.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.nu1.Location = new System.Drawing.Point(131, 21);
+            this.nu1.Location = new System.Drawing.Point(147, 21);
             this.nu1.Maximum = new decimal(new int[] {
             300,
             0,
@@ -348,128 +479,35 @@
             this.c1.Size = new System.Drawing.Size(73, 28);
             this.c1.TabIndex = 1;
             // 
-            // l1
+            // label13
             // 
-            this.l1.AutoSize = true;
-            this.l1.Location = new System.Drawing.Point(6, 28);
-            this.l1.Name = "l1";
-            this.l1.Size = new System.Drawing.Size(110, 13);
-            this.l1.TabIndex = 14;
-            this.l1.Text = "Veľkosť loga ŠGÚDŠ";
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label13.Location = new System.Drawing.Point(292, 191);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(78, 17);
+            this.label13.TabIndex = 28;
+            this.label13.Text = "Počet príloh";
             // 
-            // label1
+            // nuPriloha
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 61);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 13);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "Veľkosť loga MRA";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 94);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 13);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "Veľkosť loga SNAS1";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 127);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(107, 13);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "Veľkosť loga SNAS2";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(303, 28);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 13);
-            this.label4.TabIndex = 18;
-            this.label4.Text = "Výška riadka";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(303, 61);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 13);
-            this.label5.TabIndex = 19;
-            this.label5.Text = "Šírka stĺpca";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(303, 94);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(78, 13);
-            this.label6.TabIndex = 20;
-            this.label6.Text = "Veľkosť písma";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(303, 127);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(90, 13);
-            this.label7.TabIndex = 21;
-            this.label7.Text = "Veľkosť nadpisu";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(210, 127);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(16, 13);
-            this.label8.TabIndex = 22;
-            this.label8.Text = "%";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(210, 94);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(16, 13);
-            this.label9.TabIndex = 23;
-            this.label9.Text = "%";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(210, 61);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(16, 13);
-            this.label10.TabIndex = 24;
-            this.label10.Text = "%";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(210, 28);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(16, 13);
-            this.label11.TabIndex = 25;
-            this.label11.Text = "%";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(303, 161);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(37, 13);
-            this.label12.TabIndex = 26;
-            this.label12.Text = "Verzia";
+            this.nuPriloha.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.nuPriloha.Location = new System.Drawing.Point(410, 187);
+            this.nuPriloha.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.nuPriloha.Name = "nuPriloha";
+            this.nuPriloha.Size = new System.Drawing.Size(73, 27);
+            this.nuPriloha.TabIndex = 27;
+            this.nuPriloha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // MenuP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(558, 224);
+            this.ClientSize = new System.Drawing.Size(558, 273);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.pictureBox1);
@@ -499,6 +537,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nu3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nu2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nu1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nuPriloha)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -534,5 +573,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.NumericUpDown nuPriloha;
     }
 }

@@ -65,6 +65,13 @@ namespace sampleX
             set { _sFilterMeranie = value; }
         }
 
+        private static string _sTempSqlMatrica;
+        public static string sTempSqlMatrica
+        {
+            get { return _sTempSqlMatrica; }
+            set { _sTempSqlMatrica = value; }
+        }
+
         private static int _iFilterMeranie;
         public static int iFilterMeranie
         {

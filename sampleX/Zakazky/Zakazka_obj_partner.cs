@@ -1206,6 +1206,7 @@ namespace sampleX
 
         private void Obj_partnerClosed(object sender, EventArgs e)
         {
+            myReload();
             RRcode.FadeIn(this);
             this.Visible = true;
             RRcode.Front();

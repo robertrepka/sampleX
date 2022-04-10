@@ -57,7 +57,7 @@ namespace sampleX
 
         private void button2_Click(object sender, EventArgs e)
         {
-                    }
+        }
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -87,7 +87,7 @@ namespace sampleX
                 }
             }
         }
-    
+
         private static DialogResult ShowInputDialog(ref string input)
         {
             System.Drawing.Size size = new System.Drawing.Size(165, 60);
@@ -138,7 +138,7 @@ namespace sampleX
 
             inputBox.AcceptButton = okButton;
             inputBox.CancelButton = cancelButton;
-            
+
             DialogResult result = inputBox.ShowDialog();
             string s = " where labc='" + nud1.Value.ToString() + "' and rok='" + nud2.Value.ToString() + "';";
             input = s;
@@ -153,7 +153,7 @@ namespace sampleX
             Form Princip = new Princip();
             Princip.Closed += new EventHandler(ChildFormClosedFull);
             RRvar.sHeader = "Princípy merania";
-            Princip.Show(); 
+            Princip.Show();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -260,7 +260,18 @@ namespace sampleX
             Form Super = new Super();
             RRvar.sHeader = "Znaky použiteľné v hornom a dolnom indexe";
             Super.Show();
-        }     
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            RRcode.Log("Číselník neakreditovaných skúšok");
+            RRcode.FadeOut(this);
+            this.Visible = false;
+            Form FilterAN = new FilterAN();
+            FilterAN.Closed += new EventHandler(ChildFormClosedFull);
+            RRvar.sHeader = "Číselník neakreditovaných skúšok ";
+            FilterAN.Show();
+        }
     }
 }
 

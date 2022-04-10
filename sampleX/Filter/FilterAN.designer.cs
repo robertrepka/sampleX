@@ -1,6 +1,6 @@
 ﻿namespace sampleX
 {
-    partial class FilterA
+    partial class FilterAN
     {
         /// <summary>
         /// Required designer variable.
@@ -47,7 +47,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FilterA));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FilterAN));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -70,10 +70,9 @@
             this.bMatrica = new System.Windows.Forms.Button();
             this.bNeistota = new System.Windows.Forms.Button();
             this.bDelete = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.bAdd = new System.Windows.Forms.Button();
             this.bRemove = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -82,7 +81,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgMat1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgMat2)).BeginInit();
@@ -95,9 +93,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.NUD2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgNeistota)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgAll)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -346,7 +344,7 @@
             this.tMin.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.tMin.Location = new System.Drawing.Point(13, 47);
             this.tMin.Name = "tMin";
-            this.tMin.Size = new System.Drawing.Size(79, 25);
+            this.tMin.Size = new System.Drawing.Size(214, 25);
             this.tMin.TabIndex = 1;
             this.tMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tMin, "Dolná hranica");
@@ -357,12 +355,13 @@
             // tMax
             // 
             this.tMax.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.tMax.Location = new System.Drawing.Point(97, 47);
+            this.tMax.Location = new System.Drawing.Point(162, -2);
             this.tMax.Name = "tMax";
             this.tMax.Size = new System.Drawing.Size(79, 25);
             this.tMax.TabIndex = 2;
             this.tMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tMax, "Horná hranica");
+            this.tMax.Visible = false;
             this.tMax.TextChanged += new System.EventHandler(this.tMax_TextChanged);
             this.tMax.Enter += new System.EventHandler(this.tMax_Enter);
             this.tMax.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tMax_KeyPress);
@@ -371,7 +370,7 @@
             // NUD1
             // 
             this.NUD1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.NUD1.Location = new System.Drawing.Point(180, 47);
+            this.NUD1.Location = new System.Drawing.Point(233, 48);
             this.NUD1.Maximum = new decimal(new int[] {
             12,
             0,
@@ -392,7 +391,7 @@
             // NUD2
             // 
             this.NUD2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.NUD2.Location = new System.Drawing.Point(235, 47);
+            this.NUD2.Location = new System.Drawing.Point(247, -2);
             this.NUD2.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -403,6 +402,7 @@
             this.NUD2.TabIndex = 4;
             this.NUD2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.NUD2, "Neistota v percentách");
+            this.NUD2.Visible = false;
             this.NUD2.Enter += new System.EventHandler(this.NUD2_Enter);
             // 
             // tPozn
@@ -430,7 +430,7 @@
             dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgNeistota.DefaultCellStyle = dataGridViewCellStyle16;
-            this.dgNeistota.Location = new System.Drawing.Point(15, 152);
+            this.dgNeistota.Location = new System.Drawing.Point(15, 151);
             this.dgNeistota.Name = "dgNeistota";
             this.dgNeistota.ReadOnly = true;
             this.dgNeistota.RowHeadersVisible = false;
@@ -488,7 +488,7 @@
             this.bNeistota.Size = new System.Drawing.Size(102, 30);
             this.bNeistota.TabIndex = 501;
             this.bNeistota.TabStop = false;
-            this.bNeistota.Text = "Neistoty";
+            this.bNeistota.Text = "Medza";
             this.toolTip1.SetToolTip(this.bNeistota, "Ukáž pridelené neistoty");
             this.bNeistota.UseVisualStyleBackColor = true;
             this.bNeistota.Click += new System.EventHandler(this.bNeistota_Click);
@@ -505,45 +505,37 @@
             this.bDelete.UseVisualStyleBackColor = true;
             this.bDelete.Click += new System.EventHandler(this.bDelete_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(258, 131);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(49, 49);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 100;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label3.Location = new System.Drawing.Point(12, 24);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(30, 17);
+            this.label3.Size = new System.Drawing.Size(48, 17);
             this.label3.TabIndex = 119;
-            this.label3.Text = "Min";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label7.Location = new System.Drawing.Point(96, 24);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(33, 17);
-            this.label7.TabIndex = 123;
-            this.label7.Text = "Max";
+            this.label3.Text = "Medza";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label8.Location = new System.Drawing.Point(176, 24);
+            this.label8.Location = new System.Drawing.Point(229, 25);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(60, 17);
             this.label8.TabIndex = 124;
             this.label8.Text = "Presnosť";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label9.Location = new System.Drawing.Point(231, 24);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(59, 17);
-            this.label9.TabIndex = 125;
-            this.label9.Text = "Hodnota";
             // 
             // bAdd
             // 
@@ -552,7 +544,7 @@
             this.bAdd.Name = "bAdd";
             this.bAdd.Size = new System.Drawing.Size(271, 30);
             this.bAdd.TabIndex = 6;
-            this.bAdd.Text = "Pridaj neistotu";
+            this.bAdd.Text = "Pridaj medzu";
             this.bAdd.UseVisualStyleBackColor = true;
             this.bAdd.Click += new System.EventHandler(this.bAdd_Click);
             // 
@@ -564,7 +556,7 @@
             this.bRemove.Size = new System.Drawing.Size(271, 30);
             this.bRemove.TabIndex = 15;
             this.bRemove.TabStop = false;
-            this.bRemove.Text = "Odober neistotu";
+            this.bRemove.Text = "Odober medzu";
             this.bRemove.UseVisualStyleBackColor = true;
             this.bRemove.Click += new System.EventHandler(this.bRemove_Click);
             // 
@@ -577,19 +569,21 @@
             this.groupBox1.Controls.Add(this.dgMat2);
             this.groupBox1.Controls.Add(this.dgParameter);
             this.groupBox1.Controls.Add(this.dgPrincip);
+            this.groupBox1.Controls.Add(this.NUD2);
             this.groupBox1.Controls.Add(this.dgOdd);
             this.groupBox1.Controls.Add(this.dgOzn);
+            this.groupBox1.Controls.Add(this.tMax);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 10.01739F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.groupBox1.Location = new System.Drawing.Point(321, 5);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(756, 374);
             this.groupBox1.TabIndex = 131;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Rozsah akreditácie ";
+            this.groupBox1.Text = "Neakreditované skúšky";
             // 
             // tPolozka
             // 
-            this.tPolozka.BackColor = System.Drawing.Color.Aquamarine;
+            this.tPolozka.BackColor = System.Drawing.Color.LavenderBlush;
             this.tPolozka.Location = new System.Drawing.Point(529, 341);
             this.tPolozka.Name = "tPolozka";
             this.tPolozka.Size = new System.Drawing.Size(216, 25);
@@ -619,24 +613,20 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dgNeistota);
-            this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.bRemove);
             this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.bAdd);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.tPozn);
             this.groupBox2.Controls.Add(this.tMin);
-            this.groupBox2.Controls.Add(this.NUD2);
-            this.groupBox2.Controls.Add(this.tMax);
             this.groupBox2.Controls.Add(this.NUD1);
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 10.01739F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.groupBox2.Location = new System.Drawing.Point(8, 209);
+            this.groupBox2.Location = new System.Drawing.Point(12, 209);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(300, 360);
             this.groupBox2.TabIndex = 132;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Neistoty";
+            this.groupBox2.Text = "Medza stanovenia";
             // 
             // label1
             // 
@@ -648,19 +638,7 @@
             this.label1.TabIndex = 131;
             this.label1.Text = "Dostupné matrice";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(258, 120);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(49, 49);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 100;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
-            // 
-            // FilterA
+            // FilterAN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -683,12 +661,12 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
-            this.Name = "FilterA";
+            this.Name = "FilterAN";
             this.Opacity = 0D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "sampleX - Hlavné menu";
-            this.Load += new System.EventHandler(this.FilterA_Load);
-            this.Shown += new System.EventHandler(this.FilterA_Shown);
+            this.Load += new System.EventHandler(this.FilterAN_Load);
+            this.Shown += new System.EventHandler(this.FilterAN_Shown);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgMat1)).EndInit();
@@ -702,11 +680,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.NUD2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgNeistota)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgAll)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -732,9 +710,7 @@
         private System.Windows.Forms.NumericUpDown NUD1;
         private System.Windows.Forms.NumericUpDown NUD2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tPozn;
         private System.Windows.Forms.Button bAdd;
         private System.Windows.Forms.DataGridView dgNeistota;

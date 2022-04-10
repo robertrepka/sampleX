@@ -35,6 +35,7 @@ namespace sampleX
         bool bStart = true;
         bool bAuto = true;
         bool bAkr;
+        bool bFoundButNoAkr;
         int iDes = 0;
 
         public DataC()
@@ -315,7 +316,7 @@ namespace sampleX
             {
                 bOK.Visible = false;
             }
-
+            int ii = RRvar.Matrix3.Count;
             try
             {
                 double d = Convert.ToDouble(tResult.Text.Replace('.', ','));
@@ -366,7 +367,14 @@ namespace sampleX
 
             if (bFound)
             {
-                cAkr.Checked = true;
+                if (bFoundButNoAkr)
+                {
+                    cAkr.Checked = false;
+                }
+                else
+                {
+                    cAkr.Checked = true;
+                }
             }
             else
             {
@@ -381,8 +389,9 @@ namespace sampleX
             string s, t;
             string s0 = "", s1 = "", s2 = "", s3 = "", s4 = "", s5 = "", s6 = "";
             string sAll = "";
-            DataGridViewRow selectedRow = dg.SelectedRows[i];
+            string sAllN = "";
 
+            DataGridViewRow selectedRow = dg.SelectedRows[i];
             s1 = selectedRow.Cells["parid"].Value.ToString();
             s2 = selectedRow.Cells["princip"].Value.ToString();
             s3 = selectedRow.Cells["ozn"].Value.ToString();
@@ -390,10 +399,25 @@ namespace sampleX
             s5 = selectedRow.Cells["jednotka"].Value.ToString();
             s6 = selectedRow.Cells["matrica"].Value.ToString();
 
-            s = "SELECT id from c_all WHERE " +
+            bAkr = true;
+            bFoundButNoAkr = false;
+
+            // Skuska N
+            s = "SELECT id from c_all WHERE akr='False' AND " +
                 " parameter = '" + s1 + "' AND princip = '" + s2 + "' AND " +
                 " ozn = '" + s3 + "' AND odd = '" + s4 + "' AND jednotka = '" + s5 + "';";
-            bAkr = true;
+            try { sAllN = RRsql.RunSqlReturn(s).ToString(); }
+            catch { sAllN = ""; }
+
+            if (sAllN.Length > 0)
+            {
+                bFoundButNoAkr = true;
+            }
+            //
+
+            s = "SELECT id from c_all WHERE akr='True' AND " +
+                " parameter = '" + s1 + "' AND princip = '" + s2 + "' AND " +
+                " ozn = '" + s3 + "' AND odd = '" + s4 + "' AND jednotka = '" + s5 + "';";
 
             try { sAll = RRsql.RunSqlReturn(s).ToString(); }
             catch { sAll = ""; }
@@ -427,8 +451,17 @@ namespace sampleX
             else
             {
                 cAkr.Checked = false;
-                RRdata.MatrixClear(3);
                 tResult.BackColor = Color.LavenderBlush;
+                if (bFoundButNoAkr)
+                {
+                    s = "SELECT min, max, des, value from c_neistota WHERE " +
+                    " c_all = '" + sAllN + "' ORDER BY min;";
+                    RRdata.MatrixFill(3, s, true);
+                }
+                else
+                {
+                    RRdata.MatrixClear(3);
+                }
             }
         }
 
@@ -819,6 +852,12 @@ namespace sampleX
                     HideResult(false);
                     bClear.Visible = false;
                 }
+            }
+            catch { }
+
+            try
+            {
+                ResultPrepare();
             }
             catch { }
         }

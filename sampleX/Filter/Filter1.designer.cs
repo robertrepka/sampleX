@@ -617,7 +617,7 @@
             this.bAkr.Name = "bAkr";
             this.bAkr.Size = new System.Drawing.Size(585, 35);
             this.bAkr.TabIndex = 67;
-            this.bAkr.Text = "Prenos vlastností parametra z rozsahu akreditácie";
+            this.bAkr.Text = "Prenos atribútov merania z číselníka skúšok";
             this.bAkr.UseVisualStyleBackColor = true;
             this.bAkr.Click += new System.EventHandler(this.bAkr_Click);
             // 

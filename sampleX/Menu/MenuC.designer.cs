@@ -42,6 +42,7 @@
             this.bFilter = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.bSuper = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -57,7 +58,7 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 380);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 424);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 8, 0);
             this.statusStrip1.Size = new System.Drawing.Size(330, 22);
@@ -158,7 +159,7 @@
             this.bFilter.Name = "bFilter";
             this.bFilter.Size = new System.Drawing.Size(267, 35);
             this.bFilter.TabIndex = 10;
-            this.bFilter.Text = "&Rozsah akreditácie ";
+            this.bFilter.Text = "Rozsah akreditácie (&A)";
             this.toolTip1.SetToolTip(this.bFilter, "Rozsah akreditácie s neistotami");
             this.bFilter.UseVisualStyleBackColor = true;
             this.bFilter.Click += new System.EventHandler(this.bFilter_Click);
@@ -189,10 +190,23 @@
             this.bSuper.UseVisualStyleBackColor = true;
             this.bSuper.Click += new System.EventHandler(this.bSuper_Click);
             // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button2.Location = new System.Drawing.Point(20, 97);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(267, 35);
+            this.button2.TabIndex = 12;
+            this.button2.Text = "Neakreditované skúšky (&N)";
+            this.toolTip1.SetToolTip(this.button2, "Rozsah akreditácie s neistotami");
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(142, 263);
+            this.pictureBox1.Location = new System.Drawing.Point(142, 306);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(45, 45);
@@ -215,18 +229,19 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.bFilter);
             this.groupBox2.Location = new System.Drawing.Point(12, 153);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(305, 102);
+            this.groupBox2.Size = new System.Drawing.Size(305, 145);
             this.groupBox2.TabIndex = 138;
             this.groupBox2.TabStop = false;
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.bSuper);
-            this.groupBox3.Location = new System.Drawing.Point(12, 308);
+            this.groupBox3.Location = new System.Drawing.Point(12, 351);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(305, 63);
             this.groupBox3.TabIndex = 139;
@@ -236,7 +251,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(330, 402);
+            this.ClientSize = new System.Drawing.Size(330, 446);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.button7);
@@ -285,5 +300,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button bSuper;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button button2;
     }
 }

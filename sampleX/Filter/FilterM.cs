@@ -19,7 +19,7 @@ namespace sampleX
         private readonly RRfun RRfun = new RRfun();
         private readonly RRdata RRdata = new RRdata();
         private readonly RRsql RRsql = new RRsql();
-                
+
         BindingSource bs = new BindingSource();
         MySqlDataAdapter da = new MySqlDataAdapter();
         DataTable dt;
@@ -41,7 +41,7 @@ namespace sampleX
             this.Text = RRvar.sHeader;
             RRcode.Front();
 
-            Filldt("select id, CONCAT(polozka, ' - ', parameter, ' - ', princip, ' - ', ozn, ' - ', odd) as value from c_all1 order by polozka, parameter");
+            Filldt("select id, CONCAT(polozka, ' - ', parameter, ' - ', princip, ' - ', ozn, ' - ', odd) as value from c_all1 " + RRvar.sTempSqlMatrica + " order by polozka, parameter");
             cMain.DisplayMember = "value";
             cMain.ValueMember = "id";
             cMain.DataSource = dt;
@@ -100,7 +100,8 @@ namespace sampleX
                         }
                     }
                 }
-            }catch{}
+            }
+            catch { }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -141,7 +142,7 @@ namespace sampleX
                     }
                 }
             }
-            catch {}
+            catch { }
         }
 
         private void DoIt1()
@@ -182,7 +183,7 @@ namespace sampleX
             if (!bStart)
             {
                 RRvar.sTempN = cMain.SelectedValue.ToString();
-                DoIt1();    
+                DoIt1();
             }
         }
 
@@ -213,7 +214,7 @@ namespace sampleX
         private void pictureBox1_MouseHover_1(object sender, EventArgs e)
         {
             RRfun.ShowMyInfoToolTip(pictureBox1.Location.X + 50, pictureBox1.Location.Y + 50, this);
-        }       
+        }
     }
 }
 

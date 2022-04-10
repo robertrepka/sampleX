@@ -13,7 +13,7 @@ using MySql.Data.MySqlClient;
 
 namespace sampleX
 {
-    public partial class FilterN : Form
+    public partial class FilterNN : Form
     {
         private readonly RRcode RRcode = new RRcode();
         private readonly RRfun RRfun = new RRfun();
@@ -30,19 +30,19 @@ namespace sampleX
         bool bStart = true;
         string sTest;
 
-        public FilterN()
+        public FilterNN()
         {
             InitializeComponent();
         }
 
-        private void FilterN_Load(object sender, EventArgs e)
+        private void FilterNN_Load(object sender, EventArgs e)
         {
             RRvar.sFooter = "sampleX verzia: " + Application.ProductVersion + " - " + RRvar.sFullName;
             lStatus.Text = RRvar.sFooter;
             this.Text = RRvar.sHeader;
             RRcode.Front();
 
-            Filldt("select id, CONCAT(polozka, ' - ', parameter, ' - ', princip, ' - ', ozn, ' - ', odd) as value from c_all1 WHERE akr='True' order by polozka, parameter");
+            Filldt("select id, CONCAT(polozka, ' - ', parameter, ' - ', princip, ' - ', ozn, ' - ', odd) as value from c_all1 WHERE akr='False' order by polozka, parameter");
             cMain.DisplayMember = "value";
             cMain.ValueMember = "id";
             cMain.DataSource = dt;
@@ -50,9 +50,9 @@ namespace sampleX
             cMain.SelectedValue = Convert.ToInt32(RRvar.sTempN);
             DoIt1();
             bStart = false;
+            dg2.Columns["max"].Visible = false;
+            dg2.Columns[4].Visible = false;
         }
-
-
 
         private void DoIt1()
         {
@@ -115,7 +115,7 @@ namespace sampleX
             RRcode.Front();
         }
 
-        private void FilterN_Shown(object sender, EventArgs e)
+        private void FilterNN_Shown(object sender, EventArgs e)
         {
             RRcode.FadeIn(this);
             RRcode.Front();
@@ -146,6 +146,7 @@ namespace sampleX
             {
                 tMin.Text = sTest;
             }
+            tMax.Text = tMin.Text;
         }
 
         private void tMax_TextChanged(object sender, EventArgs e)
@@ -168,6 +169,7 @@ namespace sampleX
             {
                 tMax.Text = sTest;
             }
+
         }
 
         private void tMin_Enter(object sender, EventArgs e)
@@ -245,6 +247,12 @@ namespace sampleX
                 return;
             }
 
+            if (dg2.Rows.Count > 0)
+            {
+                MessageBox.Show("Medza už je pridaná. Najprv ju osober!", "Informácia", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                tMin.Focus();
+                return;
+            }
             foreach (DataGridViewRow dr in dg2.Rows)
             {
                 if (dr.Cells["min"].Value.ToString() == tMin.Text)
@@ -301,43 +309,49 @@ namespace sampleX
                 }
                 scope.Complete();
             }
+            dg2.Columns["max"].Visible = false;
+            dg2.Columns["hodnota"].Visible = false;
         }
 
         private void bRemove_Click(object sender, EventArgs e)
         {
-            string sID = dg2.CurrentRow.Cells[0].Value.ToString();
-            int iIndex = dg2.SelectedRows[0].Index;
-            if (MessageBox.Show("Určite chceš vymazať záznam č. " + sID + " ?", "Mazanie dát", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            try
             {
-                try
+                string sID = dg2.CurrentRow.Cells[0].Value.ToString();
+                int iIndex = dg2.SelectedRows[0].Index;
+                if (MessageBox.Show("Určite chceš vymazať záznam č. " + sID + " ?", "Mazanie dát", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
-                    RRsql.RunSql("delete from c_neistota where id='" + dg2.CurrentRow.Cells[0].Value.ToString() + "';");
-                    dt.Clear();
-                    Filldt("select id, min, max, des, value, pozn from c_neistota where c_all = '" + RRvar.sTempN + "' order by min");
-                    dg2.DataSource = dt;
+                    try
+                    {
+                        RRsql.RunSql("delete from c_neistota where id='" + dg2.CurrentRow.Cells[0].Value.ToString() + "';");
+                        dt.Clear();
+                        Filldt("select id, min, max, des, value, pozn from c_neistota where c_all = '" + RRvar.sTempN + "' order by min");
+                        dg2.DataSource = dt;
 
-                    int numRowCount = dg2.RowCount;
-                    if (iIndex >= numRowCount)
-                    {
-                        try
+                        int numRowCount = dg2.RowCount;
+                        if (iIndex >= numRowCount)
                         {
-                            dg2.Rows[iIndex - 1].Selected = false;
-                            dg2.Rows[iIndex - 1].Cells[0].Selected = true;
+                            try
+                            {
+                                dg2.Rows[iIndex - 1].Selected = false;
+                                dg2.Rows[iIndex - 1].Cells[0].Selected = true;
+                            }
+                            catch { }
                         }
-                        catch { }
-                    }
-                    else
-                    {
-                        try
+                        else
                         {
-                            dg2.Rows[iIndex].Selected = false;
-                            dg2.Rows[iIndex].Cells[0].Selected = true;
+                            try
+                            {
+                                dg2.Rows[iIndex].Selected = false;
+                                dg2.Rows[iIndex].Cells[0].Selected = true;
+                            }
+                            catch { }
                         }
-                        catch { }
                     }
+                    catch { }
                 }
-                catch { }
             }
+            catch { }
         }
     }
 }

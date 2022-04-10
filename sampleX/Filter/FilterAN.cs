@@ -14,7 +14,7 @@ using System.Globalization;
 
 namespace sampleX
 {
-    public partial class FilterA : Form
+    public partial class FilterAN : Form
     {
         private readonly RRcode RRcode = new RRcode();
         private readonly RRfun RRfun = new RRfun();
@@ -35,19 +35,19 @@ namespace sampleX
         DataTable dtNeistota = new DataTable();
 
         string sTemp = "";
-        string SqlSelectAll = "SELECT id, polozka, parameter, princip, ozn, jednotka, odd  FROM c_all1 WHERE akr='True' order by id DESC ";
+        string SqlSelectAll = "SELECT id, polozka, parameter, princip, ozn, jednotka, odd  FROM c_all1 WHERE akr='False' order by id DESC ";
         string SqlSelectMatrica = "select id, value from xmatrica order by value";
 
         MySqlCommand myCommand;
         MySqlDataAdapter MyAdapter;
         MySqlConnection con = new MySqlConnection(RRvar.sConStr);
 
-        public FilterA()
+        public FilterAN()
         {
             InitializeComponent();
         }
 
-        private void FilterA_Load(object sender, EventArgs e)
+        private void FilterAN_Load(object sender, EventArgs e)
         {
             string s;
             RRvar.sFooter = "sampleX verzia: " + Application.ProductVersion + " - " + RRvar.sFullName;
@@ -101,8 +101,8 @@ namespace sampleX
             //}
 
             dgNeistota.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-
-
+            dgNeistota.Columns["max"].Visible = false;
+            dgNeistota.Columns[3].Visible = false;
             Filldt(SqlSelectMatrica, dtMat1);
             dgMat1.MultiSelect = false;
             dgMat1.DataSource = dtMat1;
@@ -245,6 +245,13 @@ namespace sampleX
                 return;
             }
 
+            if (dtNeistota.Rows.Count > 0)
+            {
+                MessageBox.Show("Medza už je pridaná. Najprv ju osober!", "Informácia", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                tMin.Focus();
+                return;
+            }
+
             foreach (DataRow dr in dtNeistota.Rows)
             {
                 if (dr["min"].ToString() == r["min"].ToString())
@@ -279,7 +286,7 @@ namespace sampleX
                 tMax.Text = "";
             }
             catch { }
-
+            dgNeistota.Columns["max"].Visible = false;
             dgNeistota.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
         }
 
@@ -407,7 +414,7 @@ namespace sampleX
             catch { }
         }
 
-        private void FilterA_Shown(object sender, EventArgs e)
+        private void FilterAN_Shown(object sender, EventArgs e)
         {
             try
             {
@@ -426,22 +433,7 @@ namespace sampleX
 
         private void tMin_TextChanged(object sender, EventArgs e)
         {
-            //double d;
-            //tMin.Text = tMin.Text.Replace('.',',');
-
-            //if (tMin.Text.Length == 0)
-            //{
-            //    sTemp = "";
-            //}
-
-            //try
-            //{
-            //    d = Convert.ToDouble(tMin.Text);
-            //    sTemp = tMin.Text;
-            //    tMin.Select(tMin.Text.Length, 0);
-            //} catch {
-            //    tMin.Text = sTemp;
-            //}
+            tMax.Text = tMin.Text;
         }
 
         private void tMin_Enter(object sender, EventArgs e)
@@ -451,24 +443,6 @@ namespace sampleX
 
         private void tMax_TextChanged(object sender, EventArgs e)
         {
-            //double d;
-            //tMax.Text = tMax.Text.Replace('.', ',');
-
-            //if (tMax.Text.Length == 0)
-            //{
-            //    sTemp = "";
-            //}
-
-            //try
-            //{
-            //    d = Convert.ToDouble(tMax.Text);
-            //    sTemp = tMax.Text;
-            //    tMax.Select(tMax.Text.Length, 0);
-            //}
-            //catch
-            //{
-            //    tMax.Text = sTemp;
-            //}
         }
 
         private void tMax_Enter(object sender, EventArgs e)
@@ -568,7 +542,7 @@ namespace sampleX
                         "'" + dgOzn.CurrentRow.Cells[0].Value.ToString() + "', " +
                         "'" + dgOdd.CurrentRow.Cells[0].Value.ToString() + "', " +
                         "'" + dgJednotka.CurrentRow.Cells[0].Value.ToString() + "', " +
-                        "'True', " +
+                        "'False', " +
                         "'" + RRvar.idUser.ToString() + "')";
 
                     RRsql.RunSql(sSql);
@@ -674,7 +648,7 @@ namespace sampleX
 
         private void bMatrica_Click(object sender, EventArgs e)
         {
-            RRvar.sTempSqlMatrica = " WHERE akr = 'True' ";
+            RRvar.sTempSqlMatrica = " WHERE akr = 'False' ";
             RRvar.sTempN = "";
             RRvar.sTempN = dgAll.CurrentRow.Cells[0].Value.ToString();
             RRvar.sTemp9 = dgAll.CurrentRow.Cells[0].Value.ToString();
@@ -701,10 +675,10 @@ namespace sampleX
                 return;
             }
             this.Enabled = false;
-            Form FilterN = new FilterN();
-            FilterN.Closed += new EventHandler(ChildFormClosedFull);
-            RRvar.sHeader = "Rozsah akreditácie - neistoty ";
-            FilterN.Show();
+            Form FilterNN = new FilterNN();
+            FilterNN.Closed += new EventHandler(ChildFormClosedFull);
+            RRvar.sHeader = "Číselník neakreditovaných skúšok - medza ";
+            FilterNN.Show();
         }
 
         private void tMin_KeyPress(object sender, KeyPressEventArgs e)

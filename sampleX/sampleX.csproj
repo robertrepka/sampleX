@@ -211,11 +211,23 @@
     <Compile Include="Data\ImportE.designer.cs">
       <DependentUpon>ImportE.cs</DependentUpon>
     </Compile>
+    <Compile Include="Filter\FilterAN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Filter\FilterAN.Designer.cs">
+      <DependentUpon>FilterAN.cs</DependentUpon>
+    </Compile>
     <Compile Include="Filter\FilterE.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Filter\FilterE.designer.cs">
       <DependentUpon>FilterE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Filter\FilterNN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Filter\FilterNN.Designer.cs">
+      <DependentUpon>FilterNN.cs</DependentUpon>
     </Compile>
     <Compile Include="Menu\MenuP.cs">
       <SubType>Form</SubType>
@@ -447,9 +459,15 @@
       <DependentUpon>ImportE.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Filter\FilterAN.resx">
+      <DependentUpon>FilterAN.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Filter\FilterE.resx">
       <DependentUpon>FilterE.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Filter\FilterNN.resx">
+      <DependentUpon>FilterNN.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu\MenuP.resx">
       <DependentUpon>MenuP.cs</DependentUpon>
