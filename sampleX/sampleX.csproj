@@ -229,11 +229,17 @@
     <Compile Include="Filter\FilterNN.Designer.cs">
       <DependentUpon>FilterNN.cs</DependentUpon>
     </Compile>
-    <Compile Include="Menu\MenuP.cs">
+    <Compile Include="Protokol\Pro1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menu\MenuP.Designer.cs">
-      <DependentUpon>MenuP.cs</DependentUpon>
+    <Compile Include="Protokol\Pro1.Designer.cs">
+      <DependentUpon>Pro1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Protokol\ProMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Protokol\ProMenu.Designer.cs">
+      <DependentUpon>ProMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Zakazky\Kontakt.cs">
       <SubType>Form</SubType>
@@ -469,8 +475,11 @@
     <EmbeddedResource Include="Filter\FilterNN.resx">
       <DependentUpon>FilterNN.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Menu\MenuP.resx">
-      <DependentUpon>MenuP.cs</DependentUpon>
+    <EmbeddedResource Include="Protokol\Pro1.resx">
+      <DependentUpon>Pro1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Protokol\ProMenu.resx">
+      <DependentUpon>ProMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Zakazky\Kontakt.resx">
       <DependentUpon>Kontakt.cs</DependentUpon>

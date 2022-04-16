@@ -1282,10 +1282,10 @@ namespace sampleX
 
             RRcode.FadeOut(this);
             this.Visible = false;
-            Form MenuP = new MenuP();
-            MenuP.Closed += new EventHandler(ChildFormClosedProto);
+            Form ProMenu = new ProMenu();
+            ProMenu.Closed += new EventHandler(ChildFormClosedProto);
             RRvar.sHeader = "Protokol pre " + RRvar.sHeader;
-            MenuP.Show();
+            ProMenu.Show();
 
         }
     }

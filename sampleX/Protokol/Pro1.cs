@@ -21,7 +21,7 @@ using NPOI.HPSF;
 #endregion
 namespace sampleX
 {
-    public partial class MenuP : Form
+    public partial class Pro1 : Form
     {
         #region DEKLARACIE
         private readonly RRcode RRcode = new RRcode();
@@ -42,25 +42,25 @@ namespace sampleX
         int iRowToInitializeOnStart = 100;
         #endregion
         #region FORM
-        public MenuP()
+        public Pro1()
         {
             InitializeComponent();
         }
 
-        private void MenuP_Load(object sender, EventArgs e)
+        private void Pro1_Load(object sender, EventArgs e)
         {
 
             RRcode.Log(this.Text);
             this.Text = RRvar.sHeader;
-            c1.SelectedIndex = 0;
             lStatus.Text = "sampleX - " + RRvar.sFullName;
             iCount = RRvar.Matrix4.Count;
+            cOdber.SelectedIndex = 0;
             LoadVariables();
             RRcode.Front();
             //xBook = new HSSFWorkbook();
         }
 
-        private void MenuP_Shown(object sender, EventArgs e)
+        private void Pro1_Shown(object sender, EventArgs e)
         {
             RRcode.FadeIn(this);
             RRcode.Front();
@@ -75,17 +75,9 @@ namespace sampleX
         {
             //MessageBox.Show(System.Reflection.Assembly.GetEntryAssembly().Location);
             //MessageBox.Show(Application.StartupPath);
-
             RRcode.Log(this.Text);
             xBook = new HSSFWorkbook();
-            if (c1.SelectedIndex == 0)
-            {
-                Typ1();
-            }
-            if (c1.SelectedIndex == 1)
-            {
-                Typ2();
-            }
+            Typ1();
         }
 
         private void nu1_ValueChanged(object sender, EventArgs e)
@@ -126,6 +118,11 @@ namespace sampleX
         private void nuF1_ValueChanged(object sender, EventArgs e)
         {
             RRcode.RegWrite("ProtoF1", nuF1.Value.ToString());
+        }
+
+        private void Typ2()
+        {
+
         }
         #endregion
         #region FUNKCIE
@@ -714,7 +711,6 @@ namespace sampleX
                 myFont.Boldweight = (short)NPOI.SS.UserModel.FontBoldWeight.Normal;
             }
 
-
             if (bItalic)
             {
                 myFont.IsItalic = true;
@@ -980,10 +976,7 @@ namespace sampleX
         }
         #endregion
 
-        private void Typ2()
-        {
 
-        }
 
         //Nastavi cislo riadku a stranu
         private void Typ1RowNumberAndNewPage(int i)
@@ -1010,6 +1003,7 @@ namespace sampleX
 
                 iRow = 5;
                 Typ1TableHeader(i, true);
+
             }
         }
 
@@ -1121,7 +1115,7 @@ namespace sampleX
             w("D3", sConfigValue("adr06"), (short)(nuF1.Value - 1), false, false, "left", false, 0, 0, 0, 0);
             w("D4", sConfigValue("adr11"), (short)(nuF1.Value - 1), false, false, "left", false, 0, 0, 0, 0);
             w("D5", sConfigValue("adr07") + ", " + sConfigValue("adr08") + ", tel.: " + sConfigValue("adr09"), (short)(nuF1.Value - 1), false, false, "left", false, 0, 0, 0, 0);
-            rSize(8, 40);
+            rSize(7, 40);
             #endregion
             #region LOGÁ OBRAZKY
             InitPic(1, 0, 0);
@@ -1130,13 +1124,15 @@ namespace sampleX
             #endregion
             #region HLAVICKA PROTOKOLU
             s = "Protokol o skúške č. " + RRvar.iProtoNo1.ToString() + "/" + RRvar.iProtoNo2.ToString();
-            w("L8", s, (short)(nuF2.Value), true, false, "center", false, 0, 0, 0, 0);
+            w("L7", s, (short)(nuF2.Value), true, false, "center", false, 0, 0, 0, 0);
 
-            w("N10", "Skúška:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
-            w("N11", "Subdodávka:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            w("N9", "Skúška:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            w("N10", "Subdodávka:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            w("N11", "Odber:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
 
-            w("W10", "A - akreditovaná, N - neakreditovaná", (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);
-            w("W11", "SA - akreditovaná, SN - neakreditovaná", (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);
+            w("W9", "A - akreditovaná, N - neakreditovaná", (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);
+            w("W10", "SA - akreditovaná, SN - neakreditovaná", (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);
+            w("W11", "A - akreditovaný, N neakreditovaný", (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);
 
             w("A13", "Počet výtlačkov:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
             w("A14", "Výtlačok číslo:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
@@ -1303,7 +1299,8 @@ namespace sampleX
             s = myDateFormatConvert(s);
             w("W23", s, (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);//dat prot
 
-            s = RRdata.MatrixRead(5, 0, 35);
+            //s = RRdata.MatrixRead(5, 0, 35);
+            s = tOdber.Text + ", odber: " + cOdber.Text;
             //s = myDateFormatConvert(s);
             w("W25", s, (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);//v_odobral
 
