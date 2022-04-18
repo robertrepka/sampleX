@@ -10,6 +10,7 @@ using System.Configuration;
 using System.Text.RegularExpressions;
 using System.IO;
 using System.Diagnostics;
+using MySql.Data.MySqlClient;
 using NPOI.XSSF.UserModel;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
@@ -40,6 +41,14 @@ namespace sampleX
         int iCount = 0;
         int iSheetNameToCreate = 1;
         int iRowToInitializeOnStart = 100;
+        DataTable dtOdberName;
+        DataTable dtResult;
+        DataTable dtBoss;
+        MySqlCommand myCommand;
+        MySqlDataAdapter MyAdapter;
+        MySqlConnection con = new MySqlConnection(RRvar.sConStr);
+
+
         #endregion
         #region FORM
         public Pro1()
@@ -54,16 +63,82 @@ namespace sampleX
             this.Text = RRvar.sHeader;
             lStatus.Text = "sampleX - " + RRvar.sFullName;
             iCount = RRvar.Matrix4.Count;
-            cOdber.SelectedIndex = 0;
+            cOdberAkr.SelectedIndex = 0;
             LoadVariables();
             RRcode.Front();
-            //xBook = new HSSFWorkbook();
+
+            FilldtOdberName("select id1 as id, fullname from f_auth_refe1 where value='o' order by fullname");
+            cOdberName.DisplayMember = "fullname";
+            cOdberName.ValueMember = "id";
+            cOdberName.DataSource = dtOdberName;
+            cOdberName.SelectedIndex = 0;
+
+            FilldtResult("select id1 as id, fullname from f_auth_refe1 fullname where value='p-v' order by fullname");
+            cResult.DisplayMember = "fullname";
+            cResult.ValueMember = "id";
+            cResult.DataSource = dtResult;
+            cResult.SelectedIndex = 0;
+
+            FilldtBoss("select id1 as id, fullname from f_auth_refe1 where value='p-p' order by fullname");
+            cBoss.DisplayMember = "fullname";
+            cBoss.ValueMember = "id";
+            cBoss.DataSource = dtBoss;
+            cBoss.SelectedIndex = 0;
+
         }
 
         private void Pro1_Shown(object sender, EventArgs e)
         {
             RRcode.FadeIn(this);
             RRcode.Front();
+        }
+
+        private void FilldtOdberName(string sSql)
+        {
+            myCommand = new MySqlCommand(sSql, con);
+            MyAdapter = new MySqlDataAdapter(myCommand);
+            dtOdberName = new DataTable();
+            con.Open();
+            MyAdapter.Fill(dtOdberName);
+            con.Close();
+            MyAdapter.Dispose();
+        }
+        private void FilldtResult(string sSql)
+        {
+            myCommand = new MySqlCommand(sSql, con);
+            MyAdapter = new MySqlDataAdapter(myCommand);
+            dtResult = new DataTable();
+            con.Open();
+            MyAdapter.Fill(dtResult);
+            con.Close();
+            MyAdapter.Dispose();
+        }
+        private void FilldtBoss(string sSql)
+        {
+            myCommand = new MySqlCommand(sSql, con);
+            MyAdapter = new MySqlDataAdapter(myCommand);
+            dtBoss = new DataTable();
+            con.Open();
+            MyAdapter.Fill(dtBoss);
+            con.Close();
+            MyAdapter.Dispose();
+        }
+
+        private void bOdberName_Click(object sender, EventArgs e)
+        {
+            tOdber.Text = cOdberName.Text;
+        }
+
+        private void bResult_Click(object sender, EventArgs e)
+        {
+            tResult1.Text = cResult.Text;
+            tResult2.Text = RRsql.RunSqlReturn("select post from refe where fullname = '" + cResult.Text + "'");
+        }
+
+        private void bBoss_Click(object sender, EventArgs e)
+        {
+            tBoss1.Text = cBoss.Text;
+            tBoss2.Text = RRsql.RunSqlReturn("select post from refe where fullname = '" + cBoss.Text + "'");
         }
 
         private void pictureBox1_MouseHover(object sender, EventArgs e)
@@ -73,11 +148,50 @@ namespace sampleX
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show(System.Reflection.Assembly.GetEntryAssembly().Location);
-            //MessageBox.Show(Application.StartupPath);
-            RRcode.Log(this.Text);
-            xBook = new HSSFWorkbook();
-            Typ1();
+            bool b = true;
+
+            tOdber.BackColor = Color.White;
+            tResult1.BackColor = Color.White;
+            tResult2.BackColor = Color.White;
+            tBoss1.BackColor = Color.White;
+            tBoss2.BackColor = Color.White;
+
+            if (tOdber.Text.Length == 0)
+            {
+                tOdber.BackColor = Color.Yellow;
+                b = false;
+            }
+
+            if (tResult1.Text.Length == 0)
+            {
+                tResult1.BackColor = Color.Yellow;
+                b = false;
+            }
+
+            if (tResult2.Text.Length == 0)
+            {
+                tResult2.BackColor = Color.Yellow;
+                b = false;
+            }
+
+            if (tBoss1.Text.Length == 0)
+            {
+                tBoss1.BackColor = Color.Yellow;
+                b = false;
+            }
+
+            if (tBoss2.Text.Length == 0)
+            {
+                tBoss2.BackColor = Color.Yellow;
+                b = false;
+            }
+
+            if (b)
+            {
+                RRcode.Log(this.Text);
+                xBook = new HSSFWorkbook();
+                Typ1();
+            }
         }
 
         private void nu1_ValueChanged(object sender, EventArgs e)
@@ -120,10 +234,6 @@ namespace sampleX
             RRcode.RegWrite("ProtoF1", nuF1.Value.ToString());
         }
 
-        private void Typ2()
-        {
-
-        }
         #endregion
         #region FUNKCIE
         public void LoadVariables()
@@ -975,11 +1085,9 @@ namespace sampleX
             return s;
         }
         #endregion
-
-
-
+        #region DATA S PRECHODOM NA NOVU STRANU
         //Nastavi cislo riadku a stranu
-        private void Typ1RowNumberAndNewPage(int i)
+        private void Typ1Page(int i)
         {
             string s = "";
             if (iRow < 60)
@@ -1006,7 +1114,6 @@ namespace sampleX
 
             }
         }
-
         //Hlavicka tabulky
         private void Typ1TableHeader(int i, bool bSplitOnNewPage)
         {
@@ -1097,7 +1204,237 @@ namespace sampleX
                 iRow++;
             }
         }
+        #endregion
+        #region SPODNE TEXTY S PRECHODOM NA NOVU STRANU
+        //Nastavi cislo riadku a stranu
+        private void Typ1PageComment(string sRow)
+        {
+            string s = "";
+            string ss = "";
+            if (iRow < 60)
+            {
+                iRow++;
+                ss = "A" + (iRow + 1).ToString();
+                w(ss, sRow);
+            }
+            else
+            {
+                InitXLS();
 
+                rSize(1, 40);
+                s = "Protokol o skúške č. " + RRvar.iProtoNo1.ToString() + "/" + RRvar.iProtoNo2.ToString();
+                w("L1", s, (short)(nuF2.Value), true, false, "center", false, 0, 0, 0, 0);
+
+                w("W2", "Strana 1 z počtu 1", (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);
+                w("W3", "Počet príloh: " + nuPriloha.Value.ToString(), (short)(nuF1.Value), false, false, "topright", false, 0, 0, 0, 0);
+
+                iRow = 3;
+                //Typ1TableHeader(i, true);
+                ss = "A" + (iRow + 1).ToString();
+                w(ss, sRow);
+            }
+        }
+        private void Typ1PageExplanatory(string sRowA, string sRowC)
+        {
+            string s = "";
+            string ss = "";
+            if (iRow < 60)
+            {
+                iRow++;
+                ss = "A" + (iRow + 1).ToString();
+                w(ss, sRowA);
+                ss = "E" + (iRow + 1).ToString();
+                w(ss, sRowC);
+            }
+            else
+            {
+                InitXLS();
+
+                rSize(1, 40);
+                s = "Protokol o skúške č. " + RRvar.iProtoNo1.ToString() + "/" + RRvar.iProtoNo2.ToString();
+                w("L1", s, (short)(nuF2.Value), true, false, "center", false, 0, 0, 0, 0);
+
+                w("W2", "Strana 1 z počtu 1", (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);
+                w("W3", "Počet príloh: " + nuPriloha.Value.ToString(), (short)(nuF1.Value), false, false, "topright", false, 0, 0, 0, 0);
+
+                iRow = 3;
+                //Typ1TableHeader(i, true);
+                ss = "A" + (iRow + 1).ToString();
+                w(ss, sRowA);
+                ss = "E" + (iRow + 1).ToString();
+                w(ss, sRowC);
+            }
+        }
+        private void Typ1PageHeaderExplanatory()
+        {
+            string s = "";
+            string ss = "";
+            if (iRow < 57)
+            {
+                iRow++;
+                ss = "A" + (iRow + 1).ToString();
+                w(ss, "Popis skratiek:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            }
+            else
+            {
+                InitXLS();
+
+                rSize(1, 40);
+                s = "Protokol o skúške č. " + RRvar.iProtoNo1.ToString() + "/" + RRvar.iProtoNo2.ToString();
+                w("L1", s, (short)(nuF2.Value), true, false, "center", false, 0, 0, 0, 0);
+
+                w("W2", "Strana 1 z počtu 1", (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);
+                w("W3", "Počet príloh: " + nuPriloha.Value.ToString(), (short)(nuF1.Value), false, false, "topright", false, 0, 0, 0, 0);
+
+                iRow = 3;
+                //Typ1TableHeader(i, true);
+                ss = "A" + (iRow + 1).ToString();
+                w(ss, "Popis skratiek:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            }
+        }
+        private void Typ1PagePersons()
+        {
+            string s = "";
+            string ss = "";
+            if (iRow < 52)
+            {
+                iRow++;
+                ss = "A" + (iRow).ToString();
+                w(ss, "Výsledky preskúmal a schválil:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+                ss = "A" + (iRow + 6).ToString();
+                w(ss, "Protokol o skúške schválil:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+
+                ss = "R" + (iRow + 1).ToString();
+                w(ss, tResult1.Text, (short)(nuF1.Value), true, false, "center", false, 0, 0, 0, 0);
+                ss = "R" + (iRow + 2).ToString();
+                w(ss, tResult2.Text, (short)(nuF1.Value), false, false, "center", false, 0, 0, 0, 0);
+
+                ss = "R" + (iRow + 7).ToString();
+                w(ss, tBoss1.Text, (short)(nuF1.Value), true, false, "center", false, 0, 0, 0, 0);
+                ss = "R" + (iRow + 8).ToString();
+                w(ss, tBoss2.Text, (short)(nuF1.Value), false, false, "center", false, 0, 0, 0, 0);
+            }
+            else
+            {
+                InitXLS();
+
+                rSize(1, 40);
+                s = "Protokol o skúške č. " + RRvar.iProtoNo1.ToString() + "/" + RRvar.iProtoNo2.ToString();
+                w("L1", s, (short)(nuF2.Value), true, false, "center", false, 0, 0, 0, 0);
+
+                w("W2", "Strana 1 z počtu 1", (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);
+                w("W3", "Počet príloh: " + nuPriloha.Value.ToString(), (short)(nuF1.Value), false, false, "topright", false, 0, 0, 0, 0);
+
+                iRow = 3;
+
+                ss = "A" + (iRow).ToString();
+                w(ss, "Výsledky preskúmal a schválil:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+                ss = "A" + (iRow + 6).ToString();
+                w(ss, "Protokol o skúške schválil:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+
+                ss = "R" + (iRow + 1).ToString();
+                w(ss, tResult1.Text, (short)(nuF1.Value), true, false, "center", false, 0, 0, 0, 0);
+                ss = "R" + (iRow + 2).ToString();
+                w(ss, tResult2.Text, (short)(nuF1.Value), false, false, "center", false, 0, 0, 0, 0);
+
+                ss = "R" + (iRow + 7).ToString();
+                w(ss, tBoss1.Text, (short)(nuF1.Value), true, false, "center", false, 0, 0, 0, 0);
+                ss = "R" + (iRow + 8).ToString();
+                w(ss, tBoss2.Text, (short)(nuF1.Value), false, false, "center", false, 0, 0, 0, 0);
+
+            }
+        }
+
+        private void Typ1(int i, bool bSplitOnNewPage)
+        {
+            string s = "";
+            string ss = "";
+
+            for (int l = 1; l < 23; l++)
+            {
+                wNum(l + 1, iRow, 0, 1, 0, 1);
+            }
+
+            s = "  Laboratórne číslo " + RRdata.MatrixRead(4, i, 0) + " / " + RRdata.MatrixRead(4, i, 1);
+            if (bSplitOnNewPage)
+            {
+                s += " - pokračovanie";
+            }
+
+            ss = "A" + (iRow).ToString();
+            w(ss, s, (short)(nuF1.Value + 1), true, false, "left", false, 1, 1, 0, 1);
+
+            if (RRdata.MatrixRead(4, i, 2).Length > 0)
+            {
+                s = "Označenie: " + RRdata.MatrixRead(4, i, 2);
+            }
+            else
+            {
+                s = " " + RRdata.MatrixRead(4, i, 2);
+            }
+            ss = "W" + (iRow).ToString();
+            w(ss, s, (short)(nuF1.Value), false, false, "right", false, 0, 1, 1, 1);
+
+            iRow++;
+
+            ss = "A" + (iRow).ToString();
+            j(ss, 4, 1);
+            w(ss, "  Parameter", (short)(nuF1.Value - 1), false, true, "left", true, 1, 0, 0, 0);
+            ss = "A" + (iRow + 1).ToString();
+            w(ss, "  Parameter", (short)(nuF1.Value - 1), false, true, "left", true, 1, 0, 0, 0);
+
+            ss = "H" + (iRow).ToString();
+            j(ss, 2, 1);
+            w(ss, "Hodnota", (short)(nuF1.Value - 1), false, true, "center", true, 1, 0, 0, 0);
+            ss = "H" + (iRow + 1).ToString();
+            w(ss, "Hodnota", (short)(nuF1.Value - 1), false, true, "center", true, 1, 0, 0, 0);
+
+            ss = "F" + (iRow).ToString();
+            j(ss, 1, 1);
+            w(ss, "Jednotka", (short)(nuF1.Value - 1), false, true, "center", true, 1, 0, 0, 0);
+            ss = "F" + (iRow + 1).ToString();
+            w(ss, "Jednotka", (short)(nuF1.Value - 1), false, true, "center", true, 1, 0, 0, 0);
+
+            ss = "K" + (iRow).ToString();
+            j(ss, 1, 1);
+            w(ss, "Rozšírená neistota[%]", (short)(nuF1.Value - 1), false, true, "center", true, 1, 0, 0, 0);
+            ss = "K" + (iRow + 1).ToString();
+            w(ss, "Rozšírená neistota[%]", (short)(nuF1.Value - 1), false, true, "center", true, 1, 0, 0, 0);
+
+            ss = "M" + (iRow).ToString();
+            j(ss, 1, 1);
+            w(ss, "Medza stanovenia", (short)(nuF1.Value - 1), false, true, "center", true, 1, 0, 0, 0);
+            ss = "M" + (iRow + 1).ToString();
+            w(ss, "Medza stanovenia", (short)(nuF1.Value - 1), false, true, "center", true, 1, 0, 0, 0);
+
+            ss = "O" + (iRow).ToString();
+            j(ss, 2, 1);
+            w(ss, "Metóda", (short)(nuF1.Value - 1), false, true, "center", true, 1, 0, 0, 0);
+            ss = "O" + (iRow + 1).ToString();
+            w(ss, "Metóda", (short)(nuF1.Value - 1), false, true, "center", true, 1, 0, 0, 0);
+
+            ss = "R" + (iRow).ToString();
+            j(ss, 3, 1);
+            w(ss, "Metodický predpis", (short)(nuF1.Value - 1), false, true, "center", true, 1, 0, 0, 0);
+            ss = "R" + (iRow + 1).ToString();
+            w(ss, "Metodický predpis", (short)(nuF1.Value - 1), false, true, "center", true, 1, 0, 0, 0);
+
+            ss = "V" + (iRow).ToString();
+            j(ss, 1, 1);
+            w(ss, "Typ skúšky", (short)(nuF1.Value - 1), false, true, "center", true, 1, 0, 1, 0);
+            ss = "V" + (iRow + 1).ToString();
+            w(ss, "Typ skúšky", (short)(nuF1.Value - 1), false, true, "center", true, 1, 0, 1, 0);
+
+            wNum(23, iRow, 0, 0, 1, 0);
+            wNum(23, iRow + 1, 0, 0, 1, 0);
+
+            iRow++;
+            if (bSplitOnNewPage)
+            {
+                iRow++;
+            }
+        }
+        #endregion
         private void Typ1()
         {
             string s;
@@ -1300,7 +1637,7 @@ namespace sampleX
             w("W23", s, (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);//dat prot
 
             //s = RRdata.MatrixRead(5, 0, 35);
-            s = tOdber.Text + ", odber: " + cOdber.Text;
+            s = tOdber.Text + ", odber: " + cOdberAkr.Text;
             //s = myDateFormatConvert(s);
             w("W25", s, (short)(nuF1.Value), false, false, "right", false, 0, 0, 0, 0);//v_odobral
 
@@ -1364,6 +1701,9 @@ namespace sampleX
             w("E26", s, (short)(nuF1.Value), false, false, "left", false, 0, 0, 0, 0);//matrica
             #endregion
             #region UDAJE
+            // matrix3 - zhromazdovanie principov kvoli vysvetlivkam
+            RRdata.MatrixClear(3);
+
             rSize(30, 40);
             w("L30", "Výsledky skúšok", (short)(nuF2.Value - 2), true, false, "center", false, 0, 0, 0, 0);
             iRow = 32;
@@ -1382,14 +1722,14 @@ namespace sampleX
                     }
                     else
                     {
-                        Typ1RowNumberAndNewPage(i);
+                        Typ1Page(i);
                     }
 
                     //pridavanie riadkov z data
                     for (int m = 0; m < RRvar.Matrix5.Count; m++)
                     {
                         //Nastavi cislo riadku a stranu
-                        Typ1RowNumberAndNewPage(i);
+                        Typ1Page(i);
 
                         for (int n = 0; n < 23; n++)
                         {
@@ -1484,6 +1824,24 @@ namespace sampleX
                         j(ss, 2);
                         w(ss, s, (short)(nuF1.Value), false, false, "center", false, 1, 1, 0, 1);
 
+                        bool bImHereAlready = false;
+                        for (int p = 0; p < RRvar.Matrix3.Count; p++)
+                        {
+                            if (RRdata.MatrixRead(3, p, 0) == s)
+                            {
+                                bImHereAlready = true;
+                            }
+                        }
+                        if (!bImHereAlready)
+                        {
+                            String[] sValue = new string[2];
+                            sValue[0] = s;
+                            s = RRsql.RunSqlReturn("SELECT popis FROM xprincip where value='" + s + "'");
+                            sValue[1] = s;
+                            RRdata.MatrixAdd(3, sValue, false);
+                        }
+
+
                         ss = RRdata.MatrixRead(5, m, 6); //ozn - norma
                         if (ss.Length > 0)
                         {
@@ -1499,25 +1857,50 @@ namespace sampleX
                         wNum(23, iRow, 0, 1, 1, 1);
 
                     }
-
-                    iRow++; iRow++;
+                    iRow++;
                     iRow++;
                 }
-
             }
 
-            //ss = "B" + (iRow + 1).ToString();
-            //w(ss, "Parameter", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            #endregion
+            #region KOMENTARE
+            iRow--;
+            iRow--;
+            RRdata.MatrixFill(2, "SELECT config.value FROM config WHERE config.item LIKE 'pro1text%' ORDER BY config.item;", true);
+            for (int i = 0; i < RRvar.Matrix2.Count; i++)
+            {
+                Typ1PageComment(RRdata.MatrixRead(2, i, 0));
+            }
 
-            //ss = "B" + (iRow).ToString();
-            //w(ss, "Označenie:", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            String[] sIP = new string[2];
+            sIP[0] = "IP";
+            sIP[1] = "interný predpis";
+            RRdata.MatrixAdd(3, sIP, false);
 
-            //ss = "E" + (iRow + 1).ToString();
-            //w(ss, "Označenie", (short)(nuF1.Value), false, true, "left", false, 0, 0, 0, 0);
+            iRow++;
+            Typ1PageHeaderExplanatory();
+            for (int i = 0; i < RRvar.Matrix3.Count; i++)
+            {
+                Typ1PageExplanatory(RRdata.MatrixRead(3, i, 0), RRdata.MatrixRead(3, i, 1));
+            }
+            iRow++; iRow++; iRow++;
+            Typ1PagePersons();
 
-            //ss = "J" + (iRow + 1).ToString();
-            //w(ss, "Jednotka", (short)(nuF1.Value), false, true, "center", false, 0, 0, 0, 0);
+            //for (int i = 0; i < RRvar.Matrix2.Count; i++)
+            //{
+            //    Typ1PageComment(RRdata.MatrixRead(2, i, 0));
+            //}
 
+
+
+            //if (iRow < 56)
+            //{
+            //    //    Typ1TableHeader(i, false);
+            //}
+            //else
+            //{
+            //    //    Typ1Page(i);
+            //}
             #endregion
             #region CISLA STRAN
             for (int q = 0; q < iSheetNameToCreate - 1; q++)
