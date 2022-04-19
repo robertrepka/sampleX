@@ -1,3 +1,5 @@
+19/04/2022-19:39:27 -> zmena struktury refe, parameter
+18/04/2022-21:29:31 -> Protokoly - texty, pospiay, vysvetlivky
 16/04/2022-21:29:07 -> Protokol - menu pre typ a meno odberaèa vzoriek
 15/04/2022-11:46:21 -> poznamky
 10/04/2022-19:27:27 -> Excel strankovanie

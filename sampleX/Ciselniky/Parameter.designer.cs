@@ -31,10 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Label nazov1Label;
             System.Windows.Forms.Label poznLabel;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Parameter));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.Label label1;
+            System.Windows.Forms.Label label2;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Parameter));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bn = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -58,6 +59,7 @@
             this.bExcel = new System.Windows.Forms.Button();
             this.bSelect = new System.Windows.Forms.Button();
             this.dr = new System.Windows.Forms.GroupBox();
+            this.explanation_ = new System.Windows.Forms.TextBox();
             this.pozn_ = new System.Windows.Forms.TextBox();
             this.value_ = new System.Windows.Forms.TextBox();
             this.id_ = new System.Windows.Forms.Label();
@@ -65,6 +67,7 @@
             nazov1Label = new System.Windows.Forms.Label();
             poznLabel = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bn)).BeginInit();
             this.bn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg)).BeginInit();
@@ -94,6 +97,27 @@
             poznLabel.TabIndex = 31;
             poznLabel.Text = "skrátený názov (pre protokol):";
             poznLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            label1.Location = new System.Drawing.Point(6, 60);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(0, 17);
+            label1.TabIndex = 33;
+            label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            label2.Location = new System.Drawing.Point(6, 81);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(157, 17);
+            label2.TabIndex = 34;
+            label2.Text = "poznámka (pre protokol):";
+            label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // bn
             // 
@@ -258,19 +282,18 @@
             // 
             this.dg.AllowUserToAddRows = false;
             this.dg.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.AliceBlue;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.dg.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.dg.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.AliceBlue;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.dg.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dg.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dg.DefaultCellStyle = dataGridViewCellStyle8;
             this.dg.Location = new System.Drawing.Point(573, 52);
             this.dg.Name = "dg";
             this.dg.ReadOnly = true;
@@ -280,12 +303,12 @@
             this.dg.Size = new System.Drawing.Size(240, 150);
             this.dg.TabIndex = 0;
             this.dg.Visible = false;
-            this.dg.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dg_ColumnHeaderMouseClick);
             this.dg.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg_CellEndEdit);
             this.dg.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dg_CellPainting);
+            this.dg.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dg_ColumnHeaderMouseClick);
             this.dg.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dg_DataError);
-            this.dg.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dg_KeyDown);
             this.dg.Click += new System.EventHandler(this.dg_Click);
+            this.dg.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dg_KeyDown);
             // 
             // statusStrip1
             // 
@@ -331,6 +354,8 @@
             // 
             // dr
             // 
+            this.dr.Controls.Add(label2);
+            this.dr.Controls.Add(this.explanation_);
             this.dr.Controls.Add(label1);
             this.dr.Controls.Add(poznLabel);
             this.dr.Controls.Add(this.pozn_);
@@ -339,9 +364,20 @@
             this.dr.Controls.Add(this.id_);
             this.dr.Location = new System.Drawing.Point(27, 65);
             this.dr.Name = "dr";
-            this.dr.Size = new System.Drawing.Size(490, 102);
+            this.dr.Size = new System.Drawing.Size(490, 158);
             this.dr.TabIndex = 6;
             this.dr.TabStop = false;
+            // 
+            // explanation_
+            // 
+            this.explanation_.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.explanation_.Location = new System.Drawing.Point(195, 78);
+            this.explanation_.Multiline = true;
+            this.explanation_.Name = "explanation_";
+            this.explanation_.Size = new System.Drawing.Size(282, 70);
+            this.explanation_.TabIndex = 35;
+            this.explanation_.TextChanged += new System.EventHandler(this.pozn__TextChanged);
+            this.explanation_.Validated += new System.EventHandler(this.poznTextBox_Validated);
             // 
             // pozn_
             // 
@@ -350,6 +386,7 @@
             this.pozn_.Name = "pozn_";
             this.pozn_.Size = new System.Drawing.Size(282, 25);
             this.pozn_.TabIndex = 32;
+            this.pozn_.TextChanged += new System.EventHandler(this.pozn__TextChanged);
             this.pozn_.Validated += new System.EventHandler(this.poznTextBox_Validated);
             // 
             // value_
@@ -359,14 +396,15 @@
             this.value_.Name = "value_";
             this.value_.Size = new System.Drawing.Size(420, 25);
             this.value_.TabIndex = 4;
+            this.value_.TextChanged += new System.EventHandler(this.pozn__TextChanged);
             this.value_.Validated += new System.EventHandler(this.poznTextBox_Validated);
             // 
             // id_
             // 
             this.id_.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.id_.Location = new System.Drawing.Point(319, 74);
+            this.id_.Location = new System.Drawing.Point(6, 121);
             this.id_.Name = "id_";
-            this.id_.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.id_.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.id_.Size = new System.Drawing.Size(158, 23);
             this.id_.TabIndex = 1;
             this.id_.Text = "id";
@@ -385,16 +423,6 @@
             this.pictureBox1.Visible = false;
             this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            label1.Location = new System.Drawing.Point(6, 60);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(0, 17);
-            label1.TabIndex = 33;
-            label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // Parameter
             // 
             this.ClientSize = new System.Drawing.Size(833, 514);
@@ -407,10 +435,10 @@
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Parameter";
-            this.Opacity = 0;
+            this.Opacity = 0D;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Parameter_FormClosing);
             this.Load += new System.EventHandler(this.Parameter_Load);
             this.Shown += new System.EventHandler(this.Parameter_Shown);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Parameter_FormClosing);
             this.Resize += new System.EventHandler(this.Parameter_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.bn)).EndInit();
             this.bn.ResumeLayout(false);
@@ -454,5 +482,6 @@
         private System.Windows.Forms.TextBox value_;
         private System.Windows.Forms.Button bSelect;
         private System.Windows.Forms.TextBox pozn_;
-   }
+        private System.Windows.Forms.TextBox explanation_;
+    }
 }

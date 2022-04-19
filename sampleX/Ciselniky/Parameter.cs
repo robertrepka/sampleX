@@ -15,17 +15,18 @@ namespace sampleX
     public partial class Parameter : Form
     {
         #region UVOD - TODO EDIT VALUES
-	    int iSort = 0;
+        int iSort = 0;
         string sFilter = "";
         BindingSource bs = new BindingSource();
         MySqlDataAdapter da = new MySqlDataAdapter();
         DataTable dt = new DataTable();
-        
-        string sSqlCount = "select count(id) as total from xparameter1 where value = '";
+        bool bNeedRefresh = false;
 
-        string SqlSelectCommand = "SELECT id, value, pozn, autor, stamp FROM xparameter1 " + RRvar.sTemp;
-        string SqlUpdateCommand = "UPDATE xparameter SET value = @value, pozn = @pozn, refe_id = @refe_id  WHERE (`id` = @id)";
-        string SqlInsertCommand = "INSERT INTO `xparameter` (`value`, `pozn`, `refe_id`) VALUES (@value, @pozn, @refe_id)";
+
+        string sSqlCount = "select count(id) as total from xparameter1 where value = '";
+        string SqlSelectCommand = "SELECT id, value, pozn, explanation, autor, stamp FROM xparameter1 " + RRvar.sTemp + " ORDER by value ASC";
+        string SqlUpdateCommand = "UPDATE xparameter SET value = @value, pozn = @pozn, refe_id = @refe_id, explanation = @explanation  WHERE (`id` = @id)";
+        string SqlInsertCommand = "INSERT INTO `xparameter` (`value`, `pozn`, `refe_id`, `explanation`) VALUES (@value, @pozn, @refe_id, @explanation)";
         string SqlDeleteCommand = "DELETE from xparameter where id = @id";
         string SqlLogCommand = "SELECT CONCAT('id:', id, ' - ', value) from xparameter ORDER BY id DESC LIMIT 1;";
 
@@ -35,10 +36,10 @@ namespace sampleX
         MySqlCommand mySqlUpdateCommand;
         MySqlCommand mySqlInsertCommand;
         MySqlCommand mySqlDeleteCommand;
-        
+
         MySqlConnection con = new MySqlConnection(RRvar.sConStr);
         MySqlConnection MyDataConnect = new MySqlConnection(RRvar.sConStr);
-        
+
         ListSortDirection oldSortOrder;
         DataGridViewColumn oldSortCol;
         string oldFilter = "";
@@ -64,15 +65,28 @@ namespace sampleX
             dg.ReadOnly = true;
             dg.Columns[0].ReadOnly = true;
             dg.Columns[1].HeaderText = "názov";
-            dg.Columns[2].HeaderText = "poznámka";
-            for (int i = 0; i <= dg.Columns.Count - 1; i++)
-            {
-                int colw = dg.Columns[i].Width;
-                dg.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dg.Columns[i].Width = colw;
-            }
-            dg.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dg.Columns[2].HeaderText = "skrátene";
+            dg.Columns[3].HeaderText = "poznámka";
+            //for (int i = 0; i <= dg.Columns.Count - 1; i++)
+            //{
+            //    int colw = dg.Columns[i].Width;
+            //    dg.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            //    dg.Columns[i].Width = colw;
+            //}
+            ////dg.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dg.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dg.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dg.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dg.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dg.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dg.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
 
+            dg.Columns[0].Width = 55;
+            dg.Columns[1].Width = 280;
+            dg.Columns[2].Width = 150;
+            dg.Columns[3].Width = 150;
+            dg.Columns[4].Width = 180;
+            dg.Columns[5].Width = 180;
         }
 
         private void myDgReload()
@@ -110,10 +124,17 @@ namespace sampleX
             c = this.Controls.Find(s, true);
             (c[0] as TextBox).DataBindings.Add("Text", bs, d, false, DataSourceUpdateMode.OnPropertyChanged);
 
+            d = "explanation";
+            s = d + "_"; ;
+            c = this.Controls.Find(s, true);
+            (c[0] as TextBox).DataBindings.Add("Text", bs, d, false, DataSourceUpdateMode.OnPropertyChanged);
+
+
             mySqlUpdateCommand.Parameters.AddWithValue("@id", id_.Text);
             mySqlUpdateCommand.Parameters.AddWithValue("@value", value_.Text);
             mySqlUpdateCommand.Parameters.AddWithValue("@pozn", pozn_.Text);
             mySqlUpdateCommand.Parameters.AddWithValue("@refe_id", RRvar.idUser);
+            mySqlUpdateCommand.Parameters.AddWithValue("@explanation", explanation_.Text);
             //mySqlDeleteCommand.Parameters.AddWithValue("@id", id_.Text);
 
         }
@@ -127,7 +148,7 @@ namespace sampleX
             mySqlDeleteCommand = new MySqlCommand(SqlDeleteCommand, MyDataConnect);
             da.SelectCommand = mySqlSelectCommand;
             da.UpdateCommand = mySqlUpdateCommand;
-            
+
             this.da.Fill(dt);
             MyDataConnect.Close();
             myDataSource();
@@ -173,11 +194,12 @@ namespace sampleX
             mySqlUpdateCommand.Parameters["@value"].Value = value_.Text;
             mySqlUpdateCommand.Parameters["@pozn"].Value = pozn_.Text;
             mySqlUpdateCommand.Parameters["@refe_id"].Value = RRvar.idUser;
+            mySqlUpdateCommand.Parameters["@explanation"].Value = explanation_.Text;
             try
             {
                 da.Update(dt);
             }
-            catch 
+            catch
             {
                 //MessageBox.Show(ex.ToString());
             }
@@ -204,30 +226,30 @@ namespace sampleX
         {
             MySqlConnection con = new MySqlConnection(RRvar.sConStr);
             MySqlCommand cmd = new MySqlCommand(SqlDeleteCommand, con);
-            
+
             cmd.Parameters.AddWithValue("@id", id_.Text);
 
 
             try
             {
-                    con.Open();
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.ToString());
-                    }
+                con.Open();
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
 
-                    con.Close();
-                    try
-                    {
-                        bs.EndEdit();
-                        bs.RemoveCurrent();
-                        //   myTaUpdate();
-                    }
-                    catch { }    
+                con.Close();
+                try
+                {
+                    bs.EndEdit();
+                    bs.RemoveCurrent();
+                    //   myTaUpdate();
+                }
+                catch { }
             }
             catch { }
         }
@@ -247,7 +269,7 @@ namespace sampleX
             {
                 MessageBox.Show(ex.ToString());
             }
-            
+
 
         }
         #endregion
@@ -429,12 +451,12 @@ namespace sampleX
         {
             myClip();
         }
-        
+
         private void dg_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             myEndEdit(true);
         }
-    
+
         private void Parameter_Resize(object sender, EventArgs e)
         {
             myResize();
@@ -450,23 +472,34 @@ namespace sampleX
             myEndEdit(false);
         }
 
+        private void pozn__TextChanged(object sender, EventArgs e)
+        {
+            bNeedRefresh = true;
+        }
+
         private void poznTextBox_Validated(object sender, EventArgs e)
         {
-            int FirstDisplayedScrollingRowIndex = dg.FirstDisplayedScrollingRowIndex;
-            int FirstDisplayedScrollingColumnIndex = dg.FirstDisplayedScrollingColumnIndex;
-            if (bInsertIsRunning)
+            if (bNeedRefresh)
             {
-                return;
+                int FirstDisplayedScrollingRowIndex = dg.FirstDisplayedScrollingRowIndex;
+                int FirstDisplayedScrollingColumnIndex = dg.FirstDisplayedScrollingColumnIndex;
+                if (bInsertIsRunning)
+                {
+                    return;
+                }
+                myBsReload();
+                myEndEdit(true);
+                try
+                {
+                    dg.FirstDisplayedScrollingRowIndex = FirstDisplayedScrollingRowIndex;
+                    dg.FirstDisplayedScrollingColumnIndex = FirstDisplayedScrollingColumnIndex;
+                }
+                catch { }
+                Headers();
             }
-            myBsReload();
-            myEndEdit(true);
-            try
-            {
-                dg.FirstDisplayedScrollingRowIndex = FirstDisplayedScrollingRowIndex;
-                dg.FirstDisplayedScrollingColumnIndex = FirstDisplayedScrollingColumnIndex;
-            }
-            catch { }
-            Headers();
+            bNeedRefresh = false;
+
+
         }
 
         private void Parameter_FormClosing(object sender, FormClosingEventArgs e)
@@ -487,8 +520,7 @@ namespace sampleX
             oldCombo = cFilter.SelectedIndex;
             cFilter.SelectedIndex = 0;
             bExcel.Visible = false;
-            
-            
+
             dr.Focus();
             bs.Position = dg.RowCount;
 
@@ -504,18 +536,18 @@ namespace sampleX
             bindingNavigatorMoveNextItem.Enabled = false;
             bindingNavigatorMovePreviousItem.Enabled = false;
             bindingNavigatorPositionItem.Enabled = false;
-            
-            
+
+
             id_.Text = "NOVÝ";
             foreach (Control ctr in dr.Controls)
             {
                 if (ctr is TextBox)
-                    {
-                        ctr.Text = "";
-                    }
+                {
+                    ctr.Text = "";
+                }
             }
         }
-        
+
         private void bOK_Click(object sender, EventArgs e)
         {
             int j = 0;
@@ -527,13 +559,13 @@ namespace sampleX
                 MessageBox.Show("Uvedená položka sa už v databáze nachádza!", "Varovanie", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return;
             }
-            
-            
+
+
             bool bSuccessWrite = true;
             int iNumberNext = 0;
             bInsertIsRunning = true;
             int iNewId = 0;
-            
+
             MySqlCommand cmd = new MySqlCommand(SqlInsertCommand, con);
 
             string s, d;
@@ -543,7 +575,7 @@ namespace sampleX
             s = d + "_";
             c = this.Controls.Find(s, true);
             cmd.Parameters.AddWithValue("@" + d, (c[0] as TextBox).Text);
-            
+
             d = "pozn";
             s = d + "_";
             c = this.Controls.Find(s, true);
@@ -551,6 +583,11 @@ namespace sampleX
 
             cmd.Parameters.AddWithValue("@refe_id", RRvar.idUser);
             //cmd.Parameters.AddWithValue("@stamp", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+
+            d = "explanation";
+            s = d + "_";
+            c = this.Controls.Find(s, true);
+            cmd.Parameters.AddWithValue("@" + d, (c[0] as TextBox).Text);
 
             using (System.Transactions.TransactionScope scope = new System.Transactions.TransactionScope())
             {
@@ -575,7 +612,7 @@ namespace sampleX
             }
 
             RRcode.Log(sLog1 + RRsql.RunSqlReturn(SqlLogCommand));
-            
+
             myDgReload();
             dg.Focus();
             bExcel.Visible = true;
@@ -663,12 +700,12 @@ namespace sampleX
 
         private void Parameter_Shown(object sender, EventArgs e)
         {
-            Headers(); 
+            Headers();
             if (RRvar.bSelect)
             {
                 bSelect.Visible = true;
             }
-            
+
             if (RRvar.bFilter)
             {
                 RRvar.bFilter = false;
@@ -677,7 +714,7 @@ namespace sampleX
                     cFilter.SelectedItem = RRvar.sFilter1;
                     tSearch.Text = RRvar.sFilter2;
                 }
-                catch {}
+                catch { }
             }
         }
 
@@ -694,7 +731,7 @@ namespace sampleX
             {
                 iSort = Convert.ToInt32(dg.Rows[dg.CurrentRow.Index].Cells[0].Value);
             }
-            catch {}
+            catch { }
         }
 
         private void dg_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -713,9 +750,11 @@ namespace sampleX
                 dg.CurrentCell = dg.Rows[iRow].Cells[0];
                 dg.Rows[iRow].Selected = true;
                 dg.FirstDisplayedScrollingRowIndex = dg.SelectedRows[0].Index;
-                
-            } catch { }          
+
+            }
+            catch { }
         }
+
 
     }
 }

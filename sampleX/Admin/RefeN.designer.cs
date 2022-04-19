@@ -33,8 +33,9 @@
             System.Windows.Forms.Label poznLabel;
             System.Windows.Forms.Label label1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RefeN));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.Label lPost;
             this.bn = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -67,9 +68,11 @@
             this.login_ = new System.Windows.Forms.TextBox();
             this.id_ = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.post_ = new System.Windows.Forms.TextBox();
             nazov1Label = new System.Windows.Forms.Label();
             poznLabel = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
+            lPost = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bn)).BeginInit();
             this.bn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg)).BeginInit();
@@ -93,7 +96,7 @@
             // 
             poznLabel.AutoSize = true;
             poznLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            poznLabel.Location = new System.Drawing.Point(7, 50);
+            poznLabel.Location = new System.Drawing.Point(6, 50);
             poznLabel.Name = "poznLabel";
             poznLabel.Size = new System.Drawing.Size(44, 17);
             poznLabel.TabIndex = 31;
@@ -104,7 +107,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            label1.Location = new System.Drawing.Point(6, 80);
+            label1.Location = new System.Drawing.Point(6, 83);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(50, 17);
             label1.TabIndex = 34;
@@ -141,7 +144,7 @@
             this.bn.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bn.Name = "bn";
             this.bn.PositionItem = this.bindingNavigatorPositionItem;
-            this.bn.Size = new System.Drawing.Size(503, 26);
+            this.bn.Size = new System.Drawing.Size(507, 26);
             this.bn.TabIndex = 0;
             this.bn.Text = "bindingNavigator1";
             this.bn.Validated += new System.EventHandler(this.bn_Validated);
@@ -149,7 +152,7 @@
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(29, 23);
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(33, 23);
             this.bindingNavigatorCountItem.Text = "z {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Počet záznamov";
             // 
@@ -275,19 +278,19 @@
             this.dg.AllowUserToAddRows = false;
             this.dg.AllowUserToDeleteRows = false;
             this.dg.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.AliceBlue;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.dg.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.AliceBlue;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.dg.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dg.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dg.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dg.DefaultCellStyle = dataGridViewCellStyle6;
             this.dg.Location = new System.Drawing.Point(573, 52);
             this.dg.Name = "dg";
             this.dg.RowHeadersVisible = false;
@@ -296,12 +299,12 @@
             this.dg.Size = new System.Drawing.Size(240, 150);
             this.dg.TabIndex = 0;
             this.dg.Visible = false;
-            this.dg.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dg_ColumnHeaderMouseClick);
             this.dg.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg_CellEndEdit);
             this.dg.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dg_CellPainting);
+            this.dg.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dg_ColumnHeaderMouseClick);
             this.dg.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dg_DataError);
-            this.dg.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dg_KeyDown);
             this.dg.Click += new System.EventHandler(this.dg_Click);
+            this.dg.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dg_KeyDown);
             // 
             // statusStrip1
             // 
@@ -377,13 +380,15 @@
             this.bOdd.Size = new System.Drawing.Size(45, 45);
             this.bOdd.TabIndex = 11;
             this.toolTip1.SetToolTip(this.bOdd, "Prideľovanie práv pre zápis výsledkov do jednotlivých oddelení. (Má význam, len a" +
-                    "k má užívateľ povolený zápis výsledkov)");
+        "k má užívateľ povolený zápis výsledkov)");
             this.bOdd.UseVisualStyleBackColor = true;
             this.bOdd.Visible = false;
             this.bOdd.Click += new System.EventHandler(this.bOdd_Click);
             // 
             // dr
             // 
+            this.dr.Controls.Add(this.post_);
+            this.dr.Controls.Add(lPost);
             this.dr.Controls.Add(this.ca);
             this.dr.Controls.Add(this.active_);
             this.dr.Controls.Add(label1);
@@ -401,7 +406,7 @@
             // ca
             // 
             this.ca.AutoSize = true;
-            this.ca.Location = new System.Drawing.Point(70, 83);
+            this.ca.Location = new System.Drawing.Point(70, 86);
             this.ca.Name = "ca";
             this.ca.Size = new System.Drawing.Size(15, 14);
             this.ca.TabIndex = 36;
@@ -411,7 +416,7 @@
             // active_
             // 
             this.active_.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.active_.Location = new System.Drawing.Point(351, 77);
+            this.active_.Location = new System.Drawing.Point(333, 16);
             this.active_.Name = "active_";
             this.active_.Size = new System.Drawing.Size(126, 25);
             this.active_.TabIndex = 35;
@@ -460,6 +465,26 @@
             this.pictureBox1.Visible = false;
             this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
             // 
+            // post_
+            // 
+            this.post_.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.post_.Location = new System.Drawing.Point(144, 80);
+            this.post_.Name = "post_";
+            this.post_.Size = new System.Drawing.Size(333, 25);
+            this.post_.TabIndex = 37;
+            this.post_.Validated += new System.EventHandler(this.poznTextBox_Validated);
+            // 
+            // lPost
+            // 
+            lPost.AutoSize = true;
+            lPost.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            lPost.Location = new System.Drawing.Point(90, 83);
+            lPost.Name = "lPost";
+            lPost.Size = new System.Drawing.Size(51, 17);
+            lPost.TabIndex = 37;
+            lPost.Text = "funkcia:";
+            lPost.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // RefeN
             // 
             this.ClientSize = new System.Drawing.Size(833, 514);
@@ -475,10 +500,10 @@
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RefeN";
-            this.Opacity = 0;
+            this.Opacity = 0D;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RefeN_FormClosing);
             this.Load += new System.EventHandler(this.RefeN_Load);
             this.Shown += new System.EventHandler(this.RefeN_Shown);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RefeN_FormClosing);
             this.Resize += new System.EventHandler(this.RefeN_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.bn)).EndInit();
             this.bn.ResumeLayout(false);
@@ -527,5 +552,6 @@
         private System.Windows.Forms.Button bPass;
         private System.Windows.Forms.Button bLevel;
         private System.Windows.Forms.Button bOdd;
-   }
+        private System.Windows.Forms.TextBox post_;
+    }
 }

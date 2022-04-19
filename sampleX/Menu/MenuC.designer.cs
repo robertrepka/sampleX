@@ -61,7 +61,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 424);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 8, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(330, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(329, 22);
             this.statusStrip1.TabIndex = 101;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -80,7 +80,7 @@
             this.bPrincip.Margin = new System.Windows.Forms.Padding(2);
             this.bPrincip.Name = "bPrincip";
             this.bPrincip.Size = new System.Drawing.Size(130, 35);
-            this.bPrincip.TabIndex = 3;
+            this.bPrincip.TabIndex = 2;
             this.bPrincip.Text = "&Principy";
             this.toolTip1.SetToolTip(this.bPrincip, "Číselník princípov");
             this.bPrincip.UseVisualStyleBackColor = true;
@@ -93,7 +93,7 @@
             this.bMatrica.Margin = new System.Windows.Forms.Padding(2);
             this.bMatrica.Name = "bMatrica";
             this.bMatrica.Size = new System.Drawing.Size(130, 35);
-            this.bMatrica.TabIndex = 1;
+            this.bMatrica.TabIndex = 0;
             this.bMatrica.Text = "&Matrice";
             this.toolTip1.SetToolTip(this.bMatrica, "Číselník matríc");
             this.bMatrica.UseVisualStyleBackColor = true;
@@ -106,7 +106,7 @@
             this.bParameter.Margin = new System.Windows.Forms.Padding(2);
             this.bParameter.Name = "bParameter";
             this.bParameter.Size = new System.Drawing.Size(130, 35);
-            this.bParameter.TabIndex = 2;
+            this.bParameter.TabIndex = 1;
             this.bParameter.Text = "Pa&rametre";
             this.toolTip1.SetToolTip(this.bParameter, "Číselník parametrov");
             this.bParameter.UseVisualStyleBackColor = true;
@@ -115,11 +115,11 @@
             // bOzn
             // 
             this.bOzn.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.bOzn.Location = new System.Drawing.Point(169, 62);
+            this.bOzn.Location = new System.Drawing.Point(157, 59);
             this.bOzn.Margin = new System.Windows.Forms.Padding(2);
             this.bOzn.Name = "bOzn";
             this.bOzn.Size = new System.Drawing.Size(130, 35);
-            this.bOzn.TabIndex = 4;
+            this.bOzn.TabIndex = 3;
             this.bOzn.Text = "Oz&načenie";
             this.toolTip1.SetToolTip(this.bOzn, "Číselník označení");
             this.bOzn.UseVisualStyleBackColor = true;
@@ -132,7 +132,7 @@
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(267, 35);
-            this.button1.TabIndex = 9;
+            this.button1.TabIndex = 6;
             this.button1.Text = "&Vlastné skupiny parametrov";
             this.toolTip1.SetToolTip(this.button1, "Priradenie parametrov do vlastných skupín");
             this.button1.UseVisualStyleBackColor = true;
@@ -141,11 +141,11 @@
             // button7
             // 
             this.button7.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button7.Location = new System.Drawing.Point(169, 104);
+            this.button7.Location = new System.Drawing.Point(157, 101);
             this.button7.Margin = new System.Windows.Forms.Padding(2);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(130, 35);
-            this.button7.TabIndex = 6;
+            this.button7.TabIndex = 5;
             this.button7.Text = "Odd&elenie";
             this.toolTip1.SetToolTip(this.button7, "Číselník oddelení");
             this.button7.UseVisualStyleBackColor = true;
@@ -158,7 +158,7 @@
             this.bFilter.Margin = new System.Windows.Forms.Padding(2);
             this.bFilter.Name = "bFilter";
             this.bFilter.Size = new System.Drawing.Size(267, 35);
-            this.bFilter.TabIndex = 10;
+            this.bFilter.TabIndex = 7;
             this.bFilter.Text = "Rozsah akreditácie (&A)";
             this.toolTip1.SetToolTip(this.bFilter, "Rozsah akreditácie s neistotami");
             this.bFilter.UseVisualStyleBackColor = true;
@@ -171,7 +171,7 @@
             this.button6.Margin = new System.Windows.Forms.Padding(2);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(130, 35);
-            this.button6.TabIndex = 5;
+            this.button6.TabIndex = 4;
             this.button6.Text = "&Jednotky";
             this.toolTip1.SetToolTip(this.button6, "Číselník jednotiek");
             this.button6.UseVisualStyleBackColor = true;
@@ -184,7 +184,7 @@
             this.bSuper.Margin = new System.Windows.Forms.Padding(2);
             this.bSuper.Name = "bSuper";
             this.bSuper.Size = new System.Drawing.Size(267, 35);
-            this.bSuper.TabIndex = 139;
+            this.bSuper.TabIndex = 9;
             this.bSuper.Text = "&Indexy";
             this.toolTip1.SetToolTip(this.bSuper, "Znaky pre horný a dolný index");
             this.bSuper.UseVisualStyleBackColor = true;
@@ -197,7 +197,7 @@
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(267, 35);
-            this.button2.TabIndex = 12;
+            this.button2.TabIndex = 8;
             this.button2.Text = "Neakreditované skúšky (&N)";
             this.toolTip1.SetToolTip(this.button2, "Rozsah akreditácie s neistotami");
             this.button2.UseVisualStyleBackColor = true;
@@ -219,7 +219,9 @@
             // 
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.bPrincip);
+            this.groupBox1.Controls.Add(this.button7);
             this.groupBox1.Controls.Add(this.bMatrica);
+            this.groupBox1.Controls.Add(this.bOzn);
             this.groupBox1.Controls.Add(this.bParameter);
             this.groupBox1.Location = new System.Drawing.Point(12, 3);
             this.groupBox1.Name = "groupBox1";
@@ -251,11 +253,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(330, 446);
+            this.ClientSize = new System.Drawing.Size(329, 446);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.bOzn);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);

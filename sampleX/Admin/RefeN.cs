@@ -33,9 +33,9 @@ namespace sampleX
         #region UVOD
         string sSqlCount = "select count(id) as total from refe where login = '";
 
-        string SqlSelectCommand = "SELECT id, login, fullname, active FROM refe WHERE not login='system' order by login ";
-        string SqlUpdateCommand = "UPDATE refe SET login = @login, fullname = @fullname, active = @active  WHERE (`id` = @id)";
-        string SqlInsertCommand = "INSERT INTO refe (login, fullname, active) VALUES (@login, @fullname, @active)";
+        string SqlSelectCommand = "SELECT id, login, fullname, active, post FROM refe WHERE not login='system' order by login ";
+        string SqlUpdateCommand = "UPDATE refe SET login = @login, fullname = @fullname, active = @active, post = @post WHERE (`id` = @id)";
+        string SqlInsertCommand = "INSERT INTO refe (login, fullname, active, post) VALUES (@login, @fullname, @active, @post)";
         string SqlDeleteCommand = "DELETE from refe where id = @id";
         string SqlLogCommand = "SELECT CONCAT('id:', id, ' - ', fullname) from refe ORDER BY id DESC LIMIT 1;";
         
@@ -90,8 +90,8 @@ namespace sampleX
             DGen("id", "id", 1);
             DGen("login", "login", 1);
             DGen("fullname", "meno", 1);
-            DGen("active", "Aktívny", 2);
-            
+            DGen("active", "aktívny", 2);
+            DGen("post", "funkcia", 1);
         }
         // 1 - textbox, 2 - checkbox
         private void DGen(string Meno, string Popis, int Typ)
@@ -125,7 +125,7 @@ namespace sampleX
             myDef("login");
             myDef("fullname");
             myDef("active");
-
+            myDef("post");
             //mySqlUpdateCommand.Parameters.AddWithValue("@autor", RRvar.sUser);
             //mySqlUpdateCommand.Parameters.AddWithValue("@stamp", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
         }
@@ -207,10 +207,10 @@ namespace sampleX
             mySqlUpdateCommand.Parameters["@login"].Value = login_.Text;
             mySqlUpdateCommand.Parameters["@fullname"].Value = fullname_.Text;
             mySqlUpdateCommand.Parameters["@active"].Value = active_.Text;
-
+            mySqlUpdateCommand.Parameters["@post"].Value = post_.Text;
             //mySqlUpdateCommand.Parameters["@autor"].Value = RRvar.sUser;
             //mySqlUpdateCommand.Parameters["@stamp"].Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            
+
             try
             {
                 da.Update(dt);
@@ -244,6 +244,7 @@ namespace sampleX
             myIns("login");
             myIns("fullname");
             myIns("active");
+            myIns("post");
 
             using (System.Transactions.TransactionScope scope = new System.Transactions.TransactionScope())
             {

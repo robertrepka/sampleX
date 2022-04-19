@@ -48,6 +48,7 @@ namespace sampleX
         {
             RRcode.FadeIn(this);
             RRcode.Front();
+            bMatrica.Select();
         }
 
         private void pictureBox1_MouseHover(object sender, EventArgs e)
