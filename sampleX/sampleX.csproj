@@ -235,6 +235,15 @@
     <Compile Include="Protokol\Pro1.Designer.cs">
       <DependentUpon>Pro1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Protokol\Pro1Excel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Protokol\Pro1Funct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Protokol\Pro1Styles.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Protokol\ProMenu.cs">
       <SubType>Form</SubType>
     </Compile>

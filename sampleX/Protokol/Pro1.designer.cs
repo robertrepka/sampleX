@@ -34,8 +34,20 @@
             this.lStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.button1 = new System.Windows.Forms.Button();
+            this.bOdberName = new System.Windows.Forms.Button();
+            this.bResult = new System.Windows.Forms.Button();
+            this.bBoss = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tBoss2 = new System.Windows.Forms.TextBox();
+            this.tResult2 = new System.Windows.Forms.TextBox();
+            this.cBoss = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.tBoss1 = new System.Windows.Forms.TextBox();
+            this.cResult = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.tResult1 = new System.Windows.Forms.TextBox();
+            this.cOdberName = new System.Windows.Forms.ComboBox();
             this.cOdberAkr = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.tOdber = new System.Windows.Forms.TextBox();
@@ -61,18 +73,6 @@
             this.nu3 = new System.Windows.Forms.NumericUpDown();
             this.nu2 = new System.Windows.Forms.NumericUpDown();
             this.nu1 = new System.Windows.Forms.NumericUpDown();
-            this.cOdberName = new System.Windows.Forms.ComboBox();
-            this.cResult = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.tResult1 = new System.Windows.Forms.TextBox();
-            this.cBoss = new System.Windows.Forms.ComboBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.tBoss1 = new System.Windows.Forms.TextBox();
-            this.tResult2 = new System.Windows.Forms.TextBox();
-            this.tBoss2 = new System.Windows.Forms.TextBox();
-            this.bOdberName = new System.Windows.Forms.Button();
-            this.bResult = new System.Windows.Forms.Button();
-            this.bBoss = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -119,6 +119,42 @@
             this.toolTip1.SetToolTip(this.button1, "Konfigurácia systémových parametrov");
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // bOdberName
+            // 
+            this.bOdberName.BackgroundImage = global::sampleX.Properties.Resources.Arrows_icon;
+            this.bOdberName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bOdberName.Location = new System.Drawing.Point(361, 16);
+            this.bOdberName.Name = "bOdberName";
+            this.bOdberName.Size = new System.Drawing.Size(25, 25);
+            this.bOdberName.TabIndex = 72;
+            this.toolTip1.SetToolTip(this.bOdberName, "Distribuovať vlastnosť do celej skupiny");
+            this.bOdberName.UseVisualStyleBackColor = true;
+            this.bOdberName.Click += new System.EventHandler(this.bOdberName_Click);
+            // 
+            // bResult
+            // 
+            this.bResult.BackgroundImage = global::sampleX.Properties.Resources.Arrows_icon;
+            this.bResult.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bResult.Location = new System.Drawing.Point(361, 50);
+            this.bResult.Name = "bResult";
+            this.bResult.Size = new System.Drawing.Size(25, 25);
+            this.bResult.TabIndex = 73;
+            this.toolTip1.SetToolTip(this.bResult, "Distribuovať vlastnosť do celej skupiny");
+            this.bResult.UseVisualStyleBackColor = true;
+            this.bResult.Click += new System.EventHandler(this.bResult_Click);
+            // 
+            // bBoss
+            // 
+            this.bBoss.BackgroundImage = global::sampleX.Properties.Resources.Arrows_icon;
+            this.bBoss.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bBoss.Location = new System.Drawing.Point(361, 115);
+            this.bBoss.Name = "bBoss";
+            this.bBoss.Size = new System.Drawing.Size(25, 25);
+            this.bBoss.TabIndex = 74;
+            this.toolTip1.SetToolTip(this.bBoss, "Distribuovať vlastnosť do celej skupiny");
+            this.bBoss.UseVisualStyleBackColor = true;
+            this.bBoss.Click += new System.EventHandler(this.bBoss_Click);
             // 
             // pictureBox1
             // 
@@ -177,6 +213,91 @@
             this.groupBox1.TabIndex = 121;
             this.groupBox1.TabStop = false;
             // 
+            // tBoss2
+            // 
+            this.tBoss2.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.tBoss2.Location = new System.Drawing.Point(397, 147);
+            this.tBoss2.Name = "tBoss2";
+            this.tBoss2.Size = new System.Drawing.Size(313, 27);
+            this.tBoss2.TabIndex = 43;
+            // 
+            // tResult2
+            // 
+            this.tResult2.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.tResult2.Location = new System.Drawing.Point(397, 81);
+            this.tResult2.Name = "tResult2";
+            this.tResult2.Size = new System.Drawing.Size(313, 27);
+            this.tResult2.TabIndex = 42;
+            // 
+            // cBoss
+            // 
+            this.cBoss.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.cBoss.FormattingEnabled = true;
+            this.cBoss.Items.AddRange(new object[] {
+            "N",
+            "A"});
+            this.cBoss.Location = new System.Drawing.Point(94, 114);
+            this.cBoss.Name = "cBoss";
+            this.cBoss.Size = new System.Drawing.Size(256, 28);
+            this.cBoss.TabIndex = 41;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label15.Location = new System.Drawing.Point(14, 118);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(50, 17);
+            this.label15.TabIndex = 40;
+            this.label15.Text = "Schválil";
+            // 
+            // tBoss1
+            // 
+            this.tBoss1.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.tBoss1.Location = new System.Drawing.Point(397, 115);
+            this.tBoss1.Name = "tBoss1";
+            this.tBoss1.Size = new System.Drawing.Size(313, 27);
+            this.tBoss1.TabIndex = 39;
+            // 
+            // cResult
+            // 
+            this.cResult.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.cResult.FormattingEnabled = true;
+            this.cResult.Items.AddRange(new object[] {
+            "N",
+            "A"});
+            this.cResult.Location = new System.Drawing.Point(94, 48);
+            this.cResult.Name = "cResult";
+            this.cResult.Size = new System.Drawing.Size(256, 28);
+            this.cResult.TabIndex = 38;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label14.Location = new System.Drawing.Point(14, 52);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(58, 17);
+            this.label14.TabIndex = 37;
+            this.label14.Text = "Výsledky";
+            // 
+            // tResult1
+            // 
+            this.tResult1.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.tResult1.Location = new System.Drawing.Point(397, 48);
+            this.tResult1.Name = "tResult1";
+            this.tResult1.Size = new System.Drawing.Size(313, 27);
+            this.tResult1.TabIndex = 36;
+            // 
+            // cOdberName
+            // 
+            this.cOdberName.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.cOdberName.FormattingEnabled = true;
+            this.cOdberName.Location = new System.Drawing.Point(94, 14);
+            this.cOdberName.Name = "cOdberName";
+            this.cOdberName.Size = new System.Drawing.Size(256, 28);
+            this.cOdberName.TabIndex = 35;
+            // 
             // cOdberAkr
             // 
             this.cOdberAkr.Font = new System.Drawing.Font("Segoe UI", 11.25F);
@@ -206,7 +327,7 @@
             this.tOdber.Name = "tOdber";
             this.tOdber.Size = new System.Drawing.Size(313, 27);
             this.tOdber.TabIndex = 29;
-            this.tOdber.Text = "zadávateľ";
+            this.tOdber.Text = "objednávateľ";
             // 
             // label13
             // 
@@ -537,127 +658,6 @@
             0,
             0});
             this.nu1.ValueChanged += new System.EventHandler(this.nu1_ValueChanged);
-            // 
-            // cOdberName
-            // 
-            this.cOdberName.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.cOdberName.FormattingEnabled = true;
-            this.cOdberName.Location = new System.Drawing.Point(94, 14);
-            this.cOdberName.Name = "cOdberName";
-            this.cOdberName.Size = new System.Drawing.Size(256, 28);
-            this.cOdberName.TabIndex = 35;
-            // 
-            // cResult
-            // 
-            this.cResult.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.cResult.FormattingEnabled = true;
-            this.cResult.Items.AddRange(new object[] {
-            "N",
-            "A"});
-            this.cResult.Location = new System.Drawing.Point(94, 48);
-            this.cResult.Name = "cResult";
-            this.cResult.Size = new System.Drawing.Size(256, 28);
-            this.cResult.TabIndex = 38;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label14.Location = new System.Drawing.Point(14, 52);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(58, 17);
-            this.label14.TabIndex = 37;
-            this.label14.Text = "Výsledky";
-            // 
-            // tResult1
-            // 
-            this.tResult1.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.tResult1.Location = new System.Drawing.Point(397, 48);
-            this.tResult1.Name = "tResult1";
-            this.tResult1.Size = new System.Drawing.Size(313, 27);
-            this.tResult1.TabIndex = 36;
-            // 
-            // cBoss
-            // 
-            this.cBoss.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.cBoss.FormattingEnabled = true;
-            this.cBoss.Items.AddRange(new object[] {
-            "N",
-            "A"});
-            this.cBoss.Location = new System.Drawing.Point(94, 114);
-            this.cBoss.Name = "cBoss";
-            this.cBoss.Size = new System.Drawing.Size(256, 28);
-            this.cBoss.TabIndex = 41;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label15.Location = new System.Drawing.Point(14, 118);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(50, 17);
-            this.label15.TabIndex = 40;
-            this.label15.Text = "Schválil";
-            // 
-            // tBoss1
-            // 
-            this.tBoss1.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.tBoss1.Location = new System.Drawing.Point(397, 115);
-            this.tBoss1.Name = "tBoss1";
-            this.tBoss1.Size = new System.Drawing.Size(313, 27);
-            this.tBoss1.TabIndex = 39;
-            // 
-            // tResult2
-            // 
-            this.tResult2.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.tResult2.Location = new System.Drawing.Point(397, 81);
-            this.tResult2.Name = "tResult2";
-            this.tResult2.Size = new System.Drawing.Size(313, 27);
-            this.tResult2.TabIndex = 42;
-            // 
-            // tBoss2
-            // 
-            this.tBoss2.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.tBoss2.Location = new System.Drawing.Point(397, 147);
-            this.tBoss2.Name = "tBoss2";
-            this.tBoss2.Size = new System.Drawing.Size(313, 27);
-            this.tBoss2.TabIndex = 43;
-            // 
-            // bOdberName
-            // 
-            this.bOdberName.BackgroundImage = global::sampleX.Properties.Resources.Arrows_icon;
-            this.bOdberName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.bOdberName.Location = new System.Drawing.Point(361, 16);
-            this.bOdberName.Name = "bOdberName";
-            this.bOdberName.Size = new System.Drawing.Size(25, 25);
-            this.bOdberName.TabIndex = 72;
-            this.toolTip1.SetToolTip(this.bOdberName, "Distribuovať vlastnosť do celej skupiny");
-            this.bOdberName.UseVisualStyleBackColor = true;
-            this.bOdberName.Click += new System.EventHandler(this.bOdberName_Click);
-            // 
-            // bResult
-            // 
-            this.bResult.BackgroundImage = global::sampleX.Properties.Resources.Arrows_icon;
-            this.bResult.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.bResult.Location = new System.Drawing.Point(361, 50);
-            this.bResult.Name = "bResult";
-            this.bResult.Size = new System.Drawing.Size(25, 25);
-            this.bResult.TabIndex = 73;
-            this.toolTip1.SetToolTip(this.bResult, "Distribuovať vlastnosť do celej skupiny");
-            this.bResult.UseVisualStyleBackColor = true;
-            this.bResult.Click += new System.EventHandler(this.bResult_Click);
-            // 
-            // bBoss
-            // 
-            this.bBoss.BackgroundImage = global::sampleX.Properties.Resources.Arrows_icon;
-            this.bBoss.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.bBoss.Location = new System.Drawing.Point(361, 115);
-            this.bBoss.Name = "bBoss";
-            this.bBoss.Size = new System.Drawing.Size(25, 25);
-            this.bBoss.TabIndex = 74;
-            this.toolTip1.SetToolTip(this.bBoss, "Distribuovať vlastnosť do celej skupiny");
-            this.bBoss.UseVisualStyleBackColor = true;
-            this.bBoss.Click += new System.EventHandler(this.bBoss_Click);
             // 
             // Pro1
             // 

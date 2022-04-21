@@ -178,7 +178,6 @@
             this.bSelect.TabIndex = 122;
             this.toolTip1.SetToolTip(this.bSelect, "Vygenerované laboratórne čísla");
             this.bSelect.UseVisualStyleBackColor = true;
-            this.bSelect.Visible = false;
             this.bSelect.Click += new System.EventHandler(this.bSelect_Click);
             // 
             // button1
@@ -190,7 +189,6 @@
             this.button1.TabIndex = 123;
             this.toolTip1.SetToolTip(this.button1, "Vygenerované laboratórne čísla");
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // pictureBox2
