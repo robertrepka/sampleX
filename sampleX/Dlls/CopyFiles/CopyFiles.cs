@@ -415,7 +415,7 @@ namespace sampleX
             delCopy.EndInvoke(CopyResult);
             HideDiag(digWindow);
             OnCopyComplete();
-            //RRvar.bCopyFileProgress = false;
+            RRvar.bCopyFileProgress = false;
         }
 
     }

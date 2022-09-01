@@ -139,9 +139,9 @@ namespace sampleX
                 RRvar.sCurrPath += "\\";
             }
 
-            string sServer = ConfigurationSettings.AppSettings["server"];
-            string sDb = ConfigurationSettings.AppSettings["db"];
-            string sPort = ConfigurationSettings.AppSettings["port"];
+            string sServer = System.Configuration.ConfigurationManager.AppSettings["server"];
+            string sDb = System.Configuration.ConfigurationManager.AppSettings["db"];
+            string sPort = System.Configuration.ConfigurationManager.AppSettings["port"];
 
             RRvar.sConStr = "SERVER=" + sServer + ";DATABASE=" + sDb + ";UID=samplex;PASSWORD=System.Data.Security;";
         }

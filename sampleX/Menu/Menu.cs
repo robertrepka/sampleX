@@ -29,6 +29,13 @@ namespace sampleX
             Auth();
             RRvar.iRok = Convert.ToInt16(DateTime.Now.ToString("yyyy"));
             RRvar.sFooter = "sampleX verzia: " + Application.ProductVersion + " - " + RRvar.sFullName;
+            if (RRvar.sUser == "repka_r")
+            {
+                button1.Visible = true;
+                button2.Visible = true;
+                button3.Visible = true;
+            }
+
             lStatus.Text = RRvar.sFooter;
             //RRvar.sFooter = "sampleX - " + RRvar.sFullName;
             rokUD.Value = Convert.ToDecimal(RRvar.iRok);
@@ -74,6 +81,15 @@ namespace sampleX
             else
             {
                 bV.Enabled = false;
+            }
+
+            if (RRdata.bAuth("p-a"))
+            {
+                bArchiv.Enabled = true;
+            }
+            else
+            {
+                bArchiv.Enabled = false;
             }
         }
 
@@ -164,7 +180,8 @@ namespace sampleX
 
         private void bSelect_Click(object sender, EventArgs e)
         {
-            RRvar.sTemp = " where zakazka_id=196;";
+            RRvar.sTemp = " where zakazka_id=462;";
+            //RRvar.sTemp = " where zakazka_id=196;";
             Form Labc_zakazka2 = new Labc_zakazka2();
             RRvar.sHeader = "Laboratórne čísla: TEST1";
             Labc_zakazka2.Show();
@@ -172,10 +189,33 @@ namespace sampleX
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            RRvar.sTemp = " where zakazka_id=204;";
-            Form Labc_zakazka2 = new Labc_zakazka2();
-            RRvar.sHeader = "Laboratórne čísla: TEST2";
-            Labc_zakazka2.Show();
+
+            Form zzzz = new zzzz();
+            RRvar.sHeader = "copy files";
+            zzzz.Show();
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            RRcode.Log("Archív protokolov");
+            RRcode.FadeOut(this);
+            this.Visible = false;
+            Form Files = new Files();
+            Files.Closed += new EventHandler(ChildFormClosedFull);
+            RRvar.sHeader = "Archív protokolov";
+            Files.Show();
+        }
+
+        private void bArchiv_Click(object sender, EventArgs e)
+        {
+            RRcode.Log("Archív protokolov");
+            RRcode.FadeOut(this);
+            this.Visible = false;
+            Form Files = new Files();
+            Files.Closed += new EventHandler(ChildFormClosedFull);
+            RRvar.sHeader = "Archív protokolov";
+            Files.Show();
         }
     }
 }

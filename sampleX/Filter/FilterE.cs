@@ -57,6 +57,9 @@ namespace sampleX
             this.Text = RRvar.sHeader;
             RRcode.Front();
             myButtons();
+            dt = new System.Data.DataTable();
+            dt2 = new System.Data.DataTable();
+            dt3 = new System.Data.DataTable();
             FilldtVsetko("select distinct catid as id, catvalue as value from f_cat_par1 order by catvalue");
             // dt.Rows.Add(0, "- všetko -");
             cMain.DisplayMember = "value";
@@ -120,6 +123,25 @@ namespace sampleX
 
             dg.AlternatingRowsDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10);
             dg.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10);
+
+            if (RRvar.bShowExportPatternAnalyt)
+            {
+                bAnalyt.Visible = true;
+                try
+                {
+                    cMain.Text = RRvar.sTransferNameOfAnalytGroup;
+                }
+                catch { }
+            }
+
+            if (RRvar.bShowExportPatternData)
+            {
+                bData.Visible = true;
+            }
+
+            RRvar.bShowExportPatternAnalyt = false;
+            RRvar.bShowExportPatternData = false;
+            RRvar.sTransferNameOfAnalytGroup = "";
         }
 
         private void FillOneComboStart(string sSql, string sControl)
@@ -399,6 +421,7 @@ namespace sampleX
         {
             RRcode.FadeIn(this);
             RRcode.Front();
+            
         }
 
         private void pictureBox1_MouseHover_1(object sender, EventArgs e)
@@ -469,7 +492,10 @@ namespace sampleX
         private string OneCell(string sSQL, string sColumnName)
         {
             string s;
-            try { dt3.Clear(); } catch { }
+            try 
+            { 
+                dt3.Clear(); 
+            } catch { }
             Filldt3(sSQL);
             s = "";
             foreach (DataRow dr3 in dt3.Rows)
@@ -595,21 +621,24 @@ namespace sampleX
             int i = dg.Rows.Count;
             if (i == 0)
             {
-                bOK.Enabled = false;
+                bData.Enabled = false;
+                bAnalyt.Enabled = false;
                 bUp.Enabled = false;
                 bDown.Enabled = false;
                 bDel.Enabled = false;
             }
             if (i == 1)
             {
-                bOK.Enabled = true;
+                bData.Enabled = true;
+                bAnalyt.Enabled = true;
                 bUp.Enabled = false;
                 bDown.Enabled = false;
                 bDel.Enabled = true;
             }
             if (i > 1)
             {
-                bOK.Enabled = true;
+                bData.Enabled = true;
+                bAnalyt.Enabled = true;
                 bUp.Enabled = true;
                 bDown.Enabled = true;
                 bDel.Enabled = true;
@@ -631,6 +660,7 @@ namespace sampleX
             label1.Text = "Počet: " + dg.Rows.Count.ToString();
         }
 
+        
         private void bOK_Click(object sender, EventArgs e)
         {
             RRdata.MatrixFill(3, "select value from xparameter order by value", true);
@@ -882,5 +912,236 @@ namespace sampleX
             //    }
             //}  
         }
+        private void bAnalyt_Click(object sender, EventArgs e)
+        {
+            RRdata.MatrixFill(3, "select value from xparameter order by value", true);
+
+            var xBook = new HSSFWorkbook();
+            var xSheet = xBook.CreateSheet("sampleX");
+            ICell xCell;
+            var fontI = xBook.CreateFont();
+            fontI.IsItalic = true;
+
+            var fontB = xBook.CreateFont();
+            fontB.Boldweight = (short)FontBoldWeight.Bold;
+
+            ICellStyle xTextCellStyle = xBook.CreateCellStyle();
+            xTextCellStyle.DataFormat = xBook.CreateDataFormat().GetFormat("text");
+
+            ICellStyle xTextCellStyleB = xBook.CreateCellStyle();
+            xTextCellStyleB.DataFormat = xBook.CreateDataFormat().GetFormat("text");
+            xTextCellStyleB.SetFont(fontB);
+
+            HSSFCellStyle xTextCellStyleBor = (HSSFCellStyle)xBook.CreateCellStyle();
+            xTextCellStyleBor.BorderLeft = NPOI.SS.UserModel.BorderStyle.Medium;
+            xTextCellStyleBor.BorderTop = NPOI.SS.UserModel.BorderStyle.Medium;
+            xTextCellStyleBor.BorderRight = NPOI.SS.UserModel.BorderStyle.Medium;
+            xTextCellStyleBor.BorderBottom = NPOI.SS.UserModel.BorderStyle.Medium;
+            xTextCellStyleBor.DataFormat = xBook.CreateDataFormat().GetFormat("text");
+
+            HSSFCellStyle xTextCellStyleBorI = (HSSFCellStyle)xBook.CreateCellStyle();
+            xTextCellStyleBorI.BorderLeft = NPOI.SS.UserModel.BorderStyle.Medium;
+            xTextCellStyleBorI.BorderTop = NPOI.SS.UserModel.BorderStyle.Medium;
+            xTextCellStyleBorI.BorderRight = NPOI.SS.UserModel.BorderStyle.Medium;
+            xTextCellStyleBorI.BorderBottom = NPOI.SS.UserModel.BorderStyle.Medium;
+            xTextCellStyleBorI.DataFormat = xBook.CreateDataFormat().GetFormat("text");
+            xTextCellStyleBorI.SetFont(fontI);
+
+            HSSFCellStyle xTextCellStyleBorB = (HSSFCellStyle)xBook.CreateCellStyle();
+            xTextCellStyleBorB.BorderLeft = NPOI.SS.UserModel.BorderStyle.Medium;
+            xTextCellStyleBorB.BorderTop = NPOI.SS.UserModel.BorderStyle.Medium;
+            xTextCellStyleBorB.BorderRight = NPOI.SS.UserModel.BorderStyle.Medium;
+            xTextCellStyleBorB.BorderBottom = NPOI.SS.UserModel.BorderStyle.Medium;
+            xTextCellStyleBorB.DataFormat = xBook.CreateDataFormat().GetFormat("text");
+            xTextCellStyleBorB.SetFont(fontB);
+
+            HSSFCellStyle xTextCellStyleBorBdole = (HSSFCellStyle)xBook.CreateCellStyle();
+            xTextCellStyleBorBdole.BorderBottom = NPOI.SS.UserModel.BorderStyle.Double;
+            xTextCellStyleBorBdole.DataFormat = xBook.CreateDataFormat().GetFormat("text");
+            xTextCellStyleBorBdole.SetFont(fontB);
+
+            HSSFCellStyle xTextCellStyleBorDole = (HSSFCellStyle)xBook.CreateCellStyle();
+            xTextCellStyleBorDole.BorderBottom = NPOI.SS.UserModel.BorderStyle.Double;
+            xTextCellStyleBorDole.DataFormat = xBook.CreateDataFormat().GetFormat("text");
+
+            string sRok = DateTime.Now.Year.ToString().Substring(2, 2);
+
+            var iRow = 0;
+            var r = xSheet.CreateRow(iRow);
+            xCell = r.CreateCell(0);
+            xCell.CellStyle = xTextCellStyleBorDole;
+            xCell.SetCellValue("Identifikácia lokality");
+
+            int iCol = 1;
+            xCell = r.CreateCell(iCol);
+            xCell.CellStyle = xTextCellStyleBorDole;
+            xCell.SetCellValue("Lab. č.");
+
+            iCol++;
+            xCell = r.CreateCell(iCol);
+            xCell.CellStyle = xTextCellStyleBorDole;
+            xCell.SetCellValue("Rok");
+
+            iCol++;
+            xCell = r.CreateCell(iCol);
+            xCell.CellStyle = xTextCellStyleBorDole;
+            xCell.SetCellValue("Homog.");
+
+            iCol++;
+            xCell = r.CreateCell(iCol);
+            xCell.CellStyle = xTextCellStyleBorDole;
+            xCell.SetCellValue("Príprava");
+
+            iCol++;
+            foreach (DataGridViewRow dr in dg.Rows)
+            {
+                xCell = r.CreateCell(iCol);
+                xCell.CellStyle = xTextCellStyleBorBdole;
+                xCell.SetCellValue(dr.Cells[1].Value.ToString());
+                iCol++;
+            }
+
+            //r = xSheet.CreateRow(1);
+            //xCell = r.CreateCell(0);
+            //xCell.CellStyle = xTextCellStyle;
+            //xCell.SetCellValue("x/" + sRok);
+
+            for (int i = 0; i <= iCol; i++)
+            {
+                xSheet.AutoSizeColumn(i);
+            }
+
+            xSheet = xBook.CreateSheet("Detaily");
+            iRow = 0;
+            r = xSheet.CreateRow(iRow);
+
+            xCell = r.CreateCell(0);
+            xCell.CellStyle = xTextCellStyleB;
+            xCell.SetCellValue("Detaily merania:");
+
+            iRow = 2;
+            r = xSheet.CreateRow(iRow);
+            xCell = r.CreateCell(0);
+            xCell.CellStyle = xTextCellStyleBorI;
+            xCell.SetCellValue("Parameter");
+
+            xCell = r.CreateCell(1);
+            xCell.CellStyle = xTextCellStyleBorI;
+            xCell.SetCellValue("Položka");
+
+            xCell = r.CreateCell(2);
+            xCell.CellStyle = xTextCellStyleBorI;
+            xCell.SetCellValue("Matrica");
+
+            xCell = r.CreateCell(3);
+            xCell.CellStyle = xTextCellStyleBorI;
+            xCell.SetCellValue("Princíp");
+
+            xCell = r.CreateCell(4);
+            xCell.CellStyle = xTextCellStyleBorI;
+            xCell.SetCellValue("Označenie");
+
+            xCell = r.CreateCell(5);
+            xCell.CellStyle = xTextCellStyleBorI;
+            xCell.SetCellValue("Jednotka");
+
+            xCell = r.CreateCell(6);
+            xCell.CellStyle = xTextCellStyleBorI;
+            xCell.SetCellValue("Oddelenie");
+
+            iRow = 3;
+            foreach (DataGridViewRow dr in dg.Rows)
+            {
+                r = xSheet.CreateRow(iRow);
+                xCell = r.CreateCell(0);
+                xCell.CellStyle = xTextCellStyleBor;
+                xCell.SetCellValue(dr.Cells[1].Value.ToString());
+
+                xCell = r.CreateCell(1);
+                xCell.CellStyle = xTextCellStyleBor;
+                xCell.SetCellValue(dr.Cells[3].Value.ToString());
+
+                xCell = r.CreateCell(2);
+                xCell.CellStyle = xTextCellStyleBor;
+                xCell.SetCellValue(dr.Cells[5].Value.ToString());
+
+                xCell = r.CreateCell(3);
+                xCell.CellStyle = xTextCellStyleBor;
+                xCell.SetCellValue(dr.Cells[7].Value.ToString());
+
+                xCell = r.CreateCell(4);
+                xCell.CellStyle = xTextCellStyleBor;
+                xCell.SetCellValue(dr.Cells[9].Value.ToString());
+
+                xCell = r.CreateCell(5);
+                xCell.CellStyle = xTextCellStyleBor;
+                xCell.SetCellValue(dr.Cells[11].Value.ToString());
+
+                xCell = r.CreateCell(6);
+                xCell.CellStyle = xTextCellStyleBor;
+                xCell.SetCellValue(dr.Cells[13].Value.ToString());
+
+                iRow++;
+            }
+            iRow++;
+            iRow++;
+            r = xSheet.CreateRow(iRow);
+            xCell = r.CreateCell(0);
+            xCell.CellStyle = xTextCellStyleB;
+            xCell.SetCellValue("Všetky dostupné parametre:");
+            iRow++;
+            iRow++;
+            for (int i = 0; i < RRvar.Matrix3.Count; i++)
+            {
+                r = xSheet.CreateRow(iRow);
+                xCell = r.CreateCell(0);
+                xCell.CellStyle = xTextCellStyleBor;
+                xCell.SetCellValue(RRdata.MatrixRead(3, i, 0));
+                iRow++;
+            }
+
+            for (int i = 0; i < 7; i++)
+            {
+                xSheet.AutoSizeColumn(i);
+            }
+
+            var xDocInfo = NPOI.HPSF.PropertySetFactory.CreateDocumentSummaryInformation();
+            var xInfo = NPOI.HPSF.PropertySetFactory.CreateSummaryInformation();
+            xInfo.Author = "sampleX © 2022 Róbert Repka";
+            xInfo.Subject = "sampleX - šablóna na import údajov";
+            xInfo.Comments = "robert@repka.org\r\n+421917799260";
+            xInfo.Keywords = "meranie";
+
+            xDocInfo.Company = "Štátny geologický ústav Dionýza Štúra, Odbor geoanalytických laboratórií, Spišská Nová Ves";
+            //xDocInfo.Category = "Category";
+
+            xBook.DocumentSummaryInformation = xDocInfo;
+            xBook.SummaryInformation = xInfo;
+
+            System.Windows.Forms.SaveFileDialog SD = new System.Windows.Forms.SaveFileDialog();
+            SD.Title = "Export XLS šablóny";
+            SD.RestoreDirectory = true;
+            SD.DefaultExt = "xls";
+            SD.Filter = "MS Excel (*.xls)|*.xls";
+            SD.CheckPathExists = true;
+            SD.FileName = cMain.Text + " - " + DateTime.Now.ToString("yyyy'-'MM'-'dd'_'HH'-'mm'-'ss") + ".xls";
+
+            if (SD.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    using (FileStream stream = new FileStream(SD.FileName, FileMode.Create, FileAccess.Write))
+                    {
+                        xBook.Write(stream);
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Nepodarilo za mi zapísať súbor.\r\n", "Varovanie", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+
     }
 }

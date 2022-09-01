@@ -47,6 +47,14 @@
             this.cOzn = new System.Windows.Forms.ComboBox();
             this.cJednotka = new System.Windows.Forms.ComboBox();
             this.cOdd = new System.Windows.Forms.ComboBox();
+            this.bImport = new System.Windows.Forms.Button();
+            this.bExcel = new System.Windows.Forms.Button();
+            this.bDown = new System.Windows.Forms.Button();
+            this.bUp = new System.Windows.Forms.Button();
+            this.bRename = new System.Windows.Forms.Button();
+            this.bDelete = new System.Windows.Forms.Button();
+            this.bNew = new System.Windows.Forms.Button();
+            this.bAll = new System.Windows.Forms.Button();
             this.bOdd = new System.Windows.Forms.Button();
             this.bJednotka = new System.Windows.Forms.Button();
             this.bOzn = new System.Windows.Forms.Button();
@@ -54,12 +62,6 @@
             this.bMatrica = new System.Windows.Forms.Button();
             this.bPolozka = new System.Windows.Forms.Button();
             this.bClone = new System.Windows.Forms.Button();
-            this.bAll = new System.Windows.Forms.Button();
-            this.bNew = new System.Windows.Forms.Button();
-            this.bDelete = new System.Windows.Forms.Button();
-            this.bRename = new System.Windows.Forms.Button();
-            this.bDown = new System.Windows.Forms.Button();
-            this.bUp = new System.Windows.Forms.Button();
             this.cMain = new System.Windows.Forms.ComboBox();
             this.dg1 = new System.Windows.Forms.DataGridView();
             this.dg2 = new System.Windows.Forms.DataGridView();
@@ -76,19 +78,19 @@
             this.label4 = new System.Windows.Forms.Label();
             this.ldg2 = new System.Windows.Forms.Label();
             this.ldg1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dg3 = new System.Windows.Forms.DataGridView();
             this.ldg3 = new System.Windows.Forms.Label();
             this.bAkr = new System.Windows.Forms.Button();
             this.dg4 = new System.Windows.Forms.DataGridView();
             this.ldg4 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg2)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -183,6 +185,105 @@
             this.toolTip1.SetToolTip(this.cOdd, "Oddelenie");
             this.cOdd.SelectedIndexChanged += new System.EventHandler(this.cOdd_SelectedIndexChanged);
             // 
+            // bImport
+            // 
+            this.bImport.Image = ((System.Drawing.Image)(resources.GetObject("bImport.Image")));
+            this.bImport.Location = new System.Drawing.Point(268, 328);
+            this.bImport.Name = "bImport";
+            this.bImport.Size = new System.Drawing.Size(45, 45);
+            this.bImport.TabIndex = 141;
+            this.toolTip1.SetToolTip(this.bImport, "Import meracích predpisov z XLS súboru");
+            this.bImport.UseVisualStyleBackColor = true;
+            this.bImport.Click += new System.EventHandler(this.bImport_Click);
+            // 
+            // bExcel
+            // 
+            this.bExcel.Image = global::sampleX.Properties.Resources._0;
+            this.bExcel.Location = new System.Drawing.Point(268, 282);
+            this.bExcel.Name = "bExcel";
+            this.bExcel.Size = new System.Drawing.Size(45, 45);
+            this.bExcel.TabIndex = 140;
+            this.toolTip1.SetToolTip(this.bExcel, "Export prázdnej XLS šablony pre meracie predpisy");
+            this.bExcel.UseVisualStyleBackColor = true;
+            this.bExcel.Click += new System.EventHandler(this.bExcel_Click);
+            // 
+            // bDown
+            // 
+            this.bDown.Image = global::sampleX.Properties.Resources._down;
+            this.bDown.Location = new System.Drawing.Point(268, 110);
+            this.bDown.Name = "bDown";
+            this.bDown.Size = new System.Drawing.Size(45, 45);
+            this.bDown.TabIndex = 139;
+            this.toolTip1.SetToolTip(this.bDown, "Presuň záznam nižšie");
+            this.bDown.UseVisualStyleBackColor = true;
+            this.bDown.Click += new System.EventHandler(this.bDown_Click);
+            // 
+            // bUp
+            // 
+            this.bUp.Image = global::sampleX.Properties.Resources._up;
+            this.bUp.Location = new System.Drawing.Point(268, 64);
+            this.bUp.Name = "bUp";
+            this.bUp.Size = new System.Drawing.Size(45, 45);
+            this.bUp.TabIndex = 138;
+            this.toolTip1.SetToolTip(this.bUp, "Presuň záznam vyššie");
+            this.bUp.UseVisualStyleBackColor = true;
+            this.bUp.Click += new System.EventHandler(this.bUp_Click);
+            // 
+            // bRename
+            // 
+            this.bRename.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.bRename.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bRename.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.bRename.Image = ((System.Drawing.Image)(resources.GetObject("bRename.Image")));
+            this.bRename.Location = new System.Drawing.Point(820, 6);
+            this.bRename.Name = "bRename";
+            this.bRename.Size = new System.Drawing.Size(40, 40);
+            this.bRename.TabIndex = 4;
+            this.toolTip1.SetToolTip(this.bRename, "Premenovať aktuálnu skupinu");
+            this.bRename.UseVisualStyleBackColor = true;
+            this.bRename.Click += new System.EventHandler(this.bRename_Click);
+            // 
+            // bDelete
+            // 
+            this.bDelete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.bDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bDelete.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.bDelete.Image = ((System.Drawing.Image)(resources.GetObject("bDelete.Image")));
+            this.bDelete.Location = new System.Drawing.Point(862, 6);
+            this.bDelete.Name = "bDelete";
+            this.bDelete.Size = new System.Drawing.Size(40, 40);
+            this.bDelete.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.bDelete, "Vymazať skupinu");
+            this.bDelete.UseVisualStyleBackColor = true;
+            this.bDelete.Click += new System.EventHandler(this.bDelete_Click);
+            // 
+            // bNew
+            // 
+            this.bNew.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.bNew.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bNew.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.bNew.Image = ((System.Drawing.Image)(resources.GetObject("bNew.Image")));
+            this.bNew.Location = new System.Drawing.Point(778, 6);
+            this.bNew.Name = "bNew";
+            this.bNew.Size = new System.Drawing.Size(40, 40);
+            this.bNew.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.bNew, "Vytvoriť novú skupinu");
+            this.bNew.UseVisualStyleBackColor = true;
+            this.bNew.Click += new System.EventHandler(this.bNew_Click);
+            // 
+            // bAll
+            // 
+            this.bAll.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bAll.BackgroundImage")));
+            this.bAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bAll.Location = new System.Drawing.Point(923, 396);
+            this.bAll.Name = "bAll";
+            this.bAll.Size = new System.Drawing.Size(25, 25);
+            this.bAll.TabIndex = 77;
+            this.toolTip1.SetToolTip(this.bAll, "Použiť vybrané vlastnosti pre parameter");
+            this.bAll.UseVisualStyleBackColor = true;
+            this.bAll.Visible = false;
+            this.bAll.Click += new System.EventHandler(this.bAll_Click);
+            // 
             // bOdd
             // 
             this.bOdd.BackgroundImage = global::sampleX.Properties.Resources.Arrows_icon;
@@ -269,83 +370,6 @@
             this.bClone.UseVisualStyleBackColor = true;
             this.bClone.Click += new System.EventHandler(this.bClone_Click);
             // 
-            // bAll
-            // 
-            this.bAll.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bAll.BackgroundImage")));
-            this.bAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.bAll.Location = new System.Drawing.Point(923, 396);
-            this.bAll.Name = "bAll";
-            this.bAll.Size = new System.Drawing.Size(25, 25);
-            this.bAll.TabIndex = 77;
-            this.toolTip1.SetToolTip(this.bAll, "Použiť vybrané vlastnosti pre parameter");
-            this.bAll.UseVisualStyleBackColor = true;
-            this.bAll.Visible = false;
-            this.bAll.Click += new System.EventHandler(this.bAll_Click);
-            // 
-            // bNew
-            // 
-            this.bNew.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.bNew.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bNew.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.bNew.Image = ((System.Drawing.Image)(resources.GetObject("bNew.Image")));
-            this.bNew.Location = new System.Drawing.Point(778, 6);
-            this.bNew.Name = "bNew";
-            this.bNew.Size = new System.Drawing.Size(40, 40);
-            this.bNew.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.bNew, "Vytvoriť novú skupinu");
-            this.bNew.UseVisualStyleBackColor = true;
-            this.bNew.Click += new System.EventHandler(this.bNew_Click);
-            // 
-            // bDelete
-            // 
-            this.bDelete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.bDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bDelete.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.bDelete.Image = ((System.Drawing.Image)(resources.GetObject("bDelete.Image")));
-            this.bDelete.Location = new System.Drawing.Point(862, 6);
-            this.bDelete.Name = "bDelete";
-            this.bDelete.Size = new System.Drawing.Size(40, 40);
-            this.bDelete.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.bDelete, "Vymazať skupinu");
-            this.bDelete.UseVisualStyleBackColor = true;
-            this.bDelete.Click += new System.EventHandler(this.bDelete_Click);
-            // 
-            // bRename
-            // 
-            this.bRename.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.bRename.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bRename.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.bRename.Image = ((System.Drawing.Image)(resources.GetObject("bRename.Image")));
-            this.bRename.Location = new System.Drawing.Point(820, 6);
-            this.bRename.Name = "bRename";
-            this.bRename.Size = new System.Drawing.Size(40, 40);
-            this.bRename.TabIndex = 4;
-            this.toolTip1.SetToolTip(this.bRename, "Premenovať aktuálnu skupinu");
-            this.bRename.UseVisualStyleBackColor = true;
-            this.bRename.Click += new System.EventHandler(this.bRename_Click);
-            // 
-            // bDown
-            // 
-            this.bDown.Image = global::sampleX.Properties.Resources._down;
-            this.bDown.Location = new System.Drawing.Point(268, 167);
-            this.bDown.Name = "bDown";
-            this.bDown.Size = new System.Drawing.Size(45, 45);
-            this.bDown.TabIndex = 139;
-            this.toolTip1.SetToolTip(this.bDown, "Presuň záznam nižšie");
-            this.bDown.UseVisualStyleBackColor = true;
-            this.bDown.Click += new System.EventHandler(this.bDown_Click);
-            // 
-            // bUp
-            // 
-            this.bUp.Image = global::sampleX.Properties.Resources._up;
-            this.bUp.Location = new System.Drawing.Point(268, 121);
-            this.bUp.Name = "bUp";
-            this.bUp.Size = new System.Drawing.Size(45, 45);
-            this.bUp.TabIndex = 138;
-            this.toolTip1.SetToolTip(this.bUp, "Presuň záznam vyššie");
-            this.bUp.UseVisualStyleBackColor = true;
-            this.bUp.Click += new System.EventHandler(this.bUp_Click);
-            // 
             // cMain
             // 
             this.cMain.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -356,6 +380,7 @@
             this.cMain.Size = new System.Drawing.Size(556, 29);
             this.cMain.TabIndex = 1;
             this.cMain.SelectedIndexChanged += new System.EventHandler(this.cMain_SelectedIndexChanged);
+            this.cMain.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cMain_KeyPress);
             // 
             // dg1
             // 
@@ -418,7 +443,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Segoe UI", 8.139131F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.Location = new System.Drawing.Point(268, 237);
+            this.button1.Location = new System.Drawing.Point(268, 184);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(45, 35);
             this.button1.TabIndex = 53;
@@ -429,7 +454,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Segoe UI", 8.139131F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button2.Location = new System.Drawing.Point(268, 274);
+            this.button2.Location = new System.Drawing.Point(268, 221);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(45, 35);
             this.button2.TabIndex = 54;
@@ -557,18 +582,6 @@
             this.ldg1.TabIndex = 128;
             this.ldg1.Text = "dg1";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(908, 6);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 100;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
-            // 
             // dg3
             // 
             this.dg3.AllowUserToAddRows = false;
@@ -661,11 +674,25 @@
             this.ldg4.Text = "dg4";
             this.ldg4.Visible = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(908, 6);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 100;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
+            // 
             // Filter1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(955, 535);
+            this.Controls.Add(this.bImport);
+            this.Controls.Add(this.bExcel);
             this.Controls.Add(this.bDown);
             this.Controls.Add(this.bUp);
             this.Controls.Add(this.bRename);
@@ -715,9 +742,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dg2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -769,5 +796,7 @@
         private System.Windows.Forms.Button bRename;
         private System.Windows.Forms.Button bDown;
         private System.Windows.Forms.Button bUp;
+        private System.Windows.Forms.Button bImport;
+        private System.Windows.Forms.Button bExcel;
     }
 }

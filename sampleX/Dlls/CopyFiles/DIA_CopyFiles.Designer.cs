@@ -63,7 +63,7 @@
             // DIA_CopyFiles
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(370, 43);
+            this.ClientSize = new System.Drawing.Size(366, 39);
             this.ControlBox = false;
             this.Controls.Add(this.But_Cancel);
             this.Controls.Add(this.Prog_CurrentFile);
@@ -72,11 +72,12 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DIA_CopyFiles";
-            this.Opacity = 0.9;
+            this.Opacity = 0.9D;
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Load += new System.EventHandler(this.DIA_CopyFiles_Load);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DIA_CopyFiles_FormClosed);
+            this.Load += new System.EventHandler(this.DIA_CopyFiles_Load);
             this.ResumeLayout(false);
 
         }

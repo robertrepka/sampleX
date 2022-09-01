@@ -58,6 +58,15 @@ namespace sampleX
             Pro1.Closed += new EventHandler(ChildFormClosedFull);
             Pro1.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            RRcode.FadeOut(this);
+            this.Visible = false;
+            Form Pro2 = new Pro2();
+            Pro2.Closed += new EventHandler(ChildFormClosedFull);
+            Pro2.Show();
+        }
     }
 }
 

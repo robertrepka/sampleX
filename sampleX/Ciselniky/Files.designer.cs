@@ -1,6 +1,6 @@
 ﻿namespace sampleX
 {
-    partial class Partners
+    partial class Files
     {
         /// <summary>
         /// Required designer variable.
@@ -30,15 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Label nazov1Label;
-            System.Windows.Forms.Label ulicaLabel;
-            System.Windows.Forms.Label mestoLabel;
-            System.Windows.Forms.Label pscLabel;
-            System.Windows.Forms.Label icoLabel;
-            System.Windows.Forms.Label dicLabel;
-            System.Windows.Forms.Label bankaLabel;
-            System.Windows.Forms.Label ucetLabel;
             System.Windows.Forms.Label poznLabel;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Partners));
+            System.Windows.Forms.Label label1;
+            System.Windows.Forms.Label label2;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Files));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bn = new System.Windows.Forms.BindingNavigator(this.components);
@@ -62,34 +57,30 @@
             this.lStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bExcel = new System.Windows.Forms.Button();
+            this.bOpen = new System.Windows.Forms.Button();
+            this.bRead = new System.Windows.Forms.Button();
             this.bSelect = new System.Windows.Forms.Button();
-            this.bObj = new System.Windows.Forms.Button();
             this.dr = new System.Windows.Forms.GroupBox();
-            this.nazov_ = new System.Windows.Forms.TextBox();
+            this.nRok = new System.Windows.Forms.NumericUpDown();
+            this.nProt = new System.Windows.Forms.NumericUpDown();
+            this.filename_ = new System.Windows.Forms.TextBox();
             this.pozn_ = new System.Windows.Forms.TextBox();
-            this.ucet_ = new System.Windows.Forms.TextBox();
-            this.banka_ = new System.Windows.Forms.TextBox();
-            this.dic_ = new System.Windows.Forms.TextBox();
-            this.ico_ = new System.Windows.Forms.TextBox();
-            this.psc_ = new System.Windows.Forms.TextBox();
-            this.mesto_ = new System.Windows.Forms.TextBox();
-            this.ulica_ = new System.Windows.Forms.TextBox();
+            this.value_ = new System.Windows.Forms.TextBox();
             this.id_ = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             nazov1Label = new System.Windows.Forms.Label();
-            ulicaLabel = new System.Windows.Forms.Label();
-            mestoLabel = new System.Windows.Forms.Label();
-            pscLabel = new System.Windows.Forms.Label();
-            icoLabel = new System.Windows.Forms.Label();
-            dicLabel = new System.Windows.Forms.Label();
-            bankaLabel = new System.Windows.Forms.Label();
-            ucetLabel = new System.Windows.Forms.Label();
             poznLabel = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bn)).BeginInit();
             this.bn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.dr.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nRok)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nProt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -97,100 +88,44 @@
             // 
             nazov1Label.AutoSize = true;
             nazov1Label.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            nazov1Label.Location = new System.Drawing.Point(6, 12);
+            nazov1Label.Location = new System.Drawing.Point(6, 19);
             nazov1Label.Name = "nazov1Label";
-            nazov1Label.Size = new System.Drawing.Size(87, 17);
+            nazov1Label.Size = new System.Drawing.Size(61, 17);
             nazov1Label.TabIndex = 3;
-            nazov1Label.Text = "objednávateľ:";
+            nazov1Label.Text = "protokol:";
             nazov1Label.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // ulicaLabel
-            // 
-            ulicaLabel.AutoSize = true;
-            ulicaLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            ulicaLabel.Location = new System.Drawing.Point(6, 66);
-            ulicaLabel.Name = "ulicaLabel";
-            ulicaLabel.Size = new System.Drawing.Size(37, 17);
-            ulicaLabel.TabIndex = 7;
-            ulicaLabel.Text = "ulica:";
-            ulicaLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // mestoLabel
-            // 
-            mestoLabel.AutoSize = true;
-            mestoLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            mestoLabel.Location = new System.Drawing.Point(6, 97);
-            mestoLabel.Name = "mestoLabel";
-            mestoLabel.Size = new System.Drawing.Size(47, 17);
-            mestoLabel.TabIndex = 8;
-            mestoLabel.Text = "mesto:";
-            mestoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // pscLabel
-            // 
-            pscLabel.AutoSize = true;
-            pscLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            pscLabel.Location = new System.Drawing.Point(6, 128);
-            pscLabel.Name = "pscLabel";
-            pscLabel.Size = new System.Drawing.Size(33, 17);
-            pscLabel.TabIndex = 9;
-            pscLabel.Text = "PSČ:";
-            pscLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // icoLabel
-            // 
-            icoLabel.AutoSize = true;
-            icoLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            icoLabel.Location = new System.Drawing.Point(6, 159);
-            icoLabel.Name = "icoLabel";
-            icoLabel.Size = new System.Drawing.Size(32, 17);
-            icoLabel.TabIndex = 13;
-            icoLabel.Text = "IČO:";
-            icoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // dicLabel
-            // 
-            dicLabel.AutoSize = true;
-            dicLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dicLabel.Location = new System.Drawing.Point(245, 66);
-            dicLabel.Name = "dicLabel";
-            dicLabel.Size = new System.Drawing.Size(31, 17);
-            dicLabel.TabIndex = 15;
-            dicLabel.Text = "DIČ:";
-            dicLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // bankaLabel
-            // 
-            bankaLabel.AutoSize = true;
-            bankaLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            bankaLabel.Location = new System.Drawing.Point(245, 97);
-            bankaLabel.Name = "bankaLabel";
-            bankaLabel.Size = new System.Drawing.Size(46, 17);
-            bankaLabel.TabIndex = 27;
-            bankaLabel.Text = "banka:";
-            bankaLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // ucetLabel
-            // 
-            ucetLabel.AutoSize = true;
-            ucetLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            ucetLabel.Location = new System.Drawing.Point(245, 128);
-            ucetLabel.Name = "ucetLabel";
-            ucetLabel.Size = new System.Drawing.Size(35, 17);
-            ucetLabel.TabIndex = 29;
-            ucetLabel.Text = "účet:";
-            ucetLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // poznLabel
             // 
             poznLabel.AutoSize = true;
             poznLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            poznLabel.Location = new System.Drawing.Point(6, 191);
+            poznLabel.Location = new System.Drawing.Point(6, 50);
             poznLabel.Name = "poznLabel";
-            poznLabel.Size = new System.Drawing.Size(40, 17);
+            poznLabel.Size = new System.Drawing.Size(44, 17);
             poznLabel.TabIndex = 31;
-            poznLabel.Text = "pozn:";
+            poznLabel.Text = "popis:";
             poznLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            label1.Location = new System.Drawing.Point(6, 60);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(0, 17);
+            label1.TabIndex = 33;
+            label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            label2.Location = new System.Drawing.Point(6, 81);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(45, 17);
+            label2.TabIndex = 34;
+            label2.Text = "súbor:";
+            label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // bn
             // 
@@ -358,7 +293,6 @@
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.AliceBlue;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.dg.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dg.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -414,6 +348,29 @@
             this.bExcel.Visible = false;
             this.bExcel.Click += new System.EventHandler(this.bExcel_Click);
             // 
+            // bOpen
+            // 
+            this.bOpen.Image = ((System.Drawing.Image)(resources.GetObject("bOpen.Image")));
+            this.bOpen.Location = new System.Drawing.Point(705, 251);
+            this.bOpen.Name = "bOpen";
+            this.bOpen.Size = new System.Drawing.Size(45, 45);
+            this.bOpen.TabIndex = 9;
+            this.toolTip1.SetToolTip(this.bOpen, "Voľba súboru");
+            this.bOpen.UseVisualStyleBackColor = true;
+            this.bOpen.Visible = false;
+            this.bOpen.Click += new System.EventHandler(this.bOpen_Click);
+            // 
+            // bRead
+            // 
+            this.bRead.Image = ((System.Drawing.Image)(resources.GetObject("bRead.Image")));
+            this.bRead.Location = new System.Drawing.Point(320, 191);
+            this.bRead.Name = "bRead";
+            this.bRead.Size = new System.Drawing.Size(45, 45);
+            this.bRead.TabIndex = 10;
+            this.toolTip1.SetToolTip(this.bRead, "Voľba súboru");
+            this.bRead.UseVisualStyleBackColor = true;
+            this.bRead.Click += new System.EventHandler(this.bRead_Click);
+            // 
             // bSelect
             // 
             this.bSelect.Image = ((System.Drawing.Image)(resources.GetObject("bSelect.Image")));
@@ -421,143 +378,112 @@
             this.bSelect.Name = "bSelect";
             this.bSelect.Size = new System.Drawing.Size(45, 45);
             this.bSelect.TabIndex = 8;
-            this.toolTip1.SetToolTip(this.bSelect, "Výber zákazníka");
             this.bSelect.UseVisualStyleBackColor = true;
             this.bSelect.Visible = false;
             this.bSelect.Click += new System.EventHandler(this.bSelect_Click);
             // 
-            // bObj
-            // 
-            this.bObj.Image = ((System.Drawing.Image)(resources.GetObject("bObj.Image")));
-            this.bObj.Location = new System.Drawing.Point(691, 267);
-            this.bObj.Name = "bObj";
-            this.bObj.Size = new System.Drawing.Size(45, 45);
-            this.bObj.TabIndex = 9;
-            this.toolTip1.SetToolTip(this.bObj, "Objednávky vybraného zákazníka");
-            this.bObj.UseVisualStyleBackColor = true;
-            this.bObj.Visible = false;
-            this.bObj.Click += new System.EventHandler(this.bObj_Click);
-            // 
             // dr
             // 
-            this.dr.Controls.Add(this.nazov_);
+            this.dr.Controls.Add(this.nRok);
+            this.dr.Controls.Add(this.nProt);
+            this.dr.Controls.Add(label2);
+            this.dr.Controls.Add(this.filename_);
+            this.dr.Controls.Add(label1);
             this.dr.Controls.Add(poznLabel);
             this.dr.Controls.Add(this.pozn_);
-            this.dr.Controls.Add(ucetLabel);
-            this.dr.Controls.Add(this.ucet_);
-            this.dr.Controls.Add(bankaLabel);
-            this.dr.Controls.Add(this.banka_);
-            this.dr.Controls.Add(dicLabel);
-            this.dr.Controls.Add(this.dic_);
-            this.dr.Controls.Add(icoLabel);
-            this.dr.Controls.Add(this.ico_);
-            this.dr.Controls.Add(pscLabel);
-            this.dr.Controls.Add(this.psc_);
-            this.dr.Controls.Add(mestoLabel);
-            this.dr.Controls.Add(this.mesto_);
-            this.dr.Controls.Add(ulicaLabel);
-            this.dr.Controls.Add(this.ulica_);
             this.dr.Controls.Add(nazov1Label);
+            this.dr.Controls.Add(this.value_);
             this.dr.Controls.Add(this.id_);
-            this.dr.Location = new System.Drawing.Point(29, 65);
+            this.dr.Location = new System.Drawing.Point(27, 65);
             this.dr.Name = "dr";
-            this.dr.Size = new System.Drawing.Size(490, 293);
+            this.dr.Size = new System.Drawing.Size(490, 120);
             this.dr.TabIndex = 6;
             this.dr.TabStop = false;
             // 
-            // nazov_
+            // nRok
             // 
-            this.nazov_.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.nazov_.Location = new System.Drawing.Point(9, 32);
-            this.nazov_.Name = "nazov_";
-            this.nazov_.Size = new System.Drawing.Size(468, 25);
-            this.nazov_.TabIndex = 6;
+            this.nRok.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.nRok.Location = new System.Drawing.Point(147, 16);
+            this.nRok.Maximum = new decimal(new int[] {
+            2099,
+            0,
+            0,
+            0});
+            this.nRok.Minimum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.nRok.Name = "nRok";
+            this.nRok.Size = new System.Drawing.Size(60, 25);
+            this.nRok.TabIndex = 37;
+            this.nRok.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nRok.Value = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.nRok.Visible = false;
+            this.nRok.ValueChanged += new System.EventHandler(this.nRok_ValueChanged);
+            // 
+            // nProt
+            // 
+            this.nProt.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.nProt.Location = new System.Drawing.Point(81, 16);
+            this.nProt.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.nProt.Name = "nProt";
+            this.nProt.Size = new System.Drawing.Size(60, 25);
+            this.nProt.TabIndex = 36;
+            this.nProt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nProt.Visible = false;
+            this.nProt.ValueChanged += new System.EventHandler(this.nProt_ValueChanged);
+            // 
+            // filename_
+            // 
+            this.filename_.Enabled = false;
+            this.filename_.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.filename_.Location = new System.Drawing.Point(81, 78);
+            this.filename_.Name = "filename_";
+            this.filename_.Size = new System.Drawing.Size(396, 25);
+            this.filename_.TabIndex = 35;
+            this.filename_.TextChanged += new System.EventHandler(this.pozn__TextChanged);
+            this.filename_.Validated += new System.EventHandler(this.poznTextBox_Validated);
             // 
             // pozn_
             // 
             this.pozn_.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.pozn_.Location = new System.Drawing.Point(70, 188);
-            this.pozn_.Multiline = true;
+            this.pozn_.Location = new System.Drawing.Point(81, 47);
             this.pozn_.Name = "pozn_";
-            this.pozn_.Size = new System.Drawing.Size(407, 94);
+            this.pozn_.Size = new System.Drawing.Size(396, 25);
             this.pozn_.TabIndex = 32;
+            this.pozn_.TextChanged += new System.EventHandler(this.pozn__TextChanged);
             this.pozn_.Validated += new System.EventHandler(this.poznTextBox_Validated);
             // 
-            // ucet_
+            // value_
             // 
-            this.ucet_.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.ucet_.Location = new System.Drawing.Point(319, 125);
-            this.ucet_.Name = "ucet_";
-            this.ucet_.Size = new System.Drawing.Size(158, 25);
-            this.ucet_.TabIndex = 30;
-            this.ucet_.Validated += new System.EventHandler(this.poznTextBox_Validated);
-            // 
-            // banka_
-            // 
-            this.banka_.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.banka_.Location = new System.Drawing.Point(319, 94);
-            this.banka_.Name = "banka_";
-            this.banka_.Size = new System.Drawing.Size(158, 25);
-            this.banka_.TabIndex = 28;
-            this.banka_.Validated += new System.EventHandler(this.poznTextBox_Validated);
-            // 
-            // dic_
-            // 
-            this.dic_.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.dic_.Location = new System.Drawing.Point(319, 63);
-            this.dic_.Name = "dic_";
-            this.dic_.Size = new System.Drawing.Size(158, 25);
-            this.dic_.TabIndex = 16;
-            this.dic_.Validated += new System.EventHandler(this.poznTextBox_Validated);
-            // 
-            // ico_
-            // 
-            this.ico_.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.ico_.Location = new System.Drawing.Point(70, 157);
-            this.ico_.Name = "ico_";
-            this.ico_.Size = new System.Drawing.Size(158, 25);
-            this.ico_.TabIndex = 14;
-            this.ico_.Validated += new System.EventHandler(this.poznTextBox_Validated);
-            // 
-            // psc_
-            // 
-            this.psc_.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.psc_.Location = new System.Drawing.Point(70, 125);
-            this.psc_.Name = "psc_";
-            this.psc_.Size = new System.Drawing.Size(158, 25);
-            this.psc_.TabIndex = 10;
-            this.psc_.TextChanged += new System.EventHandler(this.psc__TextChanged);
-            this.psc_.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.psc__KeyPress);
-            this.psc_.Validated += new System.EventHandler(this.poznTextBox_Validated);
-            // 
-            // mesto_
-            // 
-            this.mesto_.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.mesto_.Location = new System.Drawing.Point(70, 94);
-            this.mesto_.Name = "mesto_";
-            this.mesto_.Size = new System.Drawing.Size(158, 25);
-            this.mesto_.TabIndex = 9;
-            this.mesto_.Validated += new System.EventHandler(this.poznTextBox_Validated);
-            // 
-            // ulica_
-            // 
-            this.ulica_.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.ulica_.Location = new System.Drawing.Point(70, 63);
-            this.ulica_.Name = "ulica_";
-            this.ulica_.Size = new System.Drawing.Size(158, 25);
-            this.ulica_.TabIndex = 7;
-            this.ulica_.Validated += new System.EventHandler(this.poznTextBox_Validated);
+            this.value_.Enabled = false;
+            this.value_.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.value_.Location = new System.Drawing.Point(81, 16);
+            this.value_.Name = "value_";
+            this.value_.Size = new System.Drawing.Size(155, 25);
+            this.value_.TabIndex = 4;
+            this.value_.TextChanged += new System.EventHandler(this.pozn__TextChanged);
+            this.value_.Validated += new System.EventHandler(this.poznTextBox_Validated);
             // 
             // id_
             // 
-            this.id_.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.id_.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.id_.Location = new System.Drawing.Point(6, 324);
+            this.id_.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.id_.Location = new System.Drawing.Point(269, 16);
             this.id_.Name = "id_";
-            this.id_.Size = new System.Drawing.Size(158, 23);
+            this.id_.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.id_.Size = new System.Drawing.Size(208, 23);
             this.id_.TabIndex = 1;
             this.id_.Text = "id";
-            this.id_.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.id_.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // pictureBox1
             // 
@@ -572,10 +498,21 @@
             this.pictureBox1.Visible = false;
             this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
             // 
-            // Partners
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // backgroundWorker2
+            // 
+            this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
+            this.backgroundWorker2.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker2_RunWorkerCompleted);
+            // 
+            // Files
             // 
             this.ClientSize = new System.Drawing.Size(833, 514);
-            this.Controls.Add(this.bObj);
+            this.Controls.Add(this.bRead);
+            this.Controls.Add(this.bOpen);
             this.Controls.Add(this.bSelect);
             this.Controls.Add(this.dr);
             this.Controls.Add(this.bExcel);
@@ -584,12 +521,12 @@
             this.Controls.Add(this.bn);
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Partners";
+            this.Name = "Files";
             this.Opacity = 0D;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Partners_FormClosing);
-            this.Load += new System.EventHandler(this.Partners_Load);
-            this.Shown += new System.EventHandler(this.Partners_Shown);
-            this.Resize += new System.EventHandler(this.Partners_Resize);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Files_FormClosing);
+            this.Load += new System.EventHandler(this.Files_Load);
+            this.Shown += new System.EventHandler(this.Files_Shown);
+            this.Resize += new System.EventHandler(this.Files_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.bn)).EndInit();
             this.bn.ResumeLayout(false);
             this.bn.PerformLayout();
@@ -598,6 +535,8 @@
             this.statusStrip1.PerformLayout();
             this.dr.ResumeLayout(false);
             this.dr.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nRok)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nProt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -629,16 +568,15 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.GroupBox dr;
         private System.Windows.Forms.Label id_;
-        private System.Windows.Forms.TextBox dic_;
-        private System.Windows.Forms.TextBox ico_;
-        private System.Windows.Forms.TextBox psc_;
-        private System.Windows.Forms.TextBox mesto_;
-        private System.Windows.Forms.TextBox ulica_;
-        private System.Windows.Forms.TextBox pozn_;
-        private System.Windows.Forms.TextBox ucet_;
-        private System.Windows.Forms.TextBox banka_;
+        private System.Windows.Forms.TextBox value_;
         private System.Windows.Forms.Button bSelect;
-        private System.Windows.Forms.Button bObj;
-        private System.Windows.Forms.TextBox nazov_;
+        private System.Windows.Forms.TextBox pozn_;
+        private System.Windows.Forms.TextBox filename_;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button bOpen;
+        private System.Windows.Forms.NumericUpDown nRok;
+        private System.Windows.Forms.NumericUpDown nProt;
+        private System.Windows.Forms.Button bRead;
+        private System.ComponentModel.BackgroundWorker backgroundWorker2;
     }
 }

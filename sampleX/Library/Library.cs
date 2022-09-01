@@ -136,6 +136,37 @@ namespace sampleX
             set { _iRok = value; }
         }
 
+        private static bool _bCopyFileProgress = false;
+        public static bool bCopyFileProgress
+        {
+            get { return _bCopyFileProgress; }
+            set { _bCopyFileProgress = value; }
+        }
+
+        //na formulari Filter1 zobrazi buton na vygenerovanie typu sablony
+        private static bool _bShowExportPatternData = false;
+        public static bool bShowExportPatternData
+        {
+            get { return _bShowExportPatternData; }
+            set { _bShowExportPatternData = value; }
+        }
+
+        //na formulari Filter1 zobrazi buton na vygenerovanie typu sablony
+        private static bool _bShowExportPatternAnalyt = false;
+        public static bool bShowExportPatternAnalyt
+        {
+            get { return _bShowExportPatternAnalyt; }
+            set { _bShowExportPatternAnalyt = value; }
+        }
+        //prenos zvolenej skupiny merani medzi filter1 a filterE
+        private static string _sTransferNameOfAnalytGroup;
+        public static string sTransferNameOfAnalytGroup
+        {
+            get { return _sTransferNameOfAnalytGroup; }
+            set { _sTransferNameOfAnalytGroup = value; }
+        }
+
+
         //premenná pre výber hodnoty z iného formulára na zobrazenie prvkov
         private static bool _bSelect = false;
         public static bool bSelect
@@ -493,6 +524,16 @@ namespace sampleX
 
     class RRstring
     {
+        public static string NewRandomFilename()
+        {
+            string s = "";
+            s += DateTime.Now.ToString("yyyy").Substring(2, 2);
+            s += DateTime.Now.ToString("MMddHHmmss");
+            s += "_";
+            s += CreateRandomPassword(4);
+            return s;
+        }
+
         public string dbDate(string input)
         {
             string sOut = "";
@@ -1133,7 +1174,7 @@ namespace sampleX
             return System.Text.Encoding.UTF8.GetString(decbuff);
         }
 
-        private string CreateRandomPassword(int passwordLength)
+        private static string CreateRandomPassword(int passwordLength)
         {
             string allowedChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
             char[] chars = new char[passwordLength];
@@ -1145,16 +1186,6 @@ namespace sampleX
             }
 
             return new string(chars);
-        }
-
-        public string NewRandomFilename()
-        {
-            string s = "";
-            s += DateTime.Now.ToString("yyyy").Substring(2, 2);
-            s += DateTime.Now.ToString("MMddHHmmss");
-            s += "_";
-            s += CreateRandomPassword(4);
-            return s;
         }
     }
 
@@ -1860,7 +1891,7 @@ namespace sampleX
 
         public void CopyPro(string sFilename, string sDirectory, System.ComponentModel.ISynchronizeInvoke oThis)
         {
-            //RRvar.bCopyFileProgress = true;
+            RRvar.bCopyFileProgress = true;
             List<String> TempFiles = new List<String>();
             TempFiles.Add(sFilename);
             CopyFiles Temp = new CopyFiles(TempFiles, sDirectory);
@@ -1869,7 +1900,6 @@ namespace sampleX
             Temp.CopyAsync(TempDiag);
             //Uncomment this line to do a synchronous copy.
             //Temp.Copy();
-
         }
 
         public void Log(string sDescription)

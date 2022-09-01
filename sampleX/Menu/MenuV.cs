@@ -190,8 +190,8 @@ namespace sampleX
             Form FilterE = new FilterE();
             FilterE.Closed += new EventHandler(ChildFormClosedFull);
             RRvar.sHeader = "Generovanie šablóny pre MS Excel";
+            RRvar.bShowExportPatternData = true;
             FilterE.Show();
-
         }
 
         private void bImport_Click(object sender, EventArgs e)

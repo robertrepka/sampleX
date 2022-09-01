@@ -22,7 +22,7 @@ using NPOI.HPSF;
 #endregion
 namespace sampleX
 {
-    public partial class Pro1 : Form
+    public partial class Pro2 : Form
     {
         #region FILL
         private void Typ1()
@@ -326,12 +326,10 @@ namespace sampleX
                         Typ1Page(i);
                         #region PARAMETER
                         ss = RRdata.MatrixRead(5, m, 3); //id parameter
-                        //string sParameterFullname = RRsql.RunSqlReturn("SELECT value FROM xparameter where id='" + ss + "'");
-                        string sParameterId = ss;
-                        s = RRsql.RunSqlReturn("SELECT pozn FROM xparameter where id='" + sParameterId + "'");
+                        s = RRsql.RunSqlReturn("SELECT pozn FROM xparameter where id='" + ss + "'");
                         if (s.Length == 0)
                         {
-                            s = RRsql.RunSqlReturn("SELECT value FROM xparameter where id='" + sParameterId + "'");
+                            s = RRsql.RunSqlReturn("SELECT value FROM xparameter where id='" + ss + "'");
                         }
                         ws("A" + (iRow).ToString(), myStyleBoldBorder);
                         ws("B" + (iRow).ToString(), myStyleBoldBorder);
@@ -355,13 +353,7 @@ namespace sampleX
                         {
                             String[] sValue = new string[2];
                             sValue[0] = s;
-                            //try
-                            //{
-                            s = RRsql.RunSqlReturn("SELECT explanation FROM xparameter where id='" + sParameterId + "'");
-                            //}
-                            //catch{
-                            //    s = "";
-                            //}
+                            s = RRsql.RunSqlReturn("SELECT explanation FROM xparameter where value='" + s + "'");
                             sValue[1] = s;
                             RRdata.MatrixAdd(2, sValue, false);
                         }
@@ -482,7 +474,7 @@ namespace sampleX
                         }
                         #endregion
                         #region NORMA
-                        ss = RRdata.MatrixRead(5, m, 6);
+
                         if (RRdata.MatrixRead(5, m, 6).Length > 0)
                         {
                             s = RRsql.RunSqlReturn("SELECT value FROM xozn where id='" + ss + "'");
@@ -510,7 +502,7 @@ namespace sampleX
             iRow--;
             iRow--;
             //povinne texty
-            RRdata.MatrixFill(1, "SELECT config.value FROM config WHERE config.item LIKE 'pro1text%' ORDER BY config.item;", true);
+            RRdata.MatrixFill(1, "SELECT config.value FROM config WHERE config.item LIKE 'Pro2text%' ORDER BY config.item;", true);
             for (int i = 0; i < RRvar.Matrix1.Count; i++)
             {
                 Typ1PageComment(RRdata.MatrixRead(1, i, 0));

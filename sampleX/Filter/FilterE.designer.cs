@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FilterE));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lStatus = new System.Windows.Forms.ToolStripStatusLabel();
@@ -45,9 +45,10 @@
             this.bDel = new System.Windows.Forms.Button();
             this.bDown = new System.Windows.Forms.Button();
             this.bUp = new System.Windows.Forms.Button();
-            this.bOK = new System.Windows.Forms.Button();
+            this.bData = new System.Windows.Forms.Button();
             this.bAddAll = new System.Windows.Forms.Button();
             this.bAdd = new System.Windows.Forms.Button();
+            this.bAnalyt = new System.Windows.Forms.Button();
             this.cMain = new System.Windows.Forms.ComboBox();
             this.dg2 = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
@@ -156,7 +157,7 @@
             // bDel
             // 
             this.bDel.Image = global::sampleX.Properties.Resources.Button_Close_icon;
-            this.bDel.Location = new System.Drawing.Point(170, 182);
+            this.bDel.Location = new System.Drawing.Point(127, 182);
             this.bDel.Name = "bDel";
             this.bDel.Size = new System.Drawing.Size(42, 42);
             this.bDel.TabIndex = 138;
@@ -167,7 +168,7 @@
             // bDown
             // 
             this.bDown.Image = global::sampleX.Properties.Resources._down;
-            this.bDown.Location = new System.Drawing.Point(256, 182);
+            this.bDown.Location = new System.Drawing.Point(213, 182);
             this.bDown.Name = "bDown";
             this.bDown.Size = new System.Drawing.Size(42, 42);
             this.bDown.TabIndex = 137;
@@ -178,7 +179,7 @@
             // bUp
             // 
             this.bUp.Image = global::sampleX.Properties.Resources._up;
-            this.bUp.Location = new System.Drawing.Point(213, 182);
+            this.bUp.Location = new System.Drawing.Point(170, 182);
             this.bUp.Name = "bUp";
             this.bUp.Size = new System.Drawing.Size(42, 42);
             this.bUp.TabIndex = 136;
@@ -186,17 +187,20 @@
             this.bUp.UseVisualStyleBackColor = true;
             this.bUp.Click += new System.EventHandler(this.bUp_Click);
             // 
-            // bOK
+            // bData
             // 
-            this.bOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bOK.Image = global::sampleX.Properties.Resources._0;
-            this.bOK.Location = new System.Drawing.Point(465, 182);
-            this.bOK.Name = "bOK";
-            this.bOK.Size = new System.Drawing.Size(42, 42);
-            this.bOK.TabIndex = 135;
-            this.toolTip1.SetToolTip(this.bOK, "Vygeneruj šablónu pre MS Excel");
-            this.bOK.UseVisualStyleBackColor = true;
-            this.bOK.Click += new System.EventHandler(this.bOK_Click);
+            this.bData.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.bData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bData.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.bData.Location = new System.Drawing.Point(261, 181);
+            this.bData.Name = "bData";
+            this.bData.Size = new System.Drawing.Size(246, 42);
+            this.bData.TabIndex = 135;
+            this.bData.Text = "Šablóna pre namerané hodnoty";
+            this.toolTip1.SetToolTip(this.bData, "Vygeneruj šablónu pre MS Excel");
+            this.bData.UseVisualStyleBackColor = false;
+            this.bData.Visible = false;
+            this.bData.Click += new System.EventHandler(this.bOK_Click);
             // 
             // bAddAll
             // 
@@ -220,6 +224,21 @@
             this.bAdd.UseVisualStyleBackColor = true;
             this.bAdd.Click += new System.EventHandler(this.bAdd_Click);
             // 
+            // bAnalyt
+            // 
+            this.bAnalyt.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.bAnalyt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bAnalyt.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.bAnalyt.Location = new System.Drawing.Point(261, 181);
+            this.bAnalyt.Name = "bAnalyt";
+            this.bAnalyt.Size = new System.Drawing.Size(246, 42);
+            this.bAnalyt.TabIndex = 139;
+            this.bAnalyt.Text = "Šablóna pre definíciu vzorky";
+            this.toolTip1.SetToolTip(this.bAnalyt, "Vygeneruj šablónu pre MS Excel");
+            this.bAnalyt.UseVisualStyleBackColor = false;
+            this.bAnalyt.Visible = false;
+            this.bAnalyt.Click += new System.EventHandler(this.bAnalyt_Click);
+            // 
             // cMain
             // 
             this.cMain.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -236,19 +255,19 @@
             // 
             this.dg2.AllowUserToAddRows = false;
             this.dg2.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.dg2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.dg2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dg2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dg2.ColumnHeadersVisible = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dg2.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dg2.DefaultCellStyle = dataGridViewCellStyle5;
             this.dg2.Location = new System.Drawing.Point(12, 58);
             this.dg2.Name = "dg2";
             this.dg2.ReadOnly = true;
@@ -326,10 +345,11 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bAnalyt);
             this.groupBox1.Controls.Add(this.bDel);
             this.groupBox1.Controls.Add(this.bDown);
             this.groupBox1.Controls.Add(this.bUp);
-            this.groupBox1.Controls.Add(this.bOK);
+            this.groupBox1.Controls.Add(this.bData);
             this.groupBox1.Controls.Add(this.bAddAll);
             this.groupBox1.Controls.Add(this.bAdd);
             this.groupBox1.Controls.Add(this.cMatrica);
@@ -366,9 +386,9 @@
             // 
             this.dg.AllowUserToAddRows = false;
             this.dg.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.AliceBlue;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.dg.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.AliceBlue;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.dg.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dg.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dg.Location = new System.Drawing.Point(12, 286);
@@ -381,8 +401,8 @@
             this.dg.Size = new System.Drawing.Size(892, 244);
             this.dg.TabIndex = 134;
             this.dg.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dg_RowsAdded);
-            this.dg.Paint += new System.Windows.Forms.PaintEventHandler(this.dg_Paint);
             this.dg.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dg_RowsRemoved);
+            this.dg.Paint += new System.Windows.Forms.PaintEventHandler(this.dg_Paint);
             // 
             // lManual
             // 
@@ -440,7 +460,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "FilterE";
-            this.Opacity = 0;
+            this.Opacity = 0D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "sampleX - Hlavné menu";
             this.Load += new System.EventHandler(this.FilterE_Load);
@@ -482,11 +502,12 @@
         private System.Windows.Forms.DataGridView dg;
         private System.Windows.Forms.Button bAdd;
         private System.Windows.Forms.Button bAddAll;
-        private System.Windows.Forms.Button bOK;
+        private System.Windows.Forms.Button bData;
         private System.Windows.Forms.Label lManual;
         private System.Windows.Forms.Button bDel;
         private System.Windows.Forms.Button bDown;
         private System.Windows.Forms.Button bUp;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button bAnalyt;
     }
 }

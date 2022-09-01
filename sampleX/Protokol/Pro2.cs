@@ -22,7 +22,7 @@ using NPOI.HPSF;
 #endregion
 namespace sampleX
 {
-    public partial class Pro1 : Form
+    public partial class Pro2 : Form
     {
         #region DEKLARACIE
         private readonly RRcode RRcode = new RRcode();
@@ -48,11 +48,11 @@ namespace sampleX
 
         #endregion
         #region FORM
-        public Pro1()
+        public Pro2()
         {
             InitializeComponent();
         }
-        private void Pro1_Load(object sender, EventArgs e)
+        private void Pro2_Load(object sender, EventArgs e)
         {
 
             RRcode.Log(this.Text);
@@ -81,7 +81,7 @@ namespace sampleX
             cBoss.DataSource = dtBoss;
             cBoss.SelectedIndex = 0;
         }
-        private void Pro1_Shown(object sender, EventArgs e)
+        private void Pro2_Shown(object sender, EventArgs e)
         {
             RRcode.FadeIn(this);
             RRcode.Front();
@@ -194,6 +194,10 @@ namespace sampleX
         {
             RRcode.RegWrite("Proto3", nu3.Value.ToString());
         }
+        private void nu4_ValueChanged(object sender, EventArgs e)
+        {
+            RRcode.RegWrite("Proto4", nu4.Value.ToString());
+        }
         private void nuR_ValueChanged(object sender, EventArgs e)
         {
             RRcode.RegWrite("ProtoR", nuR.Value.ToString());
@@ -211,11 +215,6 @@ namespace sampleX
             RRcode.RegWrite("ProtoF1", nuF1.Value.ToString());
         }
         #endregion
-
-        private void nu4_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
 

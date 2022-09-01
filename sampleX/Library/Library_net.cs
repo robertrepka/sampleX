@@ -181,7 +181,6 @@ namespace sampleX
             RemoteComputerName = remoteComputerName;
             UserName = userName;
             Password = password;
-
             this.ConnectToShare(this._remoteUncName, this.UserName, this.Password, false);
         }
 

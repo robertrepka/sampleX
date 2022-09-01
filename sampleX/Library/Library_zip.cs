@@ -10,21 +10,23 @@ namespace sampleX
 {
     class RRzip
     {
-
-        public void ExtractZipFile(string FilenameIn, string FilenameOut)
+        public void ExtractZipFile(string FilenameIn, string FilenameOut, bool bUsePass, string sPassword)
         {
             ZipFile zf = null;
             try
             {
                 FileStream fs = File.OpenRead(FilenameIn);
                 zf = new ZipFile(fs);
-                
+                if (bUsePass)
+                {
+                    zf.Password = sPassword;
+                }
+
                 foreach (ZipEntry zipEntry in zf)
                 {
                     String entryFileName = zipEntry.Name;
                     byte[] buffer = new byte[4096];		// 4K is optimum
                     Stream zipStream = zf.GetInputStream(zipEntry);
-
                     //String fullZipToPath = Path.Combine(outFolder, entryFileName);
                     String fullZipToPath = FilenameOut;
 
@@ -49,8 +51,8 @@ namespace sampleX
                 }
             }
         }
-        
-        public void CompressFile(string inputPath, string outputPath)
+
+        public void CompressFile(string inputPath, string outputPath, bool bUsePass, string sPassword)
         {
             FileInfo outFileInfo = new FileInfo(outputPath);
             FileInfo inFileInfo = new FileInfo(inputPath);
@@ -67,6 +69,10 @@ namespace sampleX
                 using (ICSharpCode.SharpZipLib.Zip.ZipOutputStream zipStream = new ICSharpCode.SharpZipLib.Zip.ZipOutputStream(fsOut))
                 {
                     zipStream.SetLevel(3);
+                    if (bUsePass)
+                    {
+                        zipStream.Password = sPassword;
+                    }
 
                     ICSharpCode.SharpZipLib.Zip.ZipEntry newEntry = new ICSharpCode.SharpZipLib.Zip.ZipEntry(inFileInfo.Name);
                     newEntry.DateTime = DateTime.UtcNow;
@@ -84,6 +90,6 @@ namespace sampleX
                 }
             }
         }
-    
+
     }
 }

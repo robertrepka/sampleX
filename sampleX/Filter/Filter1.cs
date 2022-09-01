@@ -1,9 +1,11 @@
 ﻿using MySql.Data.MySqlClient;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Windows.Forms;
 
 namespace sampleX
@@ -32,6 +34,9 @@ namespace sampleX
         bool bUpdatingCombo = false;
         static string sTempLocalForm = RRvar.sTemp;
         //https://www.daveoncsharp.com/2009/11/binding-a-windows-forms-combobox-in-csharp/
+
+        string[] items;
+
 
         public Filter1()
         {
@@ -331,6 +336,9 @@ namespace sampleX
             cMain.DisplayMember = "value";
             cMain.ValueMember = "id";
             cMain.DataSource = dt;
+            
+
+
 
             try
             {
@@ -342,7 +350,27 @@ namespace sampleX
             DoIt();
             FillCombos();
             bStarting = false;
+
         }
+
+        private void serchOnCMB(System.Data.DataTable dt, ComboBox cmb)
+        {
+
+            dt.DefaultView.RowFilter = string.Format("cmb_loaded_column_Header LIKE '%{0}%'", cmb.Text);
+            cmb.DataSource = dt;
+        }
+
+        //CMB KeyPress Event
+
+        private void cMain_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                serchOnCMB(dt, cMain);
+            }
+        }
+
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -1230,9 +1258,98 @@ namespace sampleX
 
             }
             catch { }
+        }
 
+        private void bExcel_Click(object sender, EventArgs e)
+        {
+            RRcode.FadeOut(this);
+            this.Visible = false;
+            Form FilterE = new FilterE();
+            FilterE.Closed += new EventHandler(ChildFormClosedFull);
+            RRvar.sHeader = "Generovanie šablóny pre MS Excel";
+            RRvar.bShowExportPatternAnalyt = true;
+            RRvar.sTransferNameOfAnalytGroup = cMain.Text;
+            FilterE.Show();
+        }
 
+        private void bImport_Click(object sender, EventArgs e)
+        {
+            string sSql =
+                " select parid, polozkaid, matricaid, principid, oznid, oddid, jednotkaid" +
+                " from f_cat_par where " +
+                " catid='" + cMain.SelectedValue.ToString() + "';";
+            RRdata.MatrixClear(5);
+            RRdata.MatrixFill(5, sSql, false);
 
+            int iErr = 0;
+            
+            for (int i = 0; i < RRvar.Matrix5.Count; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    if (RRdata.MatrixRead(5, i, j).ToString().Length == 0)
+                    {
+                        iErr++;
+                    }
+                }
+            }
+
+            if (iErr > 0)
+            {
+                MessageBox.Show("Import predpisov na meranie nemôže byť spustený, pretože nie sú zadafinované všetky vlasnosti parametrov v skupine "+cMain.Text+ ".\r\n\r\nPočet chýbajúcich vlastnosti: "+iErr.ToString()+"\r\n\r\nAkciu zopakujte opäť po doplnení chýbajúcich vlastností.", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string sFile = "";
+            string sPath = "";
+
+            OpenFileDialog od = new OpenFileDialog();
+
+            try
+            {
+                sPath = RRcode.RegRead("sampleX", "XlsPredpisPath");
+            }
+            catch { }
+
+            if (sPath.Length < 3) { sPath = @"c:\"; }
+
+            od.Filter = "XLS súbory (*.xls)|*.xls|Všetky súbory (*.*)|*.*";
+            od.Title = "Vyber súbor s predpismi merania";
+            od.FileName = "";
+            od.InitialDirectory = sPath;
+
+            DialogResult result = od.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                FileInfo fi = new FileInfo(od.FileName);
+
+                sPath = fi.DirectoryName;
+                sFile = fi.Name;
+                try
+                {
+                    RRcode.RegWrite("sampleX", "XlsPredpisPath", fi.DirectoryName);
+                }
+                catch { }
+
+                RRvar.sTemp9 = sPath + @"\" + sFile;
+
+                RRdata.MatrixClear(2);
+                foreach (DataGridViewRow row in dg2.Rows)
+                {
+                    string[] sValue = new string[1];
+                    sValue[0] = row.Cells[1].Value.ToString();
+                    RRdata.MatrixAdd(2, sValue, false);
+                }
+
+                RRcode.FadeOut(this);
+                this.Visible = false;
+                Form ImportPredpis = new ImportPredpis();
+                ImportPredpis.Closed += new EventHandler(ChildFormClosedFull);
+                RRvar.sTransferNameOfAnalytGroup = cMain.Text;
+                RRvar.sHeader = "Import predpisov merania pre vzorky zo skupiny " + RRvar.sTransferNameOfAnalytGroup;
+                ImportPredpis.Show();
+            }
         }
     }
 }

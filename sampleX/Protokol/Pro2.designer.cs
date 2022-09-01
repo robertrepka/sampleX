@@ -1,6 +1,6 @@
 ﻿namespace sampleX
 {
-    partial class Pro1
+    partial class Pro2
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Pro1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Pro2));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -56,10 +56,12 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.l1 = new System.Windows.Forms.Label();
@@ -67,12 +69,10 @@
             this.nuF1 = new System.Windows.Forms.NumericUpDown();
             this.nuC = new System.Windows.Forms.NumericUpDown();
             this.nuR = new System.Windows.Forms.NumericUpDown();
+            this.nu4 = new System.Windows.Forms.NumericUpDown();
             this.nu3 = new System.Windows.Forms.NumericUpDown();
             this.nu2 = new System.Windows.Forms.NumericUpDown();
             this.nu1 = new System.Windows.Forms.NumericUpDown();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.nu4 = new System.Windows.Forms.NumericUpDown();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -81,10 +81,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nuF1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nu4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nu3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nu2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nu1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nu4)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -380,6 +380,15 @@
             this.label9.TabIndex = 23;
             this.label9.Text = "%";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(235, 333);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(16, 13);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "%";
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -419,6 +428,16 @@
             this.label4.Size = new System.Drawing.Size(81, 17);
             this.label4.TabIndex = 18;
             this.label4.Text = "Výška riadka";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label3.Location = new System.Drawing.Point(14, 333);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(125, 17);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "Veľkosť loga SNAS2";
             // 
             // label2
             // 
@@ -540,6 +559,31 @@
             0});
             this.nuR.ValueChanged += new System.EventHandler(this.nuR_ValueChanged);
             // 
+            // nu4
+            // 
+            this.nu4.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.nu4.Location = new System.Drawing.Point(156, 326);
+            this.nu4.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.nu4.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.nu4.Name = "nu4";
+            this.nu4.Size = new System.Drawing.Size(73, 27);
+            this.nu4.TabIndex = 8;
+            this.nu4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nu4.Value = new decimal(new int[] {
+            110,
+            0,
+            0,
+            0});
+            this.nu4.ValueChanged += new System.EventHandler(this.nu4_ValueChanged);
+            // 
             // nu3
             // 
             this.nu3.Font = new System.Drawing.Font("Segoe UI", 11.25F);
@@ -615,54 +659,7 @@
             0});
             this.nu1.ValueChanged += new System.EventHandler(this.nu1_ValueChanged);
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(235, 333);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(16, 13);
-            this.label8.TabIndex = 22;
-            this.label8.Text = "%";
-            this.label8.Visible = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(14, 333);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(125, 17);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "Veľkosť loga SNAS2";
-            this.label3.Visible = false;
-            // 
-            // nu4
-            // 
-            this.nu4.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.nu4.Location = new System.Drawing.Point(156, 326);
-            this.nu4.Maximum = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            this.nu4.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.nu4.Name = "nu4";
-            this.nu4.Size = new System.Drawing.Size(73, 27);
-            this.nu4.TabIndex = 8;
-            this.nu4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nu4.Value = new decimal(new int[] {
-            110,
-            0,
-            0,
-            0});
-            this.nu4.Visible = false;
-            this.nu4.ValueChanged += new System.EventHandler(this.nu4_ValueChanged);
-            // 
-            // Pro1
+            // Pro2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -677,12 +674,12 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
-            this.Name = "Pro1";
+            this.Name = "Pro2";
             this.Opacity = 0D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "sampleX - TYP1";
-            this.Load += new System.EventHandler(this.Pro1_Load);
-            this.Shown += new System.EventHandler(this.Pro1_Shown);
+            this.Text = "sampleX - TYP2";
+            this.Load += new System.EventHandler(this.Pro2_Load);
+            this.Shown += new System.EventHandler(this.Pro2_Shown);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -693,10 +690,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nuF1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nu4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nu3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nu2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nu1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nu4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -710,6 +707,7 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.NumericUpDown nu4;
         private System.Windows.Forms.NumericUpDown nu3;
         private System.Windows.Forms.NumericUpDown nu2;
         private System.Windows.Forms.NumericUpDown nu1;
@@ -721,10 +719,12 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label13;
@@ -744,8 +744,5 @@
         private System.Windows.Forms.Button bOdberName;
         private System.Windows.Forms.Button bBoss;
         private System.Windows.Forms.Button bResult;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown nu4;
     }
 }

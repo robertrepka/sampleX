@@ -1,3 +1,10 @@
+01/09/2022-22:48:40 -> po 1. faze importu
+31/08/2022-09:43:39 -> pred importom predpisu
+26/08/2022-16:37:57 -> Po dlhom case
+08/05/2022-09:34:26 -> Archiv skoro dokonèený
+28/04/2022-21:18:19 -> archiv - zaciatok
+24/04/2022-13:17:14 -> Protokol1 - hotovo
+21/04/2022-17:47:57 -> Protokol 1 prerobeny na definovane styly a rozdeleny na viac cs suborov
 20/04/2022-20:37:41 -> pred zmenami fontov
 19/04/2022-19:39:27 -> zmena struktury refe, parameter
 18/04/2022-21:29:31 -> Protokoly - texty, pospiay, vysvetlivky

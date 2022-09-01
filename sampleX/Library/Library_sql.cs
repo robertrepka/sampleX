@@ -171,11 +171,10 @@ namespace sampleX
             MyDataConnect.Open();
             MyAdapter = new MySqlDataAdapter(strDataCommand, MyDataConnect);
             MyAdapter.Fill(MyTable);
-            MyDataConnect.Close();
+            MyDataConnect.Close();  
             Object oId = MyTable.Rows[0][0];
             return Convert.ToString(oId);
         }
-
         public string Config(string sItem)
         {
             string sSql = "select value from config where item = '" + sItem + "';";
